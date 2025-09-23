@@ -1,0 +1,805 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\Do-an-1.bundle.scp.css",
+      "PackagePath": "staticwebassets\\Do-an-1.j01z1umirw.bundle.scp.css"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\css\\plugins\\glightbox.min.css",
+      "PackagePath": "staticwebassets\\assets\\css\\plugins\\glightbox.min.css"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\css\\plugins\\swiper-bundle.min.css",
+      "PackagePath": "staticwebassets\\assets\\css\\plugins\\swiper-bundle.min.css"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\css\\style.css",
+      "PackagePath": "staticwebassets\\assets\\css\\style.css"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\css\\vendor\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\assets\\css\\vendor\\bootstrap.min.css"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\banner\\banner-bg1.png",
+      "PackagePath": "staticwebassets\\assets\\img\\banner\\banner-bg1.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\banner\\banner-bg2.png",
+      "PackagePath": "staticwebassets\\assets\\img\\banner\\banner-bg2.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\banner\\banner-bg3.png",
+      "PackagePath": "staticwebassets\\assets\\img\\banner\\banner-bg3.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\banner\\banner-bg4.png",
+      "PackagePath": "staticwebassets\\assets\\img\\banner\\banner-bg4.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\banner\\banner-bg5.png",
+      "PackagePath": "staticwebassets\\assets\\img\\banner\\banner-bg5.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\banner\\banner1.png",
+      "PackagePath": "staticwebassets\\assets\\img\\banner\\banner1.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\banner\\banner10.png",
+      "PackagePath": "staticwebassets\\assets\\img\\banner\\banner10.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\banner\\banner11.png",
+      "PackagePath": "staticwebassets\\assets\\img\\banner\\banner11.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\banner\\banner12.png",
+      "PackagePath": "staticwebassets\\assets\\img\\banner\\banner12.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\banner\\banner13.png",
+      "PackagePath": "staticwebassets\\assets\\img\\banner\\banner13.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\banner\\banner14.png",
+      "PackagePath": "staticwebassets\\assets\\img\\banner\\banner14.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\banner\\banner15.png",
+      "PackagePath": "staticwebassets\\assets\\img\\banner\\banner15.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\banner\\banner16.png",
+      "PackagePath": "staticwebassets\\assets\\img\\banner\\banner16.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\banner\\banner17.png",
+      "PackagePath": "staticwebassets\\assets\\img\\banner\\banner17.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\banner\\banner2.png",
+      "PackagePath": "staticwebassets\\assets\\img\\banner\\banner2.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\banner\\banner3.png",
+      "PackagePath": "staticwebassets\\assets\\img\\banner\\banner3.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\banner\\banner4.png",
+      "PackagePath": "staticwebassets\\assets\\img\\banner\\banner4.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\banner\\banner5.png",
+      "PackagePath": "staticwebassets\\assets\\img\\banner\\banner5.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\banner\\banner6.png",
+      "PackagePath": "staticwebassets\\assets\\img\\banner\\banner6.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\banner\\banner7.png",
+      "PackagePath": "staticwebassets\\assets\\img\\banner\\banner7.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\banner\\banner8.png",
+      "PackagePath": "staticwebassets\\assets\\img\\banner\\banner8.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\banner\\banner9.png",
+      "PackagePath": "staticwebassets\\assets\\img\\banner\\banner9.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\banner\\breadcrumb-bg.png",
+      "PackagePath": "staticwebassets\\assets\\img\\banner\\breadcrumb-bg.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\banner\\menu-banner.png",
+      "PackagePath": "staticwebassets\\assets\\img\\banner\\menu-banner.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\banner\\newsletter-popup-thumb.png",
+      "PackagePath": "staticwebassets\\assets\\img\\banner\\newsletter-popup-thumb.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\banner\\newsletter-popup-thumb2.png",
+      "PackagePath": "staticwebassets\\assets\\img\\banner\\newsletter-popup-thumb2.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\blog\\blog-page-big1.png",
+      "PackagePath": "staticwebassets\\assets\\img\\blog\\blog-page-big1.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\blog\\blog1.png",
+      "PackagePath": "staticwebassets\\assets\\img\\blog\\blog1.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\blog\\blog2.png",
+      "PackagePath": "staticwebassets\\assets\\img\\blog\\blog2.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\blog\\blog3.png",
+      "PackagePath": "staticwebassets\\assets\\img\\blog\\blog3.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\blog\\blog4.png",
+      "PackagePath": "staticwebassets\\assets\\img\\blog\\blog4.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\blog\\related-post1.png",
+      "PackagePath": "staticwebassets\\assets\\img\\blog\\related-post1.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\blog\\related-post2.png",
+      "PackagePath": "staticwebassets\\assets\\img\\blog\\related-post2.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\favicon.ico",
+      "PackagePath": "staticwebassets\\assets\\img\\favicon.ico"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\icon\\bus.png",
+      "PackagePath": "staticwebassets\\assets\\img\\icon\\bus.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\icon\\credit-card.svg",
+      "PackagePath": "staticwebassets\\assets\\img\\icon\\credit-card.svg"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\icon\\email.png",
+      "PackagePath": "staticwebassets\\assets\\img\\icon\\email.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\icon\\lamp.png",
+      "PackagePath": "staticwebassets\\assets\\img\\icon\\lamp.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\icon\\language-icon.png",
+      "PackagePath": "staticwebassets\\assets\\img\\icon\\language-icon.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\icon\\left-arrow-angle.png",
+      "PackagePath": "staticwebassets\\assets\\img\\icon\\left-arrow-angle.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\icon\\right-arrow-angle.png",
+      "PackagePath": "staticwebassets\\assets\\img\\icon\\right-arrow-angle.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\icon\\signature.png",
+      "PackagePath": "staticwebassets\\assets\\img\\icon\\signature.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\icon\\text-shape-icon.png",
+      "PackagePath": "staticwebassets\\assets\\img\\icon\\text-shape-icon.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\icon\\usd-icon.png",
+      "PackagePath": "staticwebassets\\assets\\img\\icon\\usd-icon.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\logo\\brand-logo1.png",
+      "PackagePath": "staticwebassets\\assets\\img\\logo\\brand-logo1.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\logo\\brand-logo2.png",
+      "PackagePath": "staticwebassets\\assets\\img\\logo\\brand-logo2.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\logo\\brand-logo3.png",
+      "PackagePath": "staticwebassets\\assets\\img\\logo\\brand-logo3.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\logo\\brand-logo4.png",
+      "PackagePath": "staticwebassets\\assets\\img\\logo\\brand-logo4.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\logo\\brand-logo5.png",
+      "PackagePath": "staticwebassets\\assets\\img\\logo\\brand-logo5.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\logo\\nav-log.png",
+      "PackagePath": "staticwebassets\\assets\\img\\logo\\nav-log.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\logo\\nav-log2.png",
+      "PackagePath": "staticwebassets\\assets\\img\\logo\\nav-log2.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\other\\404-thumb.png",
+      "PackagePath": "staticwebassets\\assets\\img\\other\\404-thumb.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\other\\about-thumb-list1.png",
+      "PackagePath": "staticwebassets\\assets\\img\\other\\about-thumb-list1.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\other\\about-thumb-list2.png",
+      "PackagePath": "staticwebassets\\assets\\img\\other\\about-thumb-list2.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\other\\comment-thumb1.png",
+      "PackagePath": "staticwebassets\\assets\\img\\other\\comment-thumb1.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\other\\comment-thumb2.png",
+      "PackagePath": "staticwebassets\\assets\\img\\other\\comment-thumb2.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\other\\comment-thumb3.png",
+      "PackagePath": "staticwebassets\\assets\\img\\other\\comment-thumb3.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\other\\heading-shape.png",
+      "PackagePath": "staticwebassets\\assets\\img\\other\\heading-shape.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\other\\instagram1.webp",
+      "PackagePath": "staticwebassets\\assets\\img\\other\\instagram1.webp"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\other\\instagram2.webp",
+      "PackagePath": "staticwebassets\\assets\\img\\other\\instagram2.webp"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\other\\instagram3.webp",
+      "PackagePath": "staticwebassets\\assets\\img\\other\\instagram3.webp"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\other\\instagram4.webp",
+      "PackagePath": "staticwebassets\\assets\\img\\other\\instagram4.webp"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\other\\instagram5.webp",
+      "PackagePath": "staticwebassets\\assets\\img\\other\\instagram5.webp"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\other\\instagram6.webp",
+      "PackagePath": "staticwebassets\\assets\\img\\other\\instagram6.webp"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\other\\payment-visa-card.png",
+      "PackagePath": "staticwebassets\\assets\\img\\other\\payment-visa-card.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\other\\portfolio1.png",
+      "PackagePath": "staticwebassets\\assets\\img\\other\\portfolio1.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\other\\portfolio2.png",
+      "PackagePath": "staticwebassets\\assets\\img\\other\\portfolio2.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\other\\portfolio3.png",
+      "PackagePath": "staticwebassets\\assets\\img\\other\\portfolio3.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\other\\portfolio4.png",
+      "PackagePath": "staticwebassets\\assets\\img\\other\\portfolio4.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\other\\portfolio5.png",
+      "PackagePath": "staticwebassets\\assets\\img\\other\\portfolio5.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\other\\portfolio7.png",
+      "PackagePath": "staticwebassets\\assets\\img\\other\\portfolio7.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\other\\portfolio8.png",
+      "PackagePath": "staticwebassets\\assets\\img\\other\\portfolio8.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\other\\portfolio9.png",
+      "PackagePath": "staticwebassets\\assets\\img\\other\\portfolio9.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\other\\safe-checkout.png",
+      "PackagePath": "staticwebassets\\assets\\img\\other\\safe-checkout.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\other\\shipping1.png",
+      "PackagePath": "staticwebassets\\assets\\img\\other\\shipping1.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\other\\shipping2.png",
+      "PackagePath": "staticwebassets\\assets\\img\\other\\shipping2.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\other\\shipping3.png",
+      "PackagePath": "staticwebassets\\assets\\img\\other\\shipping3.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\other\\shipping4.png",
+      "PackagePath": "staticwebassets\\assets\\img\\other\\shipping4.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\other\\team1.png",
+      "PackagePath": "staticwebassets\\assets\\img\\other\\team1.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\other\\team2.png",
+      "PackagePath": "staticwebassets\\assets\\img\\other\\team2.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\other\\team3.png",
+      "PackagePath": "staticwebassets\\assets\\img\\other\\team3.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\other\\testimonial-thumb1.png",
+      "PackagePath": "staticwebassets\\assets\\img\\other\\testimonial-thumb1.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\other\\testimonial-thumb2.png",
+      "PackagePath": "staticwebassets\\assets\\img\\other\\testimonial-thumb2.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\other\\testimonial-thumb3.png",
+      "PackagePath": "staticwebassets\\assets\\img\\other\\testimonial-thumb3.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\product\\big-product1.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\big-product1.jpg"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\product\\big-product2.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\big-product2.jpg"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\product\\big-product3.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\big-product3.jpg"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\product\\big-product4.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\big-product4.jpg"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\product\\big-product5.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\big-product5.jpg"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\product\\big-product6.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\big-product6.jpg"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\product\\product1.png",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\product1.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\product\\product10.png",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\product10.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\product\\product11.png",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\product11.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\product\\product12.png",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\product12.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\product\\product13.png",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\product13.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\product\\product14.png",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\product14.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\product\\product15.png",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\product15.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\product\\product2.png",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\product2.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\product\\product3.png",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\product3.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\product\\product4.png",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\product4.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\product\\product5.png",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\product5.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\product\\product6.png",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\product6.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\product\\product7.png",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\product7.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\product\\product8.png",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\product8.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\product\\product9.png",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\product9.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\product\\small-product1.png",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\small-product1.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\product\\small-product10.png",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\small-product10.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\product\\small-product11.png",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\small-product11.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\product\\small-product12.png",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\small-product12.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\product\\small-product2.png",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\small-product2.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\product\\small-product3.png",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\small-product3.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\product\\small-product4.png",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\small-product4.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\product\\small-product5.png",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\small-product5.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\product\\small-product6.png",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\small-product6.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\product\\small-product7.png",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\small-product7.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\product\\small-product8.png",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\small-product8.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\product\\small-product9.png",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\small-product9.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\slider\\home1-slider1.png",
+      "PackagePath": "staticwebassets\\assets\\img\\slider\\home1-slider1.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\slider\\home1-slider2.png",
+      "PackagePath": "staticwebassets\\assets\\img\\slider\\home1-slider2.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\slider\\home1-slider3.png",
+      "PackagePath": "staticwebassets\\assets\\img\\slider\\home1-slider3.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\slider\\home2-slider1.png",
+      "PackagePath": "staticwebassets\\assets\\img\\slider\\home2-slider1.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\slider\\home2-slider2.png",
+      "PackagePath": "staticwebassets\\assets\\img\\slider\\home2-slider2.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\slider\\home2-slider3.png",
+      "PackagePath": "staticwebassets\\assets\\img\\slider\\home2-slider3.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\slider\\home3-slider1.png",
+      "PackagePath": "staticwebassets\\assets\\img\\slider\\home3-slider1.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\slider\\home3-slider2.png",
+      "PackagePath": "staticwebassets\\assets\\img\\slider\\home3-slider2.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\slider\\home3-slider3.png",
+      "PackagePath": "staticwebassets\\assets\\img\\slider\\home3-slider3.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\js\\plugins\\glightbox.min.js",
+      "PackagePath": "staticwebassets\\assets\\js\\plugins\\glightbox.min.js"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\js\\plugins\\swiper-bundle.min.js",
+      "PackagePath": "staticwebassets\\assets\\js\\plugins\\swiper-bundle.min.js"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\js\\script.js",
+      "PackagePath": "staticwebassets\\assets\\js\\script.js"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\js\\vendor\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\assets\\js\\vendor\\bootstrap.min.js"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\js\\vendor\\popper.js",
+      "PackagePath": "staticwebassets\\assets\\js\\vendor\\popper.js"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\js\\site.js",
+      "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "PackagePath": "staticwebassets\\lib\\bootstrap"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\LICENSE.md"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.js"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.min.js"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.js"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.Do-an-1.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.Do-an-1.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.Do-an-1.props",
+      "PackagePath": "build\\Do-an-1.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.Do-an-1.props",
+      "PackagePath": "buildMultiTargeting\\Do-an-1.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.Do-an-1.props",
+      "PackagePath": "buildTransitive\\Do-an-1.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
