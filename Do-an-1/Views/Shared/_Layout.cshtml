@@ -20,7 +20,7 @@
 
     <!-- Custom Style CSS -->
     <link rel="stylesheet" href="~/assets/css/style.css">
-
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" />
 </head>
 
 <body>
@@ -737,7 +737,11 @@
         <main role="main">
             @RenderBody()
         </main>
-    
+    <!-- Linking Emoji Mart script for emoji picker -->
+    <script src="https://cdn.jsdelivr.net/npm/emoji-mart@latest/dist/browser.js"></script>
+
+    <!-- Linking for file upload functionality -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.17.2/dist/sweetalert2.all.min.js"></script>
     <footer class="footer__section bg__black">
         <div class="container-fluid">
             <div class="main__footer d-flex justify-content-between">

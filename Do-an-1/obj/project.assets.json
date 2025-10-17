@@ -14,11 +14,19 @@
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
       "projectUniqueName": "C:\\Users\\Xuan Hoan\\source\\repos\\878sang\\do-an\\Do-an-1\\Do-an-1.csproj",
       "projectName": "Do-an-1",
       "projectPath": "C:\\Users\\Xuan Hoan\\source\\repos\\878sang\\do-an\\Do-an-1\\Do-an-1.csproj",
       "packagesPath": "C:\\Users\\Xuan Hoan\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Xuan Hoan\\source\\repos\\878sang\\do-an\\Do-an-1\\obj\\",
+=======
+      "projectUniqueName": "C:\\Users\\Xuan Hoan\\Source\\Repos\\do-an\\Do-an-1\\Do-an-1.csproj",
+      "projectName": "Do-an-1",
+      "projectPath": "C:\\Users\\Xuan Hoan\\Source\\Repos\\do-an\\Do-an-1\\Do-an-1.csproj",
+      "packagesPath": "C:\\Users\\Xuan Hoan\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Xuan Hoan\\Source\\Repos\\do-an\\Do-an-1\\obj\\",
+>>>>>>> 607a663 (test)
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

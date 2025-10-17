@@ -1,8 +1,14 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "r85E5B2AIDQ=",
   "success": true,
   "projectFilePath": "C:\\Users\\Xuan Hoan\\source\\repos\\878sang\\do-an\\Do-an-1\\Do-an-1.csproj",
+=======
+  "dgSpecHash": "gVzeivGbGBM=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Xuan Hoan\\Source\\Repos\\do-an\\Do-an-1\\Do-an-1.csproj",
+>>>>>>> 607a663 (test)
   "expectedPackageFiles": [],
   "logs": []
 }
