@@ -1,13 +1,21 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Do-an-1\\",
+  "WorkspaceRootPath": "C:\\Users\\Xuan Hoan\\source\\repos\\878sang\\do-an\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{DDC90ECA-717E-4284-95A4-31145537AF32}|Do-an-1\\Do-an-1.csproj|d:\\do-an-1\\do-an-1\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{DDC90ECA-717E-4284-95A4-31145537AF32}|Do-an-1\\Do-an-1.csproj|c:\\users\\xuan hoan\\source\\repos\\878sang\\do-an\\do-an-1\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{DDC90ECA-717E-4284-95A4-31145537AF32}|Do-an-1\\Do-an-1.csproj|solutionrelative:do-an-1\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DDC90ECA-717E-4284-95A4-31145537AF32}|Do-an-1\\Do-an-1.csproj|c:\\users\\xuan hoan\\source\\repos\\878sang\\do-an\\do-an-1\\wwwroot\\assets\\css\\test.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{DDC90ECA-717E-4284-95A4-31145537AF32}|Do-an-1\\Do-an-1.csproj|solutionrelative:do-an-1\\wwwroot\\assets\\css\\test.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DDC90ECA-717E-4284-95A4-31145537AF32}|Do-an-1\\Do-an-1.csproj|c:\\users\\xuan hoan\\source\\repos\\878sang\\do-an\\do-an-1\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{DDC90ECA-717E-4284-95A4-31145537AF32}|Do-an-1\\Do-an-1.csproj|solutionrelative:do-an-1\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DDC90ECA-717E-4284-95A4-31145537AF32}|Do-an-1\\Do-an-1.csproj|d:\\do-an-1\\do-an-1\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{DDC90ECA-717E-4284-95A4-31145537AF32}|Do-an-1\\Do-an-1.csproj|c:\\users\\xuan hoan\\source\\repos\\878sang\\do-an\\do-an-1\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{DDC90ECA-717E-4284-95A4-31145537AF32}|Do-an-1\\Do-an-1.csproj|solutionrelative:do-an-1\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
@@ -31,28 +39,53 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": ".gitignore",
+              "DocumentMoniker": "C:\\Users\\Xuan Hoan\\source\\repos\\878sang\\do-an\\Do-an-1\\.gitignore",
+              "RelativeDocumentMoniker": "Do-an-1\\.gitignore",
+              "ToolTip": "C:\\Users\\Xuan Hoan\\source\\repos\\878sang\\do-an\\Do-an-1\\.gitignore",
+              "RelativeToolTip": "Do-an-1\\.gitignore",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-10-17T09:09:51.271Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "test.css",
+              "DocumentMoniker": "C:\\Users\\Xuan Hoan\\source\\repos\\878sang\\do-an\\Do-an-1\\wwwroot\\assets\\css\\test.css",
+              "RelativeDocumentMoniker": "Do-an-1\\wwwroot\\assets\\css\\test.css",
+              "ToolTip": "C:\\Users\\Xuan Hoan\\source\\repos\\878sang\\do-an\\Do-an-1\\wwwroot\\assets\\css\\test.css",
+              "RelativeToolTip": "Do-an-1\\wwwroot\\assets\\css\\test.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-10-17T09:05:38.57Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\Do-an-1\\Do-an-1\\Views\\Home\\Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Xuan Hoan\\source\\repos\\878sang\\do-an\\Do-an-1\\Views\\Home\\Index.cshtml",
               "RelativeDocumentMoniker": "Do-an-1\\Views\\Home\\Index.cshtml",
-              "ToolTip": "D:\\Do-an-1\\Do-an-1\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Xuan Hoan\\source\\repos\\878sang\\do-an\\Do-an-1\\Views\\Home\\Index.cshtml",
               "RelativeToolTip": "Do-an-1\\Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAADUAAAAAAAAAAAAkwEoAAACRAAAAAAAAAA==",
+              "ViewState": "AgIAAD0AAAAAAAAAAAAuwEoAAACRAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-09-23T00:50:41.467Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "_Layout.cshtml",
-              "DocumentMoniker": "D:\\Do-an-1\\Do-an-1\\Views\\Shared\\_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\Xuan Hoan\\source\\repos\\878sang\\do-an\\Do-an-1\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "Do-an-1\\Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "D:\\Do-an-1\\Do-an-1\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\Xuan Hoan\\source\\repos\\878sang\\do-an\\Do-an-1\\Views\\Shared\\_Layout.cshtml",
               "RelativeToolTip": "Do-an-1\\Views\\Shared\\_Layout.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAI8DAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-09-23T00:46:15.079Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-23T00:46:15.079Z"
             }
           ]
         }
