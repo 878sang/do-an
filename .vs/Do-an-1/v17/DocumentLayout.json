@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "D:\\Do-an-1\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{DDC90ECA-717E-4284-95A4-31145537AF32}|Do-an-1\\Do-an-1.csproj|d:\\do-an-1\\do-an-1\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{DDC90ECA-717E-4284-95A4-31145537AF32}|Do-an-1\\Do-an-1.csproj|solutionrelative:do-an-1\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{DDC90ECA-717E-4284-95A4-31145537AF32}|Do-an-1\\Do-an-1.csproj|d:\\do-an-1\\do-an-1\\areas\\admin\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{DDC90ECA-717E-4284-95A4-31145537AF32}|Do-an-1\\Do-an-1.csproj|solutionrelative:do-an-1\\areas\\admin\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
@@ -13,10 +17,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{DDC90ECA-717E-4284-95A4-31145537AF32}|Do-an-1\\Do-an-1.csproj|d:\\do-an-1\\do-an-1\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{DDC90ECA-717E-4284-95A4-31145537AF32}|Do-an-1\\Do-an-1.csproj|solutionrelative:do-an-1\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DDC90ECA-717E-4284-95A4-31145537AF32}|Do-an-1\\Do-an-1.csproj|d:\\do-an-1\\do-an-1\\areas\\admin\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{DDC90ECA-717E-4284-95A4-31145537AF32}|Do-an-1\\Do-an-1.csproj|solutionrelative:do-an-1\\areas\\admin\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DDC90ECA-717E-4284-95A4-31145537AF32}|Do-an-1\\Do-an-1.csproj|d:\\do-an-1\\do-an-1\\areas\\admin\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -54,34 +54,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 2,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "_ViewImports.cshtml",
-              "DocumentMoniker": "D:\\Do-an-1\\Do-an-1\\Views\\_ViewImports.cshtml",
-              "RelativeDocumentMoniker": "Do-an-1\\Views\\_ViewImports.cshtml",
-              "ToolTip": "D:\\Do-an-1\\Do-an-1\\Views\\_ViewImports.cshtml",
-              "RelativeToolTip": "Do-an-1\\Views\\_ViewImports.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-28T03:03:04.64Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "_ViewStart.cshtml",
-              "DocumentMoniker": "D:\\Do-an-1\\Do-an-1\\Views\\_ViewStart.cshtml",
-              "RelativeDocumentMoniker": "Do-an-1\\Views\\_ViewStart.cshtml",
-              "ToolTip": "D:\\Do-an-1\\Do-an-1\\Views\\_ViewStart.cshtml",
-              "RelativeToolTip": "Do-an-1\\Views\\_ViewStart.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-28T03:03:01.103Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
@@ -89,6 +63,43 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "D:\\Do-an-1\\Do-an-1\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Do-an-1\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "D:\\Do-an-1\\Do-an-1\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Do-an-1\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-31T03:28:46.673Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "_ViewImports.cshtml",
+              "DocumentMoniker": "D:\\Do-an-1\\Do-an-1\\Views\\_ViewImports.cshtml",
+              "RelativeDocumentMoniker": "Do-an-1\\Views\\_ViewImports.cshtml",
+              "ToolTip": "D:\\Do-an-1\\Do-an-1\\Views\\_ViewImports.cshtml",
+              "RelativeToolTip": "Do-an-1\\Views\\_ViewImports.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-28T03:03:04.64Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "_ViewStart.cshtml",
+              "DocumentMoniker": "D:\\Do-an-1\\Do-an-1\\Views\\_ViewStart.cshtml",
+              "RelativeDocumentMoniker": "Do-an-1\\Views\\_ViewStart.cshtml",
+              "ToolTip": "D:\\Do-an-1\\Do-an-1\\Views\\_ViewStart.cshtml",
+              "RelativeToolTip": "Do-an-1\\Views\\_ViewStart.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-28T03:03:01.103Z"
             },
             {
               "$type": "Document",
@@ -128,28 +139,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Index.cshtml",
               "DocumentMoniker": "D:\\Do-an-1\\Do-an-1\\Areas\\Admin\\Views\\Home\\Index.cshtml",
               "RelativeDocumentMoniker": "Do-an-1\\Areas\\Admin\\Views\\Home\\Index.cshtml",
               "ToolTip": "D:\\Do-an-1\\Do-an-1\\Areas\\Admin\\Views\\Home\\Index.cshtml",
               "RelativeToolTip": "Do-an-1\\Areas\\Admin\\Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAdAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-10-28T02:06:32.341Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "D:\\Do-an-1\\Do-an-1\\Areas\\Admin\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "Do-an-1\\Areas\\Admin\\Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "D:\\Do-an-1\\Do-an-1\\Areas\\Admin\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "Do-an-1\\Areas\\Admin\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAOoDAAAAAAAAAAAAAAEEAAAYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-28T02:04:59.941Z",
               "EditorCaption": ""
             },
             {
