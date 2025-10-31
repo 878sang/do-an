@@ -1153,6 +1153,10 @@
       "PackagePath": "staticwebassets\\Admin\\vendor\\wnumb\\wNumb.js"
     },
     {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\css\\chat.css",
+      "PackagePath": "staticwebassets\\assets\\css\\chat.css"
+    },
+    {
       "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\css\\plugins\\glightbox.min.css",
       "PackagePath": "staticwebassets\\assets\\css\\plugins\\glightbox.min.css"
     },
@@ -1671,6 +1675,10 @@
     {
       "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\img\\slider\\home3-slider3.png",
       "PackagePath": "staticwebassets\\assets\\img\\slider\\home3-slider3.png"
+    },
+    {
+      "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\js\\chat.js",
+      "PackagePath": "staticwebassets\\assets\\js\\chat.js"
     },
     {
       "Id": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\js\\plugins\\glightbox.min.js",
