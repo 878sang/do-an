@@ -3,36 +3,48 @@
   "WorkspaceRootPath": "D:\\Do-an-1\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{DDC90ECA-717E-4284-95A4-31145537AF32}|Do-an-1\\Do-an-1.csproj|d:\\do-an-1\\do-an-1\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{DDC90ECA-717E-4284-95A4-31145537AF32}|Do-an-1\\Do-an-1.csproj|solutionrelative:do-an-1\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{DDC90ECA-717E-4284-95A4-31145537AF32}|Do-an-1\\Do-an-1.csproj|d:\\do-an-1\\do-an-1\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{DDC90ECA-717E-4284-95A4-31145537AF32}|Do-an-1\\Do-an-1.csproj|solutionrelative:do-an-1\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DDC90ECA-717E-4284-95A4-31145537AF32}|Do-an-1\\Do-an-1.csproj|d:\\do-an-1\\do-an-1\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{DDC90ECA-717E-4284-95A4-31145537AF32}|Do-an-1\\Do-an-1.csproj|solutionrelative:do-an-1\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{DDC90ECA-717E-4284-95A4-31145537AF32}|Do-an-1\\Do-an-1.csproj|d:\\do-an-1\\do-an-1\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DDC90ECA-717E-4284-95A4-31145537AF32}|Do-an-1\\Do-an-1.csproj|solutionrelative:do-an-1\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DDC90ECA-717E-4284-95A4-31145537AF32}|Do-an-1\\Do-an-1.csproj|d:\\do-an-1\\do-an-1\\views\\shared\\_minicartpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{DDC90ECA-717E-4284-95A4-31145537AF32}|Do-an-1\\Do-an-1.csproj|solutionrelative:do-an-1\\views\\shared\\_minicartpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DDC90ECA-717E-4284-95A4-31145537AF32}|Do-an-1\\Do-an-1.csproj|d:\\do-an-1\\do-an-1\\views\\shared\\components\\productsnew\\default.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{DDC90ECA-717E-4284-95A4-31145537AF32}|Do-an-1\\Do-an-1.csproj|solutionrelative:do-an-1\\views\\shared\\components\\productsnew\\default.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DDC90ECA-717E-4284-95A4-31145537AF32}|Do-an-1\\Do-an-1.csproj|d:\\do-an-1\\do-an-1\\views\\shared\\components\\productsbestseller\\default.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{DDC90ECA-717E-4284-95A4-31145537AF32}|Do-an-1\\Do-an-1.csproj|solutionrelative:do-an-1\\views\\shared\\components\\productsbestseller\\default.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DDC90ECA-717E-4284-95A4-31145537AF32}|Do-an-1\\Do-an-1.csproj|d:\\do-an-1\\do-an-1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DDC90ECA-717E-4284-95A4-31145537AF32}|Do-an-1\\Do-an-1.csproj|solutionrelative:do-an-1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DDC90ECA-717E-4284-95A4-31145537AF32}|Do-an-1\\Do-an-1.csproj|d:\\do-an-1\\do-an-1\\models\\fashionstoredbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DDC90ECA-717E-4284-95A4-31145537AF32}|Do-an-1\\Do-an-1.csproj|solutionrelative:do-an-1\\models\\fashionstoredbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{DDC90ECA-717E-4284-95A4-31145537AF32}|Do-an-1\\Do-an-1.csproj|d:\\do-an-1\\do-an-1\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DDC90ECA-717E-4284-95A4-31145537AF32}|Do-an-1\\Do-an-1.csproj|solutionrelative:do-an-1\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DDC90ECA-717E-4284-95A4-31145537AF32}|Do-an-1\\Do-an-1.csproj|d:\\do-an-1\\do-an-1\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{DDC90ECA-717E-4284-95A4-31145537AF32}|Do-an-1\\Do-an-1.csproj|solutionrelative:do-an-1\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{DDC90ECA-717E-4284-95A4-31145537AF32}|Do-an-1\\Do-an-1.csproj|d:\\do-an-1\\do-an-1\\viewcomponents\\productsnewviewcomponent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DDC90ECA-717E-4284-95A4-31145537AF32}|Do-an-1\\Do-an-1.csproj|solutionrelative:do-an-1\\viewcomponents\\productsnewviewcomponent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DDC90ECA-717E-4284-95A4-31145537AF32}|Do-an-1\\Do-an-1.csproj|d:\\do-an-1\\do-an-1\\wwwroot\\assets\\css\\chat.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{DDC90ECA-717E-4284-95A4-31145537AF32}|Do-an-1\\Do-an-1.csproj|solutionrelative:do-an-1\\wwwroot\\assets\\css\\chat.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+      "AbsoluteMoniker": "D:0:0:{DDC90ECA-717E-4284-95A4-31145537AF32}|Do-an-1\\Do-an-1.csproj|d:\\do-an-1\\do-an-1\\viewcomponents\\productsbestsellerviewcomponent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DDC90ECA-717E-4284-95A4-31145537AF32}|Do-an-1\\Do-an-1.csproj|solutionrelative:do-an-1\\viewcomponents\\productsbestsellerviewcomponent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DDC90ECA-717E-4284-95A4-31145537AF32}|Do-an-1\\Do-an-1.csproj|d:\\do-an-1\\do-an-1\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{DDC90ECA-717E-4284-95A4-31145537AF32}|Do-an-1\\Do-an-1.csproj|solutionrelative:do-an-1\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DDC90ECA-717E-4284-95A4-31145537AF32}|Do-an-1\\Do-an-1.csproj|d:\\do-an-1\\do-an-1\\wwwroot\\assets\\js\\chat.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{DDC90ECA-717E-4284-95A4-31145537AF32}|Do-an-1\\Do-an-1.csproj|solutionrelative:do-an-1\\wwwroot\\assets\\js\\chat.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+      "AbsoluteMoniker": "D:0:0:{DDC90ECA-717E-4284-95A4-31145537AF32}|Do-an-1\\Do-an-1.csproj|d:\\do-an-1\\do-an-1\\areas\\admin\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{DDC90ECA-717E-4284-95A4-31145537AF32}|Do-an-1\\Do-an-1.csproj|solutionrelative:do-an-1\\areas\\admin\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,7 +54,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 11,
+          "SelectedChildIndex": 13,
           "Children": [
             {
               "$type": "Bookmark",
@@ -63,104 +75,135 @@
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "CartController.cs",
+              "DocumentMoniker": "D:\\Do-an-1\\Do-an-1\\Controllers\\CartController.cs",
+              "RelativeDocumentMoniker": "Do-an-1\\Controllers\\CartController.cs",
+              "ToolTip": "D:\\Do-an-1\\Do-an-1\\Controllers\\CartController.cs",
+              "RelativeToolTip": "Do-an-1\\Controllers\\CartController.cs",
+              "ViewState": "AgIAACQAAAAAAAAAAAAowAsAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-07T09:01:48.268Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "_MiniCartPartial.cshtml",
+              "DocumentMoniker": "D:\\Do-an-1\\Do-an-1\\Views\\Shared\\_MiniCartPartial.cshtml",
+              "RelativeDocumentMoniker": "Do-an-1\\Views\\Shared\\_MiniCartPartial.cshtml",
+              "ToolTip": "D:\\Do-an-1\\Do-an-1\\Views\\Shared\\_MiniCartPartial.cshtml",
+              "RelativeToolTip": "Do-an-1\\Views\\Shared\\_MiniCartPartial.cshtml",
+              "ViewState": "AgIAABMAAAAAAAAAAAAAABgAAABpAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-07T07:06:08.366Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Default.cshtml",
+              "DocumentMoniker": "D:\\Do-an-1\\Do-an-1\\Views\\Shared\\Components\\ProductsBestSeller\\Default.cshtml",
+              "RelativeDocumentMoniker": "Do-an-1\\Views\\Shared\\Components\\ProductsBestSeller\\Default.cshtml",
+              "ToolTip": "D:\\Do-an-1\\Do-an-1\\Views\\Shared\\Components\\ProductsBestSeller\\Default.cshtml",
+              "RelativeToolTip": "Do-an-1\\Views\\Shared\\Components\\ProductsBestSeller\\Default.cshtml",
+              "ViewState": "AgIAAD4AAAAAAAAAAAAuwF4AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-06T03:11:38.134Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ProductsBestSellerViewComponent.cs",
+              "DocumentMoniker": "D:\\Do-an-1\\Do-an-1\\ViewComponents\\ProductsBestSellerViewComponent.cs",
+              "RelativeDocumentMoniker": "Do-an-1\\ViewComponents\\ProductsBestSellerViewComponent.cs",
+              "ToolTip": "D:\\Do-an-1\\Do-an-1\\ViewComponents\\ProductsBestSellerViewComponent.cs",
+              "RelativeToolTip": "Do-an-1\\ViewComponents\\ProductsBestSellerViewComponent.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-06T03:10:04.246Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\Do-an-1\\Do-an-1\\Areas\\Admin\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "Do-an-1\\Areas\\Admin\\Views\\Home\\Index.cshtml",
+              "ToolTip": "D:\\Do-an-1\\Do-an-1\\Areas\\Admin\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "Do-an-1\\Areas\\Admin\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAABIAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-06T02:58:19.426Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Default.cshtml",
+              "DocumentMoniker": "D:\\Do-an-1\\Do-an-1\\Views\\Shared\\Components\\ProductsNew\\Default.cshtml",
+              "RelativeDocumentMoniker": "Do-an-1\\Views\\Shared\\Components\\ProductsNew\\Default.cshtml",
+              "ToolTip": "D:\\Do-an-1\\Do-an-1\\Views\\Shared\\Components\\ProductsNew\\Default.cshtml",
+              "RelativeToolTip": "Do-an-1\\Views\\Shared\\Components\\ProductsNew\\Default.cshtml",
+              "ViewState": "AgIAAGAAAAAAAAAAAAAuwFwAAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-05T16:11:27.772Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\Do-an-1\\Do-an-1\\Program.cs",
               "RelativeDocumentMoniker": "Do-an-1\\Program.cs",
               "ToolTip": "D:\\Do-an-1\\Do-an-1\\Program.cs",
               "RelativeToolTip": "Do-an-1\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAzAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-31T08:19:36.703Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-06T03:47:43.225Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "FashionStoreDbContext.cs",
-              "DocumentMoniker": "D:\\Do-an-1\\Do-an-1\\Models\\FashionStoreDbContext.cs",
-              "RelativeDocumentMoniker": "Do-an-1\\Models\\FashionStoreDbContext.cs",
-              "ToolTip": "D:\\Do-an-1\\Do-an-1\\Models\\FashionStoreDbContext.cs",
-              "RelativeToolTip": "Do-an-1\\Models\\FashionStoreDbContext.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAqAAAAAAAAAA==",
+              "DocumentIndex": 8,
+              "Title": "ProductsNewViewComponent.cs",
+              "DocumentMoniker": "D:\\Do-an-1\\Do-an-1\\ViewComponents\\ProductsNewViewComponent.cs",
+              "RelativeDocumentMoniker": "Do-an-1\\ViewComponents\\ProductsNewViewComponent.cs",
+              "ToolTip": "D:\\Do-an-1\\Do-an-1\\ViewComponents\\ProductsNewViewComponent.cs",
+              "RelativeToolTip": "Do-an-1\\ViewComponents\\ProductsNewViewComponent.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-31T08:16:59.439Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-05T16:16:28.112Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "D:\\Do-an-1\\Do-an-1\\appsettings.json",
-              "RelativeDocumentMoniker": "Do-an-1\\appsettings.json",
-              "ToolTip": "D:\\Do-an-1\\Do-an-1\\appsettings.json",
-              "RelativeToolTip": "Do-an-1\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-10-31T08:15:46.702Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "_ViewStart.cshtml",
-              "DocumentMoniker": "D:\\Do-an-1\\Do-an-1\\Views\\_ViewStart.cshtml",
-              "RelativeDocumentMoniker": "Do-an-1\\Views\\_ViewStart.cshtml",
-              "ToolTip": "D:\\Do-an-1\\Do-an-1\\Views\\_ViewStart.cshtml",
-              "RelativeToolTip": "Do-an-1\\Views\\_ViewStart.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-31T08:15:45.768Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "D:\\Do-an-1\\Do-an-1\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "Do-an-1\\Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "D:\\Do-an-1\\Do-an-1\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "Do-an-1\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAJADAABIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-31T04:36:34.063Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "chat.js",
-              "DocumentMoniker": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\js\\chat.js",
-              "RelativeDocumentMoniker": "Do-an-1\\wwwroot\\assets\\js\\chat.js",
-              "ToolTip": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\js\\chat.js",
-              "RelativeToolTip": "Do-an-1\\wwwroot\\assets\\js\\chat.js",
-              "ViewState": "AgIAAOEAAAAAAAAAAAAowPQAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-10-31T04:36:18.191Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "chat.css",
-              "DocumentMoniker": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\css\\chat.css",
-              "RelativeDocumentMoniker": "Do-an-1\\wwwroot\\assets\\css\\chat.css",
-              "ToolTip": "D:\\Do-an-1\\Do-an-1\\wwwroot\\assets\\css\\chat.css",
-              "RelativeToolTip": "Do-an-1\\wwwroot\\assets\\css\\chat.css",
-              "ViewState": "AgIAABwAAAAAAAAAAAAAADUAAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-10-31T04:35:14.158Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
               "Title": "Index.cshtml",
               "DocumentMoniker": "D:\\Do-an-1\\Do-an-1\\Views\\Home\\Index.cshtml",
               "RelativeDocumentMoniker": "Do-an-1\\Views\\Home\\Index.cshtml",
               "ToolTip": "D:\\Do-an-1\\Do-an-1\\Views\\Home\\Index.cshtml",
               "RelativeToolTip": "Do-an-1\\Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAAHcQAAAAAAAAAAAAAIIQAAASAAAAAAAAAA==",
+              "ViewState": "AgIAAOUJAAAAAAAAAAAmwO8JAABcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-31T04:34:25.163Z",
+              "WhenOpened": "2025-11-05T16:15:47.87Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "D:\\Do-an-1\\Do-an-1\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Do-an-1\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "D:\\Do-an-1\\Do-an-1\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Do-an-1\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAMMCAAAAAAAAAAAuwNYCAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-06T09:50:41.635Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "D:\\Do-an-1\\Do-an-1\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "Do-an-1\\Controllers\\HomeController.cs",
+              "ToolTip": "D:\\Do-an-1\\Do-an-1\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "Do-an-1\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAAAAkAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-06T03:25:05.222Z"
             }
           ]
         }

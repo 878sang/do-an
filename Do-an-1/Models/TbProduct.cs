@@ -37,6 +37,10 @@ public partial class TbProduct
 
     public bool? IsActive { get; set; }
 
+    public int? Quantity { get; set; }
+
+    public int? Star { get; set; }
+
     public virtual TbProductCategory? CategoryProduct { get; set; }
 
     public virtual ICollection<TbOrderDetail> TbOrderDetails { get; set; } = new List<TbOrderDetail>();

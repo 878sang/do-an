@@ -17,7 +17,7 @@ public partial class TbCustomer
 
     public string? Password { get; set; }
 
-    public DateTime? Birthday { get; set; }
+    public DateOnly? Birthday { get; set; }
 
     public string? Avatar { get; set; }
 
