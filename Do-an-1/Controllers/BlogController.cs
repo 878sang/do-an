@@ -12,6 +12,10 @@ namespace Do_an_1.Controllers
         {
             _context = context;
         }
+        public IActionResult Index()
+        {
+            return View();
+        }
         [Route("/blog/{alias}-{id}.html")]
         public async Task<IActionResult> Details(int? id)
         {

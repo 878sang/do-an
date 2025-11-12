@@ -23,8 +23,6 @@
             </div>
         </div>
     </section>
-    <!-- End breadcrumb section -->
-    <!-- Start blog details section -->
     <section class="blog__details--section section--padding">
         <div class="container-fluid">
             <div class="row">
@@ -58,7 +56,7 @@
                                 </p>
                             </div>
                             <div class="blog__thumbnail mb-30">
-                                <img class="blog__thumbnail--img border-radius-10" src="~/assets/img/blog/@Model.Image" alt="blog-img">
+                                <img class="blog__thumbnail--img border-radius-10" src="@Model.Image" alt="blog-img">
                             </div>
                             <div class="blog__details--content">
                                 <h3 class="blog__details--content__subtitle mb-25">@Model.Detail</h3>
@@ -132,7 +130,7 @@
                                             <div class="related__post--items">
                                                 <div class="related__post--thumb border-radius-10 mb-15">
                                                     <a class="display-block" href="@sUrl">
-                                                        <img class="related__post--img display-block border-radius-10" src="~/assets/img/blog/@related.Image" alt="related-post">
+                                                        <img class="related__post--img display-block border-radius-10" src="@related.Image" alt="related-post">
                                                     </a>
                                                 </div>
                                                 <div class="related__post--text">
@@ -157,7 +155,7 @@
                                 <div class="reviews__comment--inner">
                                     <div class="reviews__comment--list d-flex">
                                         <div class="reviews__comment--thumb">
-                                            <img class="display-block" src="assets/img/other/comment-thumb1.png" alt="comment-thumb">
+                                            <img class="display-block" src="~/assets/img/other/comment-thumb1.png" alt="comment-thumb">
                                         </div>
                                         <div class="reviews__comment--content ">
                                             <div class="comment__content--topbar d-flex justify-content-between">
@@ -172,7 +170,7 @@
                                     </div>
                                     <div class="reviews__comment--list margin__left d-flex">
                                         <div class="reviews__comment--thumb">
-                                            <img class="display-block" src="assets/img/other/comment-thumb2.png" alt="comment-thumb">
+                                            <img class="display-block" src="~/assets/img/other/comment-thumb2.png" alt="comment-thumb">
                                         </div>
                                         <div class="reviews__comment--content">
                                             <div class="comment__content--topbar d-flex justify-content-between">
@@ -187,7 +185,7 @@
                                     </div>
                                     <div class="reviews__comment--list d-flex">
                                         <div class="reviews__comment--thumb">
-                                            <img class="display-block" src="assets/img/other/comment-thumb3.png" alt="comment-thumb">
+                                            <img class="display-block" src="~/assets/img/other/comment-thumb3.png" alt="comment-thumb">
                                         </div>
                                         <div class="reviews__comment--content">
                                             <div class="comment__content--topbar d-flex justify-content-between">
@@ -252,7 +250,7 @@
                                 {
                                     <li class="widget__categories--menu__list">
                                         <label class="widget__categories--menu__label d-flex align-items-center">
-                                            <img class="widget__categories--menu__img" src="assets/img/product/small-product1.png" alt="categories-img">
+                                            <img class="widget__categories--menu__img" src="~/assets/img/product/small-product1.png" alt="categories-img">
                                             <span class="widget__categories--menu__text">Denim Jacket</span>
                                             <svg class="widget__categories--menu__arrowdown--icon" xmlns="http://www.w3.org/2000/svg" width="12.355" height="8.394">
                                                 <path d="M15.138,8.59l-3.961,3.952L7.217,8.59,6,9.807l5.178,5.178,5.178-5.178Z" transform="translate(-6 -8.59)" fill="currentColor"></path>
@@ -261,25 +259,25 @@
                                         <ul class="widget__categories--sub__menu">
                                             <li class="widget__categories--sub__menu--list">
                                                 <a class="widget__categories--sub__menu--link d-flex align-items-center" href="blog-details.html">
-                                                    <img class="widget__categories--sub__menu--img" src="assets/img/product/small-product2.png" alt="categories-img">
+                                                    <img class="widget__categories--sub__menu--img" src="~/assets/img/product/small-product2.png" alt="categories-img">
                                                     <span class="widget__categories--sub__menu--text">Jacket, Women</span>
                                                 </a>
                                             </li>
                                             <li class="widget__categories--sub__menu--list">
                                                 <a class="widget__categories--sub__menu--link d-flex align-items-center" href="blog-details.html">
-                                                    <img class="widget__categories--sub__menu--img" src="assets/img/product/small-product3.png" alt="categories-img">
+                                                    <img class="widget__categories--sub__menu--img" src="~/assets/img/product/small-product3.png" alt="categories-img">
                                                     <span class="widget__categories--sub__menu--text">Woolend Jacket</span>
                                                 </a>
                                             </li>
                                             <li class="widget__categories--sub__menu--list">
                                                 <a class="widget__categories--sub__menu--link d-flex align-items-center" href="blog-details.html">
-                                                    <img class="widget__categories--sub__menu--img" src="assets/img/product/small-product4.png" alt="categories-img">
+                                                    <img class="widget__categories--sub__menu--img" src="~/assets/img/product/small-product4.png" alt="categories-img">
                                                     <span class="widget__categories--sub__menu--text">Western denim</span>
                                                 </a>
                                             </li>
                                             <li class="widget__categories--sub__menu--list">
                                                 <a class="widget__categories--sub__menu--link d-flex align-items-center" href="blog-details.html">
-                                                    <img class="widget__categories--sub__menu--img" src="assets/img/product/small-product5.png" alt="categories-img">
+                                                    <img class="widget__categories--sub__menu--img" src="~/assets/img/product/small-product5.png" alt="categories-img">
                                                     <span class="widget__categories--sub__menu--text">Mini Dresss</span>
                                                 </a>
                                             </li>
@@ -290,7 +288,7 @@
 
                                 <li class="widget__categories--menu__list">
                                     <label class="widget__categories--menu__label d-flex align-items-center">
-                                        <img class="widget__categories--menu__img" src="assets/img/product/small-product2.png" alt="categories-img">
+                                        <img class="widget__categories--menu__img" src="~/assets/img/product/small-product2.png" alt="categories-img">
                                         <span class="widget__categories--menu__text">Oversize Cotton</span>
                                         <svg class="widget__categories--menu__arrowdown--icon" xmlns="http://www.w3.org/2000/svg" width="12.355" height="8.394">
                                             <path d="M15.138,8.59l-3.961,3.952L7.217,8.59,6,9.807l5.178,5.178,5.178-5.178Z" transform="translate(-6 -8.59)" fill="currentColor"></path>
@@ -299,25 +297,25 @@
                                     <ul class="widget__categories--sub__menu">
                                         <li class="widget__categories--sub__menu--list">
                                             <a class="widget__categories--sub__menu--link d-flex align-items-center" href="blog-details.html">
-                                                <img class="widget__categories--sub__menu--img" src="assets/img/product/small-product2.png" alt="categories-img">
+                                                <img class="widget__categories--sub__menu--img" src="~/assets/img/product/small-product2.png" alt="categories-img">
                                                 <span class="widget__categories--sub__menu--text">Jacket, Women</span>
                                             </a>
                                         </li>
                                         <li class="widget__categories--sub__menu--list">
                                             <a class="widget__categories--sub__menu--link d-flex align-items-center" href="blog-details.html">
-                                                <img class="widget__categories--sub__menu--img" src="assets/img/product/small-product3.png" alt="categories-img">
+                                                <img class="widget__categories--sub__menu--img" src="~/assets/img/product/small-product3.png" alt="categories-img">
                                                 <span class="widget__categories--sub__menu--text">Woolend Jacket</span>
                                             </a>
                                         </li>
                                         <li class="widget__categories--sub__menu--list">
                                             <a class="widget__categories--sub__menu--link d-flex align-items-center" href="blog-details.html">
-                                                <img class="widget__categories--sub__menu--img" src="assets/img/product/small-product4.png" alt="categories-img">
+                                                <img class="widget__categories--sub__menu--img" src="~/assets/img/product/small-product4.png" alt="categories-img">
                                                 <span class="widget__categories--sub__menu--text">Western denim</span>
                                             </a>
                                         </li>
                                         <li class="widget__categories--sub__menu--list">
                                             <a class="widget__categories--sub__menu--link d-flex align-items-center" href="blog-details.html">
-                                                <img class="widget__categories--sub__menu--img" src="assets/img/product/small-product5.png" alt="categories-img">
+                                                <img class="widget__categories--sub__menu--img" src="~/assets/img/product/small-product5.png" alt="categories-img">
                                                 <span class="widget__categories--sub__menu--text">Mini Dresss</span>
                                             </a>
                                         </li>
@@ -325,7 +323,7 @@
                                 </li>
                                 <li class="widget__categories--menu__list">
                                     <label class="widget__categories--menu__label d-flex align-items-center">
-                                        <img class="widget__categories--menu__img" src="assets/img/product/small-product3.png" alt="categories-img">
+                                        <img class="widget__categories--menu__img" src="~/assets/img/product/small-product3.png" alt="categories-img">
                                         <span class="widget__categories--menu__text">Dairy & chesse</span>
                                         <svg class="widget__categories--menu__arrowdown--icon" xmlns="http://www.w3.org/2000/svg" width="12.355" height="8.394">
                                             <path d="M15.138,8.59l-3.961,3.952L7.217,8.59,6,9.807l5.178,5.178,5.178-5.178Z" transform="translate(-6 -8.59)" fill="currentColor"></path>
@@ -334,25 +332,25 @@
                                     <ul class="widget__categories--sub__menu">
                                         <li class="widget__categories--sub__menu--list">
                                             <a class="widget__categories--sub__menu--link d-flex align-items-center" href="blog-details.html">
-                                                <img class="widget__categories--sub__menu--img" src="assets/img/product/small-product2.png" alt="categories-img">
+                                                <img class="widget__categories--sub__menu--img" src="~/assets/img/product/small-product2.png" alt="categories-img">
                                                 <span class="widget__categories--sub__menu--text">Jacket, Women</span>
                                             </a>
                                         </li>
                                         <li class="widget__categories--sub__menu--list">
                                             <a class="widget__categories--sub__menu--link d-flex align-items-center" href="blog-details.html">
-                                                <img class="widget__categories--sub__menu--img" src="assets/img/product/small-product3.png" alt="categories-img">
+                                                <img class="widget__categories--sub__menu--img" src="~/assets/img/product/small-product3.png" alt="categories-img">
                                                 <span class="widget__categories--sub__menu--text">Woolend Jacket</span>
                                             </a>
                                         </li>
                                         <li class="widget__categories--sub__menu--list">
                                             <a class="widget__categories--sub__menu--link d-flex align-items-center" href="blog-details.html">
-                                                <img class="widget__categories--sub__menu--img" src="assets/img/product/small-product4.png" alt="categories-img">
+                                                <img class="widget__categories--sub__menu--img" src="~/assets/img/product/small-product4.png" alt="categories-img">
                                                 <span class="widget__categories--sub__menu--text">Western denim</span>
                                             </a>
                                         </li>
                                         <li class="widget__categories--sub__menu--list">
                                             <a class="widget__categories--sub__menu--link d-flex align-items-center" href="blog-details.html">
-                                                <img class="widget__categories--sub__menu--img" src="assets/img/product/small-product5.png" alt="categories-img">
+                                                <img class="widget__categories--sub__menu--img" src="~/assets/img/product/small-product5.png" alt="categories-img">
                                                 <span class="widget__categories--sub__menu--text">Mini Dresss</span>
                                             </a>
                                         </li>
@@ -360,7 +358,7 @@
                                 </li>
                                 <li class="widget__categories--menu__list">
                                     <label class="widget__categories--menu__label d-flex align-items-center">
-                                        <img class="widget__categories--menu__img" src="assets/img/product/small-product4.png" alt="categories-img">
+                                        <img class="widget__categories--menu__img" src="~/assets/img/product/small-product4.png" alt="categories-img">
                                         <span class="widget__categories--menu__text">Shoulder Bag</span>
                                         <svg class="widget__categories--menu__arrowdown--icon" xmlns="http://www.w3.org/2000/svg" width="12.355" height="8.394">
                                             <path d="M15.138,8.59l-3.961,3.952L7.217,8.59,6,9.807l5.178,5.178,5.178-5.178Z" transform="translate(-6 -8.59)" fill="currentColor"></path>
@@ -369,25 +367,25 @@
                                     <ul class="widget__categories--sub__menu">
                                         <li class="widget__categories--sub__menu--list">
                                             <a class="widget__categories--sub__menu--link d-flex align-items-center" href="blog-details.html">
-                                                <img class="widget__categories--sub__menu--img" src="assets/img/product/small-product2.png" alt="categories-img">
+                                                <img class="widget__categories--sub__menu--img" src="~/assets/img/product/small-product2.png" alt="categories-img">
                                                 <span class="widget__categories--sub__menu--text">Jacket, Women</span>
                                             </a>
                                         </li>
                                         <li class="widget__categories--sub__menu--list">
                                             <a class="widget__categories--sub__menu--link d-flex align-items-center" href="blog-details.html">
-                                                <img class="widget__categories--sub__menu--img" src="assets/img/product/small-product3.png" alt="categories-img">
+                                                <img class="widget__categories--sub__menu--img" src="~/assets/img/product/small-product3.png" alt="categories-img">
                                                 <span class="widget__categories--sub__menu--text">Woolend Jacket</span>
                                             </a>
                                         </li>
                                         <li class="widget__categories--sub__menu--list">
                                             <a class="widget__categories--sub__menu--link d-flex align-items-center" href="blog-details.html">
-                                                <img class="widget__categories--sub__menu--img" src="assets/img/product/small-product4.png" alt="categories-img">
+                                                <img class="widget__categories--sub__menu--img" src="~/assets/img/product/small-product4.png" alt="categories-img">
                                                 <span class="widget__categories--sub__menu--text">Western denim</span>
                                             </a>
                                         </li>
                                         <li class="widget__categories--sub__menu--list">
                                             <a class="widget__categories--sub__menu--link d-flex align-items-center" href="blog-details.html">
-                                                <img class="widget__categories--sub__menu--img" src="assets/img/product/small-product5.png" alt="categories-img">
+                                                <img class="widget__categories--sub__menu--img" src="~/assets/img/product/small-product5.png" alt="categories-img">
                                                 <span class="widget__categories--sub__menu--text">Mini Dresss</span>
                                             </a>
                                         </li>
@@ -395,7 +393,7 @@
                                 </li>
                                 <li class="widget__categories--menu__list">
                                     <label class="widget__categories--menu__label d-flex align-items-center">
-                                        <img class="widget__categories--menu__img" src="assets/img/product/small-product5.png" alt="categories-img">
+                                        <img class="widget__categories--menu__img" src="~/assets/img/product/small-product5.png" alt="categories-img">
                                         <span class="widget__categories--menu__text">Denim Jacket</span>
                                         <svg class="widget__categories--menu__arrowdown--icon" xmlns="http://www.w3.org/2000/svg" width="12.355" height="8.394">
                                             <path d="M15.138,8.59l-3.961,3.952L7.217,8.59,6,9.807l5.178,5.178,5.178-5.178Z" transform="translate(-6 -8.59)" fill="currentColor"></path>
@@ -404,25 +402,25 @@
                                     <ul class="widget__categories--sub__menu">
                                         <li class="widget__categories--sub__menu--list">
                                             <a class="widget__categories--sub__menu--link d-flex align-items-center" href="blog-details.html">
-                                                <img class="widget__categories--sub__menu--img" src="assets/img/product/small-product2.png" alt="categories-img">
+                                                <img class="widget__categories--sub__menu--img" src="~/assets/img/product/small-product2.png" alt="categories-img">
                                                 <span class="widget__categories--sub__menu--text">Jacket, Women</span>
                                             </a>
                                         </li>
                                         <li class="widget__categories--sub__menu--list">
                                             <a class="widget__categories--sub__menu--link d-flex align-items-center" href="blog-details.html">
-                                                <img class="widget__categories--sub__menu--img" src="assets/img/product/small-product3.png" alt="categories-img">
+                                                <img class="widget__categories--sub__menu--img" src="~/assets/img/product/small-product3.png" alt="categories-img">
                                                 <span class="widget__categories--sub__menu--text">Woolend Jacket</span>
                                             </a>
                                         </li>
                                         <li class="widget__categories--sub__menu--list">
                                             <a class="widget__categories--sub__menu--link d-flex align-items-center" href="blog-details.html">
-                                                <img class="widget__categories--sub__menu--img" src="assets/img/product/small-product4.png" alt="categories-img">
+                                                <img class="widget__categories--sub__menu--img" src="~/assets/img/product/small-product4.png" alt="categories-img">
                                                 <span class="widget__categories--sub__menu--text">Western denim</span>
                                             </a>
                                         </li>
                                         <li class="widget__categories--sub__menu--list">
                                             <a class="widget__categories--sub__menu--link d-flex align-items-center" href="blog-details.html">
-                                                <img class="widget__categories--sub__menu--img" src="assets/img/product/small-product5.png" alt="categories-img">
+                                                <img class="widget__categories--sub__menu--img" src="~/assets/img/product/small-product5.png" alt="categories-img">
                                                 <span class="widget__categories--sub__menu--text">Mini Dresss</span>
                                             </a>
                                         </li>
@@ -436,8 +434,8 @@
                                 <div class="product__items product__items--grid d-flex align-items-center">
                                     <div class="product__items--grid__thumbnail position__relative">
                                         <a class="product__items--link" href="blog-details.html">
-                                            <img class="product__grid--items__img product__primary--img" src="assets/img/product/small-product2.png" alt="product-img">
-                                            <img class="product__grid--items__img product__secondary--img" src="assets/img/product/small-product3.png" alt="product-img">
+                                            <img class="product__grid--items__img product__primary--img" src="~/assets/img/product/small-product2.png" alt="product-img">
+                                            <img class="product__grid--items__img product__secondary--img" src="~/assets/img/product/small-product3.png" alt="product-img">
                                         </a>
                                     </div>
                                     <div class="product__items--grid__content">
@@ -448,8 +446,8 @@
                                 <div class="product__items product__items--grid d-flex align-items-center">
                                     <div class="product__items--grid__thumbnail position__relative">
                                         <a class="product__items--link" href="blog-details.html">
-                                            <img class="product__grid--items__img product__primary--img" src="assets/img/product/small-product1.png" alt="product-img">
-                                            <img class="product__grid--items__img product__secondary--img" src="assets/img/product/small-product2.png" alt="product-img">
+                                            <img class="product__grid--items__img product__primary--img" src="~/assets/img/product/small-product1.png" alt="product-img">
+                                            <img class="product__grid--items__img product__secondary--img" src="~/assets/img/product/small-product2.png" alt="product-img">
                                         </a>
                                     </div>
                                     <div class="product__items--grid__content">
@@ -460,8 +458,8 @@
                                 <div class="product__items product__items--grid d-flex align-items-center">
                                     <div class="product__items--grid__thumbnail position__relative">
                                         <a class="product__items--link" href="blog-details.html">
-                                            <img class="product__grid--items__img product__primary--img" src="assets/img/product/small-product5.png" alt="product-img">
-                                            <img class="product__grid--items__img product__secondary--img" src="assets/img/product/small-product4.png" alt="product-img">
+                                            <img class="product__grid--items__img product__primary--img" src="~/assets/img/product/small-product5.png" alt="product-img">
+                                            <img class="product__grid--items__img product__secondary--img" src="~/assets/img/product/small-product4.png" alt="product-img">
                                         </a>
                                     </div>
                                     <div class="product__items--grid__content">
@@ -496,7 +494,7 @@
             <div class="shipping__section2--inner shipping__style3--inner d-flex justify-content-between">
                 <div class="shipping__items2 d-flex align-items-center">
                     <div class="shipping__items2--icon">
-                        <img src="assets/img/other/shipping1.png" alt="">
+                        <img src="~/assets/img/other/shipping1.png" alt="">
                     </div>
                     <div class="shipping__items2--content">
                         <h2 class="shipping__items2--content__title h3">Shipping</h2>
@@ -505,7 +503,7 @@
                 </div>
                 <div class="shipping__items2 d-flex align-items-center">
                     <div class="shipping__items2--icon">
-                        <img src="assets/img/other/shipping2.png" alt="">
+                        <img src="~/assets/img/other/shipping2.png" alt="">
                     </div>
                     <div class="shipping__items2--content">
                         <h2 class="shipping__items2--content__title h3">Payment</h2>
@@ -514,7 +512,7 @@
                 </div>
                 <div class="shipping__items2 d-flex align-items-center">
                     <div class="shipping__items2--icon">
-                        <img src="assets/img/other/shipping3.png" alt="">
+                        <img src="~/assets/img/other/shipping3.png" alt="">
                     </div>
                     <div class="shipping__items2--content">
                         <h2 class="shipping__items2--content__title h3">Return</h2>
@@ -523,7 +521,7 @@
                 </div>
                 <div class="shipping__items2 d-flex align-items-center">
                     <div class="shipping__items2--icon">
-                        <img src="assets/img/other/shipping4.png" alt="">
+                        <img src="~/assets/img/other/shipping4.png" alt="">
                     </div>
                     <div class="shipping__items2--content">
                         <h2 class="shipping__items2--content__title h3">Support</h2>

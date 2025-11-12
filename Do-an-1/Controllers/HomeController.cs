@@ -34,4 +34,12 @@ public class HomeController : Controller
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
+    public IActionResult Preview(int id)
+    {
+        var product = _context.TbProducts.FirstOrDefault(p => p.ProductId == id);
+        if (product == null)
+            return NotFound();
+
+        return PartialView("_ProductPreview", product);
+    }
 }

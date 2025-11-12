@@ -13,7 +13,11 @@ namespace Do_an_1.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            var products = _context.TbProducts
+        .Where(b => b.IsActive == true)
+        .OrderByDescending(b => b.CreatedDate)
+        .ToList();
+            return View(products);
         }
         [Route("/product/{alias}-{id}.html")]
         public async Task<IActionResult> Details(int? id)
