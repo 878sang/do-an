@@ -1,11 +1,12 @@
 ﻿@model IEnumerable<Do_an_1.Models.TbProduct>
 @foreach (var item in Model)
 {
+    string sUrl = $"/product/{item.Alias}-{item.ProductId}.html";
     <div class="swiper-slide">
         <div class="product__items ">
             <div class="product__items--thumbnail">
-                <a class="product__items--link" href="product-details.html">
-                    <img class="product__items--img product__primary--img" src="~/assets/img/product/@item.Image"
+                <a class="product__items--link" href="@sUrl">
+                    <img class="product__items--img product__primary--img" src="@item.Image"
                         alt="product-img">
                 </a>
                 <div class="product__badge">
@@ -14,7 +15,7 @@
             </div>
             <div class="product__items--content">
                 <span class="product__items--content__subtitle">@item.CategoryProduct?.Title</span>
-                <h3 class="product__items--content__title h4"><a href="product-details.html">@item.Title</a></h3>
+                <h3 class="product__items--content__title h4"><a href="@sUrl">@item.Title</a></h3>
                 <div class="product__items--price">
                     <span class="current__price">@item.PriceSale</span>
                     <span class="price__divided"></span>
@@ -37,8 +38,8 @@
                 </ul>
                 <ul class="product__items--action d-flex">
                     <li class="product__items--action__list">
-                        <a href="javascript:void(0)" class="product__items--action__btn add__to--cart"
-                            data-id="@item.ProductId" onclick="addToCart('@item.ProductId')">
+                        <a href="javascript:void(0)" data-open="modal1" class="product__items--action__btn add__to--cart" 
+                            @* data-id="@item.ProductId" onclick="addToCart('@item.ProductId')"*@> 
                             <svg class="product__items--action__btn--svg" xmlns="http://www.w3.org/2000/svg" width="22.51"
                                 height="20.443" viewBox="0 0 14.706 13.534">
                                 <g transform="translate(0 0)">

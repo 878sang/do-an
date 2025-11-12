@@ -22,12 +22,16 @@
         {
             <div class="minicart__product--items d-flex" data-product-id="@item.ProductId">
                 <div class="minicart__thumb">
-                    <a href="/Product/Details/@item.ProductId"><img src="~/assets/img/product/@item.Image"
+                    <a href="/Product/Details/@item.ProductId"><img src="@item.Image"
                             alt="product-img"></a>
                 </div>
                 <div class="minicart__text">
                     <h3 class="minicart__subtitle h4">
                         <a href="/Product/Details/@item.ProductId">@item.Title</a>
+                        @if (!string.IsNullOrEmpty(item.Weight))
+                        {
+                            <span style="font-size:12px;"> - @item.Weight</span>
+                        }
                     </h3>
                     <div class="minicart__price">
                         <span class="current__price" data-price="@item.Price">@String.Format("{0:N0}", item.Price)</span>
@@ -65,6 +69,6 @@
     </div>
 </div>
 <div class="minicart__button d-flex justify-content-center">
-    <a class="primary__btn minicart__button--link" href="/Cart">View cart</a>
-    <a class="primary__btn minicart__button--link" href="/checkout.html">Checkout</a>
+    <a class="primary__btn minicart__button--link" asp-controller="Cart" asp-action="Index">View cart</a>
+    <a class="primary__btn minicart__button--link" asp-controller="Checkout" asp-action="Index">Checkout</a>
 </div>

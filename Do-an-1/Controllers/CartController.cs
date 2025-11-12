@@ -18,7 +18,7 @@ namespace Do_an_1.Controllers
             var product = _context.TbProducts.FirstOrDefault(p => p.ProductId == req.Id);
 
             var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>("Cart") ?? new List<CartItem>();
-            var existing = cart.FirstOrDefault(x => x.ProductId == req.Id);
+            var existing = cart.FirstOrDefault(x => x.ProductId == req.Id && x.Weight == req.Weight);
             if (existing != null)
                 existing.Quantity += 1;
             else
@@ -28,7 +28,8 @@ namespace Do_an_1.Controllers
                     Title = product.Title,
                     Image = product.Image,
                     Price = product.PriceSale ?? product.Price,
-                    Quantity = 1
+                    Quantity = 1,
+                    Weight = req.Weight // Lưu lựa chọn weight
                 });
             HttpContext.Session.SetObjectAsJson("Cart", cart);
             return Json(new { success = true, cartCount = cart.Sum(x => x.Quantity) });
@@ -39,6 +40,12 @@ namespace Do_an_1.Controllers
         {
             var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>("Cart") ?? new List<CartItem>();
             return PartialView("_MiniCartPartial", cart);
+        }
+
+        [HttpGet]
+        public IActionResult Index()
+        {
+            return View();
         }
 
         [HttpPost]
@@ -79,6 +86,7 @@ namespace Do_an_1.Controllers
         public class CartRequest
         {
             public int Id { get; set; }
+            public string Weight { get; set; } // Thêm thuộc tính weight cho size/khối lượng
         }
     }
 }
