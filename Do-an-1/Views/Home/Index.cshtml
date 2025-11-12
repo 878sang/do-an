@@ -2354,10 +2354,11 @@
                 <div class="swiper-wrapper">
                     @foreach (var item in Blogs)
                     {
+                        string sUrl = $"/blog/{item.Alias}-{item.BlogId}.html";
                         <div class="swiper-slide">
                             <div class="blog__items">
                                 <div class="blog__thumbnail">
-                                    <a class="blog__thumbnail--link" href="blog-details.html"><img class="blog__thumbnail--img" src="~/assets/img/blog/@item.Image" alt="blog-img"></a>
+                                    <a class="blog__thumbnail--link" href="@sUrl"><img class="blog__thumbnail--img" src="~/assets/img/blog/@item.Image" alt="blog-img"></a>
                                 </div>
                                 <div class="blog__content">
                                     <span class="blog__content--meta">@item.CreatedDate.Value.ToString("dd/MM/yyyy")</span>
@@ -2366,7 +2367,7 @@
                                             @item.Title
                                         </a>
                                     </h3>
-                                    <a class="blog__content--btn primary__btn" href="blog-details.html">Đọc thêm </a>
+                                    <a class="blog__content--btn primary__btn" href="@sUrl">Đọc thêm </a>
                                 </div>
                             </div>
                         </div>
