@@ -9,6 +9,8 @@ builder.Services.AddDbContext<FashionStoreDbContext>(options =>
 // Add services to the container.
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 builder.Services.AddSession();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddHttpClient(); // Required for ChatController
 
 var app = builder.Build();
 
