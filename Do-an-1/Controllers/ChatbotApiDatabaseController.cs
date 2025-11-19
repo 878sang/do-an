@@ -53,6 +53,7 @@ namespace Do_an_1.Controllers
                     {
                         p.ProductId,
                         p.Title,
+                        p.Alias,
                         p.Description,
                         p.Price,
                         p.PriceSale,
@@ -328,6 +329,7 @@ namespace Do_an_1.Controllers
                     {
                         p.ProductId,
                         p.Title,
+                        p.Alias,
                         p.Description,
                         p.Price,
                         p.PriceSale,

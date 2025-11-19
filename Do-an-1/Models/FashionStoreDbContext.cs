@@ -23,6 +23,8 @@ public partial class FashionStoreDbContext : DbContext
 
     public virtual DbSet<TbBlogComment> TbBlogComments { get; set; }
 
+    public virtual DbSet<TbChatMessage> TbChatMessages { get; set; }
+
     public virtual DbSet<TbColor> TbColors { get; set; }
 
     public virtual DbSet<TbContact> TbContacts { get; set; }
@@ -55,7 +57,7 @@ public partial class FashionStoreDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("data source= LAPTOP-OMH6A36G; initial catalog=FashionStoreDB; integrated security=True; TrustServerCertificate=True;");
+        => optionsBuilder.UseSqlServer("data source= PC\\SQLEXPRESS; initial catalog=FashionStoreDB; integrated security=True; TrustServerCertificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -134,6 +136,29 @@ public partial class FashionStoreDbContext : DbContext
             entity.HasOne(d => d.Customer).WithMany(p => p.TbBlogComments)
                 .HasForeignKey(d => d.CustomerId)
                 .HasConstraintName("FK__tb_BlogCo__Custo__5D95E53A");
+        });
+
+        modelBuilder.Entity<TbChatMessage>(entity =>
+        {
+            entity.HasKey(e => e.MessageId).HasName("PK__tb_ChatM__C87C0C9CE606E408");
+
+            entity.ToTable("tb_ChatMessage");
+
+            entity.HasIndex(e => e.CreatedDate, "IX_tb_ChatMessage_CreatedDate");
+
+            entity.HasIndex(e => e.GuestToken, "IX_tb_ChatMessage_GuestToken");
+
+            entity.HasIndex(e => e.UserId, "IX_tb_ChatMessage_UserId");
+
+            entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+            entity.Property(e => e.GuestToken).HasMaxLength(100);
+            entity.Property(e => e.Message).HasColumnType("ntext");
+            entity.Property(e => e.Sender).HasMaxLength(10);
+
+            entity.HasOne(d => d.User).WithMany(p => p.TbChatMessages)
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.SetNull)
+                .HasConstraintName("FK_tb_ChatMessage_tb_Account");
         });
 
         modelBuilder.Entity<TbColor>(entity =>
