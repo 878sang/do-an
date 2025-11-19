@@ -1,3 +1,8 @@
+@model List<CartItem>
+@{
+    var hasItems = Model != null && Model.Count > 0;
+    var totalAmount = hasItems ? Model.Sum(item => (item.Price ?? 0) * item.Quantity) : 0;
+}
 <main class="main__content_wrapper">
     <!-- Start breadcrumb section -->
     <section class="breadcrumb__section breadcrumb__bg">
@@ -36,24 +41,75 @@
                                     <thead class="cart__table--header">
                                         <tr class="cart__table--header__items">
                                             <th class="cart__table--header__list">Sản Phẩm</th>
-                                            <th class="cart__table--header__list">Khối lượng</th>
                                             <th class="cart__table--header__list">Giá</th>
                                             <th class="cart__table--header__list">Số Lượng</th>
                                             <th class="cart__table--header__list">Tổng Cộng</th>
                                         </tr>
                                     </thead>
                                     <tbody class="cart__table--body">
-@foreach (var item in Model) {
-<tr>
-    <td>@item.Title</td>
-    <td>@item.Weight</td>
-    <td>@String.Format("{0:N0}", item.Price)</td>
-    <td>
-        <input type="number" value="@item.Quantity" min="1" data-id="@item.ProductId" class="cart-qty"/>
-    </td>
-    <td>@String.Format("{0:N0}", (item.Price ?? 0) * item.Quantity)</td>
-</tr>
-}
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr class="cart__table--body__items">
+                                                <td class="cart__table--body__list">
+                                                    <div class="cart__product d-flex align-items-center">
+                                                        <button class="cart__remove--btn" aria-label="search button"
+                                                            type="button">
+                                                            <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg"
+                                                                viewBox="0 0 24 24" width="16px" height="16px">
+                                                                <path
+                                                                    d="M 4.7070312 3.2929688 L 3.2929688 4.7070312 L 10.585938 12 L 3.2929688 19.292969 L 4.7070312 20.707031 L 12 13.414062 L 19.292969 20.707031 L 20.707031 19.292969 L 13.414062 12 L 20.707031 4.7070312 L 19.292969 3.2929688 L 12 10.585938 L 4.7070312 3.2929688 z" />
+                                                            </svg>
+                                                        </button>
+                                                        <div class="cart__thumbnail">
+                                                            <a href="product-details.html">
+                                                                <img class="border-radius-5"
+                                                                    src="assets/img/product/product1.png"
+                                                                    alt="cart-product" />
+                                                            </a>
+                                                        </div>
+                                                        <div class="cart__content">
+                                                            <h4 class="cart__content--title">
+                                                                <a href="product-details.html">@item.Title</a>
+                                                            </h4>
+                                                            <span class="cart__content--variant">COLOR: @item.Color</span>
+                                                            <span class="cart__content--variant">SIZE: @item.Size</span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="cart__table--body__list">
+                                                    <span class="cart__price" data-unit-price="@(item.Price ?? 0)">
+                                                        @String.Format("{0:N0}", item.Price ?? 0)
+                                                    </span>
+                                                </td>
+                                                <td class="cart__table--body__list">
+                                                    <div class="quantity__box" data-id="@item.ProductId">
+                                                        <button type="button"
+                                                            class="quantity__value quickview__value--quantity decrease"
+                                                            aria-label="quantity value" value="Decrease Value"
+                                                            data-id="@item.ProductId">
+                                                            -
+                                                        </button>
+                                                        <label>
+                                                            <input type="number"
+                                                                class="quantity__number quickview__value--number"
+                                                                value="@item.Quantity" min="1" data-counter
+                                                                data-id="@item.ProductId" />
+                                                        </label>
+                                                        <button type="button"
+                                                            class="quantity__value quickview__value--quantity increase"
+                                                            aria-label="quantity value" value="Increase Value"
+                                                            data-id="@item.ProductId">
+                                                            +
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                                <td class="cart__table--body__list">
+                                                    <span class="cart__price end cart-line-total">
+                                                        @String.Format("{0:N0}", (item.Price ?? 0) * item.Quantity)
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        }
                                     </tbody>
                                 </table>
                                 <div class="continue__shopping d-flex justify-content-between">
@@ -99,8 +155,8 @@
                                                 <td class="cart__summary--total__title text-left">
                                                     TỔNG CỘNG
                                                 </td>
-                                                <td class="cart__summary--amount text-right">
-                                                    860.000đ
+                                                <td class="cart__summary--amount text-right" id="minicart-total">
+                                                    @String.Format("{0:N0}", totalAmount)
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -118,7 +174,7 @@
                                         </li>
                                         <li>
                                             <a class="cart__summary--footer__btn primary__btn checkout"
-                                                href="checkout.html">Thanh Toán</a>
+                                               asp-controller="Checkout" asp-action="Index">Thanh Toán</a>
                                         </li>
                                     </ul>
                                 </div>

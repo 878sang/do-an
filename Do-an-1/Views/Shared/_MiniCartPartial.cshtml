@@ -28,14 +28,12 @@
                 <div class="minicart__text">
                     <h3 class="minicart__subtitle h4">
                         <a href="/Product/Details/@item.ProductId">@item.Title</a>
-                        @if (!string.IsNullOrEmpty(item.Weight))
-                        {
-                            <span style="font-size:12px;"> - @item.Weight</span>
-                        }
                     </h3>
                     <div class="minicart__price">
                         <span class="current__price" data-price="@item.Price">@String.Format("{0:N0}", item.Price)</span>
                     </div>
+                    <span class="color__variant"><b>Color:</b> @item.Color</span>
+                    <span class="color__variant"><b>Size:</b> @item.Size</span>
                     <div class="minicart__text--footer d-flex align-items-center">
                         <div class="quantity__box minicart__quantity" data-id="@item.ProductId">
                             <div class="quantity__box minicart__quantity">

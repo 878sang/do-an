@@ -863,6 +863,16 @@
     <!-- End footer section -->
     <!-- Quickview Wrapper -->
     <!-- Chatbot Toggler -->
+    <div class="modal" id="modal1" data-animation="slideInUp">
+        <div class="modal-dialog quickview__main--wrapper">
+            <header class="modal-header quickview__header">
+                <button class="close-modal quickview__close--btn" aria-label="close modal" data-close>✕ </button>
+            </header>
+            <div class="quickview__inner">
+                
+            </div>
+        </div>
+    </div>
     <button id="chatbot-toggler">
         <span class="material-symbols-rounded">mode_comment</span>
         <span class="material-symbols-rounded">close</span>
@@ -1001,14 +1011,17 @@
             }
         })();
 
-        function addToCart(productId) {
-            productId = parseInt(productId, 10);
+        function addToCart(productId, size, color, quantity) {
             fetch('/Cart/AddToCart', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ id: productId })
+                body: JSON.stringify({ 
+                    id: productId ,
+                    size: size,
+                    color: color,
+                    quantity: quantity})
             })
                 .then(res => res.json())
                 .then(data => {

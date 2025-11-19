@@ -1,4 +1,6 @@
 using Do_an_1.Models;
+using Do_an_1.Services;
+using Do_an_1.Settings;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +11,8 @@ builder.Services.AddDbContext<FashionStoreDbContext>(options =>
 // Add services to the container.
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 builder.Services.AddSession();
+builder.Services.Configure<VnPaySettings>(builder.Configuration.GetSection("VnPay"));
+builder.Services.AddScoped<IVnPayService, VnPayService>();
 
 var app = builder.Build();
 

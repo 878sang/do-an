@@ -34,7 +34,7 @@ namespace Do_an_1.Controllers
             }
             ViewBag.productSize = _context.TbProductVariants
             .Include(v => v.Size)
-            .Where(v => v.ProductId == id && v.IsActive == true)
+            .Where(v => v.ProductId == id && v.IsActive == true && v.Size != null)
             .Select(v => v.Size.SizeName)
             .Distinct()
             .ToList();
@@ -45,6 +45,27 @@ namespace Do_an_1.Controllers
             .Distinct()
             .ToList();
             return View(product);
+        }
+        public IActionResult Preview(int id)
+        {
+            var product = _context.TbProducts.FirstOrDefault(p => p.ProductId == id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+            ViewBag.productSize = _context.TbProductVariants
+            .Include(v => v.Size)
+            .Where(v => v.ProductId == id && v.IsActive == true && v.Size != null)
+            .Select(v => v.Size.SizeName)
+            .Distinct()
+            .ToList();
+            ViewBag.productColor = _context.TbProductVariants
+            .Include(v => v.Color)
+            .Where(v => v.ProductId == id && v.IsActive == true)
+            .Select(v => v.Color)
+            .Distinct()
+            .ToList();
+            return PartialView("_ProductPreview", product);
         }
     }
 }

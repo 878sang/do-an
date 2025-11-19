@@ -3,194 +3,241 @@
 
 // Write your JavaScript code.
 
+function formatCurrency(value) {
+  return Number(value || 0).toLocaleString("vi-VN");
+}
 
-(function() {
-    var MINICART_PANEL_SELECTOR = '.offCanvas__minicart';
-    var BODY_ACTIVE_CLASS = 'offCanvas__minicart_active';
+function updateCartTotalDisplays(total) {
+  var formatted = formatCurrency(total);
+  document.querySelectorAll("#minicart-total").forEach(function (el) {
+    el.textContent = formatted;
+  });
+}
 
-    function openMinicart() {
-        var panel = document.querySelector(MINICART_PANEL_SELECTOR);
-        if (panel && !panel.classList.contains('active')) {
-            panel.classList.add('active');
-        }
-        document.body.classList.add(BODY_ACTIVE_CLASS);
+function updateCartRowTotal(rowElement, quantity) {
+  if (!rowElement) return;
+  var priceElement = rowElement.querySelector("[data-unit-price]");
+  if (!priceElement) return;
+  var unitPrice = parseFloat(priceElement.getAttribute("data-unit-price")) || 0;
+  var lineTotalElement = rowElement.querySelector(".cart-line-total");
+  if (lineTotalElement) {
+    lineTotalElement.textContent = formatCurrency(unitPrice * quantity);
+  }
+}
+
+(function () {
+  var MINICART_PANEL_SELECTOR = ".offCanvas__minicart";
+  var BODY_ACTIVE_CLASS = "offCanvas__minicart_active";
+
+  function openMinicart() {
+    var panel = document.querySelector(MINICART_PANEL_SELECTOR);
+    if (panel && !panel.classList.contains("active")) {
+      panel.classList.add("active");
+    }
+    document.body.classList.add(BODY_ACTIVE_CLASS);
+  }
+
+  function closeMinicart() {
+    var panel = document.querySelector(MINICART_PANEL_SELECTOR);
+    if (panel && panel.classList.contains("active")) {
+      panel.classList.remove("active");
+    }
+    document.body.classList.remove(BODY_ACTIVE_CLASS);
+  }
+
+  document.addEventListener("click", function (e) {
+    var openBtn = e.target.closest && e.target.closest(".minicart__open--btn");
+    if (openBtn) {
+      e.preventDefault();
+      openMinicart();
+      return;
     }
 
-    function closeMinicart() {
-        var panel = document.querySelector(MINICART_PANEL_SELECTOR);
-        if (panel && panel.classList.contains('active')) {
-            panel.classList.remove('active');
-        }
-        document.body.classList.remove(BODY_ACTIVE_CLASS);
+    var closeBtn =
+      e.target.closest && e.target.closest(".minicart__close--btn");
+    if (closeBtn) {
+      e.preventDefault();
+      closeMinicart();
     }
-
-    document.addEventListener('click', function(e) {
-        var openBtn = e.target.closest && e.target.closest('.minicart__open--btn');
-        if (openBtn) {
-            e.preventDefault();
-            openMinicart();
-            return;
-        }
-
-        var closeBtn = e.target.closest && e.target.closest('.minicart__close--btn');
-        if (closeBtn) {
-            e.preventDefault();
-            closeMinicart();
-        }
-    });
+  });
 })();
 
-$(document).on('click', '.add__to--cart', function(e) {
-    e.preventDefault();
-    var productId = $(this).data('id');
-    $.ajax({
-        url: '/Cart/AddToCart',
-        method: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify({ id: productId }),
-        success: function(res) {
-            if (res.success) {
-                $.get('/Cart/MiniCart', function(html) {
-                    var minicartWrap = $('.minicart__product').parent();
-                    if (minicartWrap.length > 0) {
-                        minicartWrap.html(html);
-                    }
-                });
-            } else {
-                alert(res.message);
-            }
-        }
-    });
+// Removed: jQuery handler for .add__to--cart
+// Đã sửa: Script.js (vanilla JS) xử lý thêm sản phẩm vào modal
+$(document).on("click", "#quickview-add-to-cart", function (e) {
+  e.preventDefault();
+
+  // Get product ID from the form or modal data
+  // Since we're inside the modal, get the form and extract product ID from action or data attribute
+  var modal = $(this).closest("#modal1");
+  var form = modal.find("form");
+
+  // We need to extract product ID - it's not directly in the form, so we'll need to pass it
+  // For now, we'll modify ProductPreview to include a hidden field with ProductId
+  var productId = form.find('input[name="ProductId"]').val();
+
+  if (!productId) {
+    // Alternative: get from window or modal data if set by script.js
+    productId = window.currentProductId;
+  }
+
+  var quantity = form.find(".quantity__number").val() || 1;
 });
 
 // Mini cart: increase / decrease quantity
 // Chỉ xử lý buttons trong minicart để tránh conflict với script.js
 // Event listener được thêm ngay lập tức để chạy trước script.js
-(function() {
-    // Thêm event listener ngay lập tức (không đợi DOM ready) để đảm bảo chạy trước script.js
-    document.addEventListener('click', function(e) {
-        // Tìm button quantity (có thể click vào text node bên trong button)
-        var button = e.target.closest && e.target.closest('.quantity__value');
-        if (!button) return;
-        
-        // Chỉ xử lý nếu là button increase hoặc decrease
-        if (!button.classList || (!button.classList.contains('increase') && !button.classList.contains('decrease'))) {
-            return;
-        }
-        
-        // Chỉ xử lý nếu button nằm trong minicart (có parent với class minicart__quantity)
-        var minicartContainer = button.closest && button.closest('.minicart__quantity');
-        if (!minicartContainer) return; // Không phải trong minicart, để script.js xử lý
+(function () {
+  // Thêm event listener ngay lập tức (không đợi DOM ready) để đảm bảo chạy trước script.js
+  document.addEventListener(
+    "click",
+    function (e) {
+      // Tìm button quantity (có thể click vào text node bên trong button)
+      var button = e.target.closest && e.target.closest(".quantity__value");
+      if (!button) return;
 
-        // Ngăn script.js xử lý - dùng stopImmediatePropagation để chặn các listener khác
-        e.preventDefault();
-        e.stopPropagation();
-        e.stopImmediatePropagation();
+      // Chỉ xử lý nếu là button increase hoặc decrease
+      if (
+        !button.classList ||
+        (!button.classList.contains("increase") &&
+          !button.classList.contains("decrease"))
+      ) {
+        return;
+      }
 
-        var productId = parseInt(button.getAttribute('data-id'), 10);
-        if (!productId) {
-            console.error('ProductId not found');
-            return;
-        }
+      var minicartContainer =
+        button.closest && button.closest(".minicart__quantity");
+      var cartRow =
+        button.closest && button.closest(".cart__table--body__items");
+      var isMiniCart = !!minicartContainer;
+      var isCartPage = !!cartRow;
 
-        var wrapper = button.closest && button.closest('.quantity__box');
-        var input = wrapper && wrapper.querySelector('.quantity__number');
-        if (!input) {
-            console.error('Input not found for productId:', productId);
-            return;
-        }
+      if (!isMiniCart && !isCartPage) return;
 
-        var current = parseInt(input.value, 10) || 1;
-        if (button.classList.contains('increase')) {
-            current++;
-        } else {
-            current = Math.max(1, current - 1);
-        }
-        
-        // Gọi API để update quantity
-        fetch('/Cart/UpdateQuantity', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ id: productId, quantity: current })
+      e.preventDefault();
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+
+      var productId = parseInt(button.getAttribute("data-id"), 10);
+      if (!productId) {
+        console.error("ProductId not found");
+        return;
+      }
+
+      var wrapper = button.closest && button.closest(".quantity__box");
+      var input = wrapper && wrapper.querySelector(".quantity__number");
+      if (!input) {
+        console.error("Input not found for productId:", productId);
+        return;
+      }
+
+      var current = parseInt(input.value, 10) || 1;
+      if (button.classList.contains("increase")) {
+        current++;
+      } else {
+        current = Math.max(1, current - 1);
+      }
+
+      // Gọi API để update quantity
+      fetch("/Cart/UpdateQuantity", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id: productId, quantity: current }),
+      })
+        .then(function (res) {
+          return res.json();
         })
-        .then(function(res) {
-            return res.json();
-        })
-        .then(function(res) {
-            if (res.success) {
-                input.value = current; // Update input field
-                var totalElement = document.getElementById('minicart-total');
-                if (totalElement) {
-                    totalElement.textContent = res.total.toLocaleString('vi-VN');
-                }
-                if (typeof window.setCartCount === 'function' && typeof res.cartCount !== 'undefined') {
-                    window.setCartCount(res.cartCount);
-                }
-            } else {
-                console.error('Update failed:', res.message);
+        .then(function (res) {
+          if (res.success) {
+            input.value = current; // Update input field
+            if (isCartPage) {
+              updateCartRowTotal(cartRow, current);
             }
+            updateCartTotalDisplays(res.total);
+            if (
+              typeof window.setCartCount === "function" &&
+              typeof res.cartCount !== "undefined"
+            ) {
+              window.setCartCount(res.cartCount);
+            }
+          } else {
+            console.error("Update failed:", res.message);
+          }
         })
-        .catch(function(error) {
-            console.error('Error updating quantity:', error);
+        .catch(function (error) {
+          console.error("Error updating quantity:", error);
         });
-    }, true); // Use capture phase để chạy trước script.js
+    },
+    true
+  ); // Use capture phase để chạy trước script.js
 })();
 
 // Mini cart: manual quantity change
-$(document).on('change', '.quantity__number', function(e) {
-    var productId = $(this).data('id');
-    var qty = parseInt($(this).val()) || 1;
-    if (qty < 1) qty = 1;
-    $.ajax({
-        url: '/Cart/UpdateQuantity',
-        method: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify({ id: productId, quantity: qty }),
-        success: function(res) {
-            if (res.success) {
-                $('#minicart-total').text(res.total.toLocaleString('vi-VN')); // Update total price
-                if (typeof window.setCartCount === 'function' && typeof res.cartCount !== 'undefined') {
-                    window.setCartCount(res.cartCount);
-                }
-            }
+$(document).on("change", ".quantity__number", function (e) {
+  var $input = $(this);
+  var productId = $input.data("id");
+  var qty = parseInt($input.val()) || 1;
+  if (qty < 1) qty = 1;
+  $.ajax({
+    url: "/Cart/UpdateQuantity",
+    method: "POST",
+    contentType: "application/json",
+    data: JSON.stringify({ id: productId, quantity: qty }),
+    success: function (res) {
+      if (res.success) {
+        updateCartTotalDisplays(res.total);
+        var row = $input.closest(".cart__table--body__items");
+        if (row.length) {
+          updateCartRowTotal(row.get(0), qty);
         }
-    });
+        if (
+          typeof window.setCartCount === "function" &&
+          typeof res.cartCount !== "undefined"
+        ) {
+          window.setCartCount(res.cartCount);
+        }
+      }
+    },
+  });
 });
 
 // Mini cart: remove item
-$(document).on('click', '.minicart__product--remove', function(e) {
-    e.preventDefault();
-    var productId = $(this).data('id');
-    $.ajax({
-        url: '/Cart/RemoveFromCart',
-        method: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify({ id: productId }),
-        success: function(res) {
-            if (res.success) {
-                $.get('/Cart/MiniCart', function(html) {
-                    var minicartWrap = $('.minicart__product').parent();
-                    if (minicartWrap.length > 0) {
-                        minicartWrap.html(html);
-                    }
-                });
-                if (typeof window.setCartCount === 'function' && typeof res.cartCount !== 'undefined') {
-                    window.setCartCount(res.cartCount);
-                }
-            }
+$(document).on("click", ".minicart__product--remove", function (e) {
+  e.preventDefault();
+  var productId = $(this).data("id");
+  $.ajax({
+    url: "/Cart/RemoveFromCart",
+    method: "POST",
+    contentType: "application/json",
+    data: JSON.stringify({ id: productId }),
+    success: function (res) {
+      if (res.success) {
+        $.get("/Cart/MiniCart", function (html) {
+          var minicartWrap = $(".minicart__product").parent();
+          if (minicartWrap.length > 0) {
+            minicartWrap.html(html);
+          }
+        });
+        if (
+          typeof window.setCartCount === "function" &&
+          typeof res.cartCount !== "undefined"
+        ) {
+          window.setCartCount(res.cartCount);
         }
-    });
+      }
+    },
+  });
 });
 
 function updateMiniCartTotal() {
-    var total = 0;
-    $('.minicart__product--items').each(function() {
-        var price = parseFloat($(this).find('.current__price').data('price')) || 0;
-        var qty = parseInt($(this).find('.quantity__number').val()) || 0;
-        total += price * qty;
-    });
-    $('#minicart-total').text(total.toLocaleString('vi-VN'));
-    return total;
+  var total = 0;
+  $(".minicart__product--items").each(function () {
+    var price = parseFloat($(this).find(".current__price").data("price")) || 0;
+    var qty = parseInt($(this).find(".quantity__number").val()) || 0;
+    total += price * qty;
+  });
+  $("#minicart-total").text(total.toLocaleString("vi-VN"));
+  return total;
 }

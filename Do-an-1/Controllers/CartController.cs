@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Do_an_1.Models;
 using Newtonsoft.Json;
 
@@ -18,7 +18,7 @@ namespace Do_an_1.Controllers
             var product = _context.TbProducts.FirstOrDefault(p => p.ProductId == req.Id);
 
             var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>("Cart") ?? new List<CartItem>();
-            var existing = cart.FirstOrDefault(x => x.ProductId == req.Id && x.Weight == req.Weight);
+            var existing = cart.FirstOrDefault(x => x.ProductId == req.Id);
             if (existing != null)
                 existing.Quantity += 1;
             else
@@ -28,8 +28,9 @@ namespace Do_an_1.Controllers
                     Title = product.Title,
                     Image = product.Image,
                     Price = product.PriceSale ?? product.Price,
-                    Quantity = 1,
-                    Weight = req.Weight // Lưu lựa chọn weight
+                    Quantity = req.Quantity,
+                    Size = req.Size,
+                    Color = req.Color,
                 });
             HttpContext.Session.SetObjectAsJson("Cart", cart);
             return Json(new { success = true, cartCount = cart.Sum(x => x.Quantity) });
@@ -45,7 +46,9 @@ namespace Do_an_1.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>("Cart")
+               ?? new List<CartItem>();
+            return View(cart);
         }
 
         [HttpPost]
@@ -86,7 +89,11 @@ namespace Do_an_1.Controllers
         public class CartRequest
         {
             public int Id { get; set; }
-            public string Weight { get; set; } // Thêm thuộc tính weight cho size/khối lượng
+            public int Quantity { get; set; }
+            public string Image { get; set; }
+            public decimal? Price { get; set; }
+            public string Size { get; set; }
+            public string Color { get; set; }
         }
     }
 }

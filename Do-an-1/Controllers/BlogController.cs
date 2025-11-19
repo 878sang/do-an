@@ -14,7 +14,11 @@ namespace Do_an_1.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            var blog = _context.TbBlogs
+        .Where(b => b.IsActive == true)
+        .OrderByDescending(b => b.CreatedDate)
+        .ToList();
+            return View(blog);
         }
         [Route("/blog/{alias}-{id}.html")]
         public async Task<IActionResult> Details(int? id)
