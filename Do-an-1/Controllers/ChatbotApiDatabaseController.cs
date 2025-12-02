@@ -1,390 +1,354 @@
 using Do_an_1.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
-
-namespace Do_an_1.Controllers
+namespace th3.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    [Produces("application/json")]
-    public class ChatbotApiDatabaseController : ControllerBase
+    [Route("Chatbot")]
+    public class ChatbotController : Controller
     {
         private readonly FashionStoreDbContext _context;
-        private readonly ILogger<ChatbotApiDatabaseController> _logger;
+        private readonly IConfiguration _configuration;
+        private readonly HttpClient _httpClient;
 
-        public ChatbotApiDatabaseController(FashionStoreDbContext context, ILogger<ChatbotApiDatabaseController> logger)
+        public ChatbotController(FashionStoreDbContext context, IConfiguration configuration)
         {
             _context = context;
-            _logger = logger;
+            _configuration = configuration;
+            _httpClient = new HttpClient();
         }
 
-        [HttpGet("test")]
-        public IActionResult Test()
-        {
-            return Ok(new { message = "Chatbot DB API is working!", timestamp = DateTime.Now });
-        }
-
-        [HttpGet("products")]
-        public async Task<IActionResult> GetProducts([FromQuery] string? search = null, [FromQuery] int? categoryId = null)
+        [HttpPost("SendMessage")]
+        public async Task<IActionResult> SendMessage([FromBody] ChatRequest request)
         {
             try
             {
-                var query = _context.TbProducts
-                    .Include(p => p.CategoryProduct)
-                    .Where(p => p.IsActive == true);
-
-                if (!string.IsNullOrEmpty(search))
+                var apiKey = _configuration["Gemini:ApiKey"];
+                if (string.IsNullOrEmpty(apiKey))
                 {
-                    var searchLower = search.ToLower();
-                    query = query.Where(p => (p.Title != null && p.Title.ToLower().Contains(searchLower)) ||
-                                             (p.Description != null && p.Description.ToLower().Contains(searchLower)));
+                    return StatusCode(500, "API Key not configured.");
                 }
 
-                if (categoryId.HasValue)
-                {
-                    query = query.Where(p => p.CategoryProductId == categoryId);
-                }
+                var userMessage = request.Contents.LastOrDefault()?.Parts.FirstOrDefault()?.Text;
+                string contextInfo = "";
 
-                var products = await query
-                    .OrderByDescending(p => p.IsBestSeller == true)
-                    .ThenByDescending(p => p.CreatedDate)
-                    .Select(p => new
+                // Enhanced RAG: Search database to answer user questions
+                if (!string.IsNullOrEmpty(userMessage))
+                {
+                    var messageLower = userMessage.ToLower();
+                    var keywords = messageLower.Split(new[] { ' ', ',', '.', '?', '!' }, StringSplitOptions.RemoveEmptyEntries);
+                    var searchTerms = keywords.Where(k => k.Length > 2).ToList();
+
+                    // Check for "how many products" questions
+                    bool isAskingProductCount = (keywords.Contains("bao") && keywords.Contains("nhiêu")) ||
+                                                 keywords.Contains("tổng") ||
+                                                 keywords.Contains("số");
+
+                    if (isAskingProductCount && (messageLower.Contains("sản phẩm") || messageLower.Contains("sp")))
                     {
-                        p.ProductId,
-                        p.Title,
-                        p.Alias,
-                        p.Description,
-                        p.Price,
-                        p.PriceSale,
-                        p.Image,
-                        p.IsNew,
-                        p.IsBestSeller,
-                        p.Star,
-                        CategoryName = p.CategoryProduct != null ? p.CategoryProduct.Title : null
-                    })
-                    .Take(20)
-                    .ToListAsync();
+                        var totalProducts = await _context.TbProducts.CountAsync(p => p.IsActive==true);
+                        Console.WriteLine($"[CHATBOT DEBUG] Total active products in DB: {totalProducts}");
+                        contextInfo += $"[DATABASE INFO] Tổng số sản phẩm đang kinh doanh: {totalProducts}\n";
 
-                return Ok(products);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Lỗi khi lấy danh sách sản phẩm (DB API)");
-                return StatusCode(500, new { error = "Lỗi server khi lấy dữ liệu sản phẩm" });
-            }
-        }
+                        // Also show the list of products with links
+                        var allProducts = await _context.TbProducts
+                            .Where(p => p.IsActive == true)
+                            .OrderBy(p => p.Title)
+                            .Select(p => new { p.ProductId, p.Title, p.PriceSale, p.Quantity, p.Alias, p.Image, p.Description })
+                            .ToListAsync();
 
-        [HttpGet("product/{id}")]
-        public async Task<IActionResult> GetProduct(int id)
-        {
-            try
-            {
-                var product = await _context.TbProducts
-                    .Include(p => p.CategoryProduct)
-                    .Include(p => p.TbProductReviews)
-                    .Where(p => p.ProductId == id && p.IsActive == true)
-                    .Select(p => new
-                    {
-                        p.ProductId,
-                        p.Title,
-                        p.Description,
-                        p.Detail,
-                        p.Price,
-                        p.PriceSale,
-                        p.Image,
-                        p.IsNew,
-                        p.IsBestSeller,
-                        p.Star,
-                        p.Quantity,
-                        CategoryName = p.CategoryProduct != null ? p.CategoryProduct.Title : null,
-                        Reviews = p.TbProductReviews
-                            .OrderByDescending(r => r.CreatedDate)
-                            .Select(r => new { r.Name, r.Detail, r.CreatedDate })
-                            .Take(5)
-                    })
-                    .FirstOrDefaultAsync();
-
-                if (product == null)
-                {
-                    return NotFound(new { error = "Không tìm thấy sản phẩm" });
-                }
-
-                return Ok(product);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Lỗi khi lấy thông tin sản phẩm {ProductId} (DB API)", id);
-                return StatusCode(500, new { error = "Lỗi server khi lấy thông tin sản phẩm" });
-            }
-        }
-
-        [HttpGet("categories")]
-        public async Task<IActionResult> GetCategories()
-        {
-            try
-            {
-                var categories = await _context.TbProductCategories
-                    .Select(c => new { c.CategoryProductId, c.Title, c.Description, c.Icon })
-                    .ToListAsync();
-
-                return Ok(categories);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Lỗi khi lấy danh sách danh mục (DB API)");
-                return StatusCode(500, new { error = "Lỗi server khi lấy dữ liệu danh mục" });
-            }
-        }
-
-        [HttpGet("orders")]
-        public async Task<IActionResult> GetOrders([FromQuery] string? code = null, [FromQuery] string? phone = null)
-        {
-            try
-            {
-                var query = _context.TbOrders
-                    .Include(o => o.Customer)
-                    .Include(o => o.OrderStatus)
-                    .Include(o => o.TbOrderDetails).ThenInclude(od => od.Product)
-                    .AsQueryable();
-
-                if (!string.IsNullOrWhiteSpace(code))
-                {
-                    query = query.Where(o => o.Code != null && o.Code.Equals(code));
-                }
-
-                if (!string.IsNullOrWhiteSpace(phone))
-                {
-                    query = query.Where(o => o.Customer != null && o.Customer.Phone != null && o.Customer.Phone.Contains(phone));
-                }
-
-                // Nếu không truyền tham số, trả về 5 đơn gần nhất (friendly cho chatbot demo)
-                query = query.OrderByDescending(o => o.CreatedDate);
-
-                var orders = await query
-                    .Take(10)
-                    .Select(o => new
-                    {
-                        o.OrderId,
-                        o.Code,
-                        CustomerName = o.Customer != null ? o.Customer.Name : null,
-                        Phone = o.Customer != null ? o.Customer.Phone : null,
-                        Address = o.ShippingAddress,
-                        o.TotalAmount,
-                        o.CreatedDate,
-                        StatusName = o.OrderStatus != null ? o.OrderStatus.Name : null,
-                        OrderDetails = o.TbOrderDetails.Select(od => new
+                        if (allProducts.Any())
                         {
-                            Title = od.Product != null ? od.Product.Title : null,
-                            od.Price,
-                            od.Quantity
-                        })
-                    })
-                    .ToListAsync();
+                            contextInfo += $"\n[DATABASE INFO] Danh sách {allProducts.Count} sản phẩm (với hình ảnh và link):\n";
+                            foreach (var p in allProducts)
+                            {
+                                var productUrl = $"/san-pham/{p.Alias}-{p.ProductId}";
+                                var imageUrl = !string.IsNullOrEmpty(p.Image) ? p.Image : "/images/no-image.jpg";
+                                var description = !string.IsNullOrEmpty(p.Description) ? p.Description.Replace("\"", "'").Replace("\n", " ").Replace("\r", "") : "";
+                                contextInfo += $"{{\"title\":\"{p.Title}\",\"price\":\"{p.PriceSale:N0} VNĐ\",\"stock\":{p.Quantity},\"url\":\"{productUrl}\",\"image\":\"{imageUrl}\",\"description\":\"{description}\"}}\n";
+                            }
+                        }
+                    }
 
-                return Ok(orders);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Lỗi khi lấy danh sách đơn hàng (DB API)");
-                return StatusCode(500, new { error = "Lỗi server khi lấy dữ liệu đơn hàng" });
-            }
-        }
+                    // Check for category count questions
+                    if (isAskingProductCount && (messageLower.Contains("danh mục") || messageLower.Contains("loại")))
+                    {
+                        var totalCategories = await _context.TbProductCategories.CountAsync();
+                        contextInfo += $"[DATABASE INFO] Tổng số danh mục: {totalCategories}\n";
+                    }
 
-        [HttpGet("blogs")]
-        public async Task<IActionResult> GetBlogs([FromQuery] string? search = null)
-        {
-            try
-            {
-                var query = _context.TbBlogs
-                    .Include(b => b.BlogCategory)
-                    .Include(b => b.Account)
-                    .AsQueryable();
+                    // Check if user wants to see ALL products (list request)
+                    bool isAskingForList = (messageLower.Contains("tên") || messageLower.Contains("danh sách") ||
+                                           messageLower.Contains("liệt kê") || messageLower.Contains("cho tôi biết") ||
+                                           messageLower.Contains("có những") || messageLower.Contains("có gì")) &&
+                                          (messageLower.Contains("sản phẩm") || messageLower.Contains("sp"));
 
-                if (!string.IsNullOrEmpty(search))
-                {
-                    var searchLower = search.ToLower();
-                    query = query.Where(b => (b.Title != null && b.Title.ToLower().Contains(searchLower)) ||
-                                             (b.Description != null && b.Description.ToLower().Contains(searchLower)));
+                    if (isAskingForList)
+                    {
+                        // Return ALL products, not just keyword matches
+                        var allProducts = await _context.TbProducts
+                            .Where(p => p.IsActive == true)
+                            .OrderBy(p => p.Title)
+                            .Select(p => new { p.ProductId, p.Title, p.PriceSale, p.Quantity, p.Alias, p.Image, p.Description })
+                            .ToListAsync();
+
+                        if (allProducts.Any())
+                        {
+                            Console.WriteLine($"[CHATBOT DEBUG] Listing ALL {allProducts.Count} active products");
+                            contextInfo += $"\n[DATABASE INFO] Danh sách tất cả {allProducts.Count} sản phẩm (với hình ảnh và link):\n";
+                            foreach (var p in allProducts)
+                            {
+                                var productUrl = $"/san-pham/{p.Alias}-{p.ProductId}";
+                                var imageUrl = !string.IsNullOrEmpty(p.Image) ? p.Image : "/images/no-image.jpg";
+                                var description = !string.IsNullOrEmpty(p.Description) ? p.Description.Replace("\"", "'").Replace("\n", " ").Replace("\r", "") : "";
+                                Console.WriteLine($"  - {p.Title}: {p.PriceSale:N0} VNĐ (Stock: {p.Quantity}) - {productUrl}");
+                                contextInfo += $"{{\"title\":\"{p.Title}\",\"price\":\"{p.PriceSale:N0} VNĐ\",\"stock\":{p.Quantity},\"url\":\"{productUrl}\",\"image\":\"{imageUrl}\",\"description\":\"{description}\"}}\n";
+                            }
+                        }
+                    }
+                    // Search Products by keywords (only if NOT asking for full list)
+                    else if (searchTerms.Any())
+                    {
+                        var products = await _context.TbProducts
+                            .Where(p => p.IsActive==true && searchTerms.Any(t =>
+                                p.Title.ToLower().Contains(t) ||
+                                (p.Description != null && p.Description.ToLower().Contains(t))))
+                            .Take(5)
+                            .Select(p => new { p.ProductId, p.Title, p.PriceSale, p.Quantity, p.Alias, p.Image, p.Description })
+                            .ToListAsync();
+
+                        if (products.Any())
+                        {
+                            Console.WriteLine($"[CHATBOT DEBUG] Found {products.Count} products matching keywords: {string.Join(", ", searchTerms)}");
+                            contextInfo += "\n[DATABASE INFO] Sản phẩm tìm thấy (với hình ảnh và link):\n";
+                            foreach (var p in products)
+                            {
+                                var productUrl = $"/product/{p.Alias}-{p.ProductId}.html";
+                                var imageUrl = !string.IsNullOrEmpty(p.Image) ? p.Image : "/images/no-image.jpg";
+                                var description = !string.IsNullOrEmpty(p.Description) ? p.Description.Replace("\"", "'").Replace("\n", " ").Replace("\r", "") : "";
+                                Console.WriteLine($"  - {p.Title}: {p.PriceSale:N0} VNĐ (Stock: {p.Quantity}) - {productUrl}");
+                                contextInfo += $"{{\"title\":\"{p.Title}\",\"price\":\"{p.PriceSale:N0} VNĐ\",\"stock\":{p.Quantity},\"url\":\"{productUrl}\",\"image\":\"{imageUrl}\",\"description\":\"{description}\"}}\n";
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine($"[CHATBOT DEBUG] No products found for keywords: {string.Join(", ", searchTerms)}");
+                        }
+                    }
+
+                    // Search Categories by keywords
+                    if (searchTerms.Any() && (messageLower.Contains("danh mục") || messageLower.Contains("loại") || messageLower.Contains("category")))
+                    {
+                        var categories = await _context.TbProductCategories
+                            .Where(c => searchTerms.Any(t =>
+                                c.Title.ToLower().Contains(t) ||
+                                (c.Description != null && c.Description.ToLower().Contains(t))))
+                            .Take(5)
+                            .Select(c => new { c.Title, c.Description })
+                            .ToListAsync();
+
+                        if (categories.Any())
+                        {
+                            contextInfo += "\n[DATABASE INFO] Danh mục tìm thấy:\n";
+                            foreach (var c in categories)
+                            {
+                                contextInfo += $"- {c.Title}: {c.Description}\n";
+                            }
+                        }
+                        else
+                        {
+                            // If no specific match, show all categories
+                            var allCategories = await _context.TbProductCategories
+                                .Take(10)
+                                .Select(c => new { c.Title })
+                                .ToListAsync();
+
+                            if (allCategories.Any())
+                            {
+                                contextInfo += "\n[DATABASE INFO] Các danh mục có sẵn:\n";
+                                foreach (var c in allCategories)
+                                {
+                                    contextInfo += $"- {c.Title}\n";
+                                }
+                            }
+                        }
+                    }
+
+                    // Search Blogs by keywords
+                    if (searchTerms.Any() && (messageLower.Contains("blog") || messageLower.Contains("bài viết") || messageLower.Contains("tin tức")))
+                    {
+                        var blogs = await _context.TbBlogs
+                            .Where(b => b.IsActive == true && searchTerms.Any(t =>
+                                b.Title.ToLower().Contains(t) ||
+                                (b.Description != null && b.Description.ToLower().Contains(t)) ||
+                                (b.Detail != null && b.Detail.ToLower().Contains(t))))
+                            .Take(5)
+                            .Select(b => new { b.Title, b.Description, b.Detail })
+                            .ToListAsync();
+
+                        if (blogs.Any())
+                        {
+                            contextInfo += "\n[DATABASE INFO] Bài viết tìm thấy:\n";
+                            foreach (var b in blogs)
+                            {
+                                contextInfo += $"- {b.Title}: {b.Description}\n";
+                            }
+                        }
+                    }
+
+                    // Log context for debugging
+                    if (!string.IsNullOrEmpty(contextInfo))
+                    {
+                        Console.WriteLine($"[CHATBOT DEBUG] Context being sent:\n{contextInfo}");
+                    }
                 }
 
-                var blogs = await query
-                    .OrderByDescending(b => b.CreatedDate)
-                    .Select(b => new
-                    {
-                        b.BlogId,
-                        b.Title,
-                        b.Description,
-                        b.Image,
-                        b.CreatedDate,
-                        CategoryName = b.BlogCategory != null ? b.BlogCategory.Title : null,
-                        AuthorName = b.Account != null ? b.Account.FullName : null
-                    })
-                    .Take(10)
-                    .ToListAsync();
+                // Construct the payload for Gemini with system instruction
+                var requestPayload = new Dictionary<string, object>();
 
-                return Ok(blogs);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Lỗi khi lấy danh sách blog (DB API)");
-                return StatusCode(500, new { error = "Lỗi server khi lấy dữ liệu blog" });
-            }
-        }
-
-        [HttpGet("news")]
-        public async Task<IActionResult> GetNews([FromQuery] string? search = null)
-        {
-            try
-            {
-                var query = _context.TbNews
-                    .Include(n => n.NewsCategory)
-                    .AsQueryable();
-
-                if (!string.IsNullOrEmpty(search))
+                // Add system instruction if we have context
+                if (!string.IsNullOrEmpty(contextInfo))
                 {
-                    var searchLower = search.ToLower();
-                    query = query.Where(n => (n.Title != null && n.Title.ToLower().Contains(searchLower)) ||
-                                             (n.Description != null && n.Description.ToLower().Contains(searchLower)));
+                    var systemInstruction = $@"Bạn là trợ lý AI cho một cửa hàng thương mại điện tử. 
+
+QUAN TRỌNG: Bạn PHẢI sử dụng thông tin sau đây từ database để trả lời câu hỏi của người dùng. Đây là dữ liệu THỰC TẾ và CHÍNH XÁC từ hệ thống:
+
+{contextInfo}
+
+Khi người dùng hỏi về số lượng, sản phẩm, danh mục, hoặc bất kỳ thông tin nào có trong DATABASE INFO ở trên, bạn PHẢI trả lời dựa trên dữ liệu đó. KHÔNG hỏi lại người dùng để làm rõ nếu thông tin đã có sẵn trong database.
+
+QUAN TRỌNG VỀ HIỂN THỊ SẢN PHẨM:
+Khi có dữ liệu sản phẩm dạng JSON ({{""title"":...,""price"":...,""stock"":...,""url"":...,""image"":...,""description"":...}}), bạn PHẢI format thành HTML card đẹp mắt như sau:
+
+<div style=""display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; margin: 15px 0;"">
+  <div style=""border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; transition: transform 0.2s; cursor: pointer; background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1);"" onclick=""window.location.href='{{url}}'"">
+    <img src=""{{image}}"" alt=""{{title}}"" style=""width: 100%; height: 150px; object-fit: cover;"">
+    <div style=""padding: 12px;"">
+      <h4 style=""margin: 0 0 8px 0; font-size: 14px; font-weight: 600; color: #333; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"">{{title}}</h4>
+      <p style=""margin: 0 0 8px 0; font-size: 12px; color: #666; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;"">{{description}}</p>
+      <p style=""margin: 0; color: #e74c3c; font-size: 16px; font-weight: bold;"">{{price}}</p>
+      <p style=""margin: 5px 0 0 0; font-size: 12px; color: #7f8c8d;"">Còn {{stock}} sản phẩm</p>
+    </div>
+  </div>
+</div>
+
+                    requestPayload["systemInstruction"] = new
+                    {
+                        parts = new[] { new { text = systemInstruction } }
+                    };
                 }
 
-                var news = await query
-                    .OrderByDescending(n => n.CreatedDate)
-                    .Select(n => new
-                    {
-                        n.NewsId,
-                        n.Title,
-                        n.Description,
-                        n.Image,
-                        n.CreatedDate,
-                        CategoryName = n.NewsCategory != null ? n.NewsCategory.Title : null
-                    })
-                    .Take(10)
-                    .ToListAsync();
+                // Add conversation contents
+                if (request.Contents != null && request.Contents.Any())
+                {
+                    requestPayload["contents"] = request.Contents;
+                }
 
-                return Ok(news);
+                var apiUrl = $"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={apiKey}";
+
+                var jsonContent = JsonSerializer.Serialize(requestPayload);
+                var httpContent = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+
+                var response = await _httpClient.PostAsync(apiUrl, httpContent);
+                var responseString = await response.Content.ReadAsStringAsync();
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return StatusCode((int)response.StatusCode, responseString);
+                }
+
+                return Content(responseString, "application/json");
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Lỗi khi lấy danh sách tin tức (DB API)");
-                return StatusCode(500, new { error = "Lỗi server khi lấy dữ liệu tin tức" });
+                return StatusCode(500, ex.Message);
             }
         }
 
-        [HttpGet("statistics")]
-        public async Task<IActionResult> GetStatistics()
+
+        [HttpGet("TestDatabase")]
+        public async Task<IActionResult> TestDatabase()
         {
             try
             {
                 var totalProducts = await _context.TbProducts.CountAsync(p => p.IsActive == true);
-                var totalOrders = await _context.TbOrders.CountAsync();
-                var totalCustomers = await _context.TbCustomers.CountAsync();
-                var totalBlogs = await _context.TbBlogs.CountAsync();
-                var totalNews = await _context.TbNews.CountAsync();
+                var totalCategories = await _context.TbProductCategories.CountAsync();
+                var totalBlogs = await _context.TbBlogs.CountAsync(b => b.IsActive == true);
 
-                var newProducts = await _context.TbProducts.CountAsync(p => p.IsNew == true && p.IsActive == true);
-                var bestSellerProducts = await _context.TbProducts.CountAsync(p => p.IsBestSeller == true && p.IsActive == true);
-
-                return Ok(new
-                {
-                    totalProducts,
-                    totalOrders,
-                    totalCustomers,
-                    totalBlogs,
-                    totalNews,
-                    newProducts,
-                    bestSellerProducts
-                });
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Lỗi khi lấy thống kê (DB API)");
-                return StatusCode(500, new { error = "Lỗi server khi lấy thống kê" });
-            }
-        }
-
-        public class SearchRequest
-        {
-            public string Query { get; set; } = string.Empty;
-        }
-
-        [HttpPost("search")]
-        public async Task<IActionResult> SearchData([FromBody] SearchRequest request)
-        {
-            try
-            {
-                if (string.IsNullOrWhiteSpace(request.Query))
-                {
-                    return BadRequest(new { error = "Truy vấn không được để trống" });
-                }
-
-                var q = request.Query.ToLower();
-
-                var productsTask = _context.TbProducts
-                    .Include(p => p.CategoryProduct)
-                    .Where(p => p.IsActive == true &&
-                                ((p.Title != null && p.Title.ToLower().Contains(q)) ||
-                                 (p.Description != null && p.Description.ToLower().Contains(q))))
-                    .Select(p => new
-                    {
-                        p.ProductId,
-                        p.Title,
-                        p.Alias,
-                        p.Description,
-                        p.Price,
-                        p.PriceSale,
-                        p.Image,
-                        CategoryName = p.CategoryProduct != null ? p.CategoryProduct.Title : null
-                    })
+                var sampleProducts = await _context.TbProducts
+                    .Where(p => p.IsActive == true)
                     .Take(5)
+                    .Select(p => new { p.ProductId, p.Title, p.PriceSale, p.Quantity, p.IsActive })
                     .ToListAsync();
 
-                var blogsTask = _context.TbBlogs
-                    .Include(b => b.BlogCategory)
-                    .Where(b => (b.Title != null && b.Title.ToLower().Contains(q)) ||
-                                (b.Description != null && b.Description.ToLower().Contains(q)))
-                    .Select(b => new
-                    {
-                        b.BlogId,
-                        b.Title,
-                        b.Description,
-                        b.Image,
-                        CategoryName = b.BlogCategory != null ? b.BlogCategory.Title : null
-                    })
-                    .Take(3)
-                    .ToListAsync();
-
-                var newsTask = _context.TbNews
-                    .Include(n => n.NewsCategory)
-                    .Where(n => (n.Title != null && n.Title.ToLower().Contains(q)) ||
-                                (n.Description != null && n.Description.ToLower().Contains(q)))
-                    .Select(n => new
-                    {
-                        n.NewsId,
-                        n.Title,
-                        n.Description,
-                        n.Image,
-                        CategoryName = n.NewsCategory != null ? n.NewsCategory.Title : null
-                    })
-                    .Take(3)
-                    .ToListAsync();
-
-                await Task.WhenAll(productsTask, blogsTask, newsTask);
-
-                return Ok(new
+                var result = new
                 {
-                    products = productsTask.Result,
-                    blogs = blogsTask.Result,
-                    news = newsTask.Result
-                });
+                    TotalActiveProducts = totalProducts,
+                    TotalCategories = totalCategories,
+                    TotalActiveBlogs = totalBlogs,
+                    SampleProducts = sampleProducts,
+                    Message = "Database connection successful!"
+                };
+
+                return Ok(result);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Lỗi khi tìm kiếm dữ liệu (DB API)");
-                return StatusCode(500, new { error = "Lỗi server khi tìm kiếm" });
+                return StatusCode(500, new { Error = ex.Message, StackTrace = ex.StackTrace });
             }
+        }
+
+        public class ChatRequest
+        {
+            [JsonPropertyName("contents")]
+            public List<Content> Contents { get; set; }
+        }
+
+        public class Content
+        {
+            [JsonPropertyName("role")]
+            public string Role { get; set; }
+
+            [JsonPropertyName("parts")]
+            public List<Part> Parts { get; set; }
+        }
+
+        public class Part
+        {
+            [JsonPropertyName("text")]
+            public string Text { get; set; }
+
+            [JsonPropertyName("inline_data")]
+            public object InlineData { get; set; }
         }
     }
 }
 
+
+public class ChatRequest
+{
+    [JsonPropertyName("contents")]
+    public List<Content> Contents { get; set; }
+}
+
+public class Content
+{
+    [JsonPropertyName("role")]
+    public string Role { get; set; }
+
+    [JsonPropertyName("parts")]
+    public List<Part> Parts { get; set; }
+}
+
+public class Part
+{
+    [JsonPropertyName("text")]
+    public string Text { get; set; }
+
+    [JsonPropertyName("inline_data")]
+    public object InlineData { get; set; }
+}
 

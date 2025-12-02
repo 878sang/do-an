@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="~/assets/css/style.css">
     <link rel="stylesheet" href="~/assets/css/chat.css">
 
+
 </head>
 
 <body>
@@ -873,7 +874,7 @@
             </div>
         </div>
     </div>
-    <button id="chatbot-toggler">
+    <button id="chatbot-toggler" onclick="document.body.classList.toggle('show-chatbot'); console.log('Toggled!');">
         <span class="material-symbols-rounded">mode_comment</span>
         <span class="material-symbols-rounded">close</span>
     </button>
@@ -898,34 +899,6 @@
                 </svg>
                 <!-- prettier-ignore -->
                 <div class="message-text"> Xin chào 👋<br /> Tôi có thể giúp gì cho bạn hôm nay? </div>
-            </div>
-        </div>
-        <!-- Quick Replies -->
-        <div id="quick-replies-fixed" style="padding: 10px; background: #fff; border-top: 1px solid #eef2f7;">
-            <button id="quick-replies-toggle-btn" class="quick-replies-main-btn">
-                <i class="fas fa-bolt btn-icon"></i>
-                <span>Câu hỏi nhanh</span>
-                <i class="fas fa-chevron-down toggle-icon"></i>
-            </button>
-            <div id="quick-replies-dropdown" class="quick-replies-dropdown">
-                <div class="quick-replies-grid">
-                    <button class="quick-reply-item special" data-action="track-order">
-                        <span class="quick-reply-icon">🔍</span>
-                        <span class="quick-reply-text">Tra cứu đơn hàng</span>
-                    </button>
-                    <button class="quick-reply-item" data-action="chat" data-text="Danh mục sản phẩm">
-                        <span class="quick-reply-icon">📂</span>
-                        <span class="quick-reply-text">Danh mục sản phẩm</span>
-                    </button>
-                    <button class="quick-reply-item" data-action="chat" data-text="Sản phẩm mới">
-                        <span class="quick-reply-icon">🆕</span>
-                        <span class="quick-reply-text">Sản phẩm mới</span>
-                    </button>
-                    <button class="quick-reply-item" data-action="chat" data-text="Sản phẩm bán chạy">
-                        <span class="quick-reply-icon">🔥</span>
-                        <span class="quick-reply-text">Sản phẩm bán chạy</span>
-                    </button>
-                </div>
             </div>
         </div>
         <!-- Chatbot Footer -->
@@ -984,7 +957,6 @@
     <!-- Customscript js -->
     <script src="~/js/site.js"></script>
     <script src="~/assets/js/script.js"></script>
-    <script src="~/assets/js/chat.js"></script>
     <script>
         (function () {
             var toastTimeout;
@@ -1078,8 +1050,9 @@
                 });
         }
     </script>
+    
 </body>
-
+<script src="~/assets/js/chat.js"></script>
 <!-- Mirrored from risingtheme.com/html/demo-suruchi-v1/suruchi/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 10 Dec 2024 13:57:07 GMT -->
 
 </html>

@@ -17,13 +17,13 @@ namespace Do_an_1.Controllers
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IConfiguration _configuration;
         private readonly HttpClient _httpClient;
-        
+
         // Gemini API Configuration
         private const string GEMINI_API_ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
-        
+
         public ChatController(
-            FashionStoreDbContext context, 
-            ILogger<ChatController> logger, 
+            FashionStoreDbContext context,
+            ILogger<ChatController> logger,
             IHttpContextAccessor httpContextAccessor,
             IConfiguration configuration,
             IHttpClientFactory httpClientFactory)
@@ -111,13 +111,13 @@ namespace Do_an_1.Controllers
 
                 // Get AI response with context
                 var aiResponse = await GetAIResponse(userId, guestToken, request.Message);
-                
+
                 // Save bot message
                 var botMsg = await SaveBotMessage(userId, guestToken, aiResponse);
 
                 // Detect and attach structured data (categories/products)
                 var structuredData = await DetectAndFetchStructuredData(request.Message.ToLower());
-                
+
                 return Ok(BuildResponse(userMsg, botMsg, structuredData));
             }
             catch (Exception ex)
@@ -135,10 +135,10 @@ namespace Do_an_1.Controllers
             {
                 // Get system context
                 var systemContext = await BuildSystemContext();
-                
+
                 // Get chat history
                 var chatHistory = await GetChatHistory(userId, guestToken, 10);
-                
+
                 // Build Gemini API request
                 var geminiRequest = new
                 {
@@ -166,9 +166,9 @@ namespace Do_an_1.Controllers
                 // Call Gemini API
                 var jsonRequest = JsonSerializer.Serialize(geminiRequest);
                 var content = new StringContent(jsonRequest, Encoding.UTF8, "application/json");
-                
+
                 var response = await _httpClient.PostAsync(requestUrl, content);
-                
+
                 if (!response.IsSuccessStatusCode)
                 {
                     _logger.LogWarning("Gemini API returned {StatusCode}", response.StatusCode);
@@ -200,14 +200,14 @@ namespace Do_an_1.Controllers
         private List<object> BuildGeminiContents(string systemContext, List<TbChatMessage> history, string currentMessage)
         {
             var contents = new List<object>();
-            
+
             // Add system context as first user message
             contents.Add(new
             {
                 role = "user",
                 parts = new[] { new { text = systemContext } }
             });
-            
+
             contents.Add(new
             {
                 role = "model",
@@ -429,7 +429,7 @@ Hãy bắt đầu hỗ trợ khách hàng!";
             // Try exact match first
             var exactMatch = await _context.TbProducts
                 .Include(p => p.CategoryProduct)
-                .Where(p => p.IsActive == true && p.Title != null && 
+                .Where(p => p.IsActive == true && p.Title != null &&
                            p.Title.ToLower().Contains(cleanMessage))
                 .FirstOrDefaultAsync();
 
@@ -456,7 +456,7 @@ Hãy bắt đầu hỗ trợ khách hàng!";
                 .Include(p => p.CategoryProduct)
                 .Include(p => p.TbOrderDetails)
                 .Where(p => p.IsActive == true &&
-                           keywords.Any(kw => kw.Length >= 3 && 
+                           keywords.Any(kw => kw.Length >= 3 &&
                            p.Title != null && p.Title.ToLower().Contains(kw)))
                 .ToListAsync();
 
@@ -466,7 +466,7 @@ Hãy bắt đầu hỗ trợ khách hàng!";
                 .Select(p => new
                 {
                     Product = p,
-                    Score = keywords.Count(kw => kw.Length >= 3 && 
+                    Score = keywords.Count(kw => kw.Length >= 3 &&
                             p.Title != null && p.Title.ToLower().Contains(kw)) * 10 +
                             p.TbOrderDetails.Sum(od => od.Quantity ?? 0)
                 })
@@ -501,10 +501,10 @@ Hãy bắt đầu hỗ trợ khách hàng!";
                 var guestToken = GetOrCreateGuestToken();
 
                 var orderIdStr = Regex.Replace(request.OrderId, @"[^0-9]", "");
-                
+
                 if (string.IsNullOrEmpty(orderIdStr) || !int.TryParse(orderIdStr, out int orderId))
                 {
-                    var botMsg = await SaveBotMessage(userId, guestToken, 
+                    var botMsg = await SaveBotMessage(userId, guestToken,
                         "Mã đơn hàng không hợp lệ. Vui lòng nhập mã đơn hàng (ví dụ: #123 hoặc 123).");
                     return Ok(new { bot = botMsg });
                 }
@@ -651,7 +651,7 @@ Hãy bắt đầu hỗ trợ khách hàng!";
                 if (!string.IsNullOrEmpty(request.PriceRange))
                 {
                     var range = request.PriceRange.Split('-');
-                    if (range.Length == 2 && 
+                    if (range.Length == 2 &&
                         decimal.TryParse(range[0], out decimal minPrice) &&
                         decimal.TryParse(range[1], out decimal maxPrice))
                     {
@@ -823,16 +823,16 @@ Hãy bắt đầu hỗ trợ khách hàng!";
         private string GetFallbackResponse(string userMessage)
         {
             var lower = userMessage.ToLower();
-            
+
             if (lower.Contains("xin chào") || lower.Contains("hello") || lower.Contains("hi"))
                 return "Xin chào! Tôi có thể giúp gì cho bạn về sản phẩm của chúng tôi? 😊";
-            
+
             if (lower.Contains("cảm ơn") || lower.Contains("thank"))
                 return "Rất vui được hỗ trợ bạn! Chúc bạn có trải nghiệm mua sắm tuyệt vời! 🎉";
-            
+
             if (lower.Contains("tạm biệt") || lower.Contains("bye"))
                 return "Tạm biệt! Hẹn gặp lại bạn sớm! 👋";
-            
+
             return "Tôi có thể giúp bạn tìm hiểu về sản phẩm, danh mục hoặc tra cứu đơn hàng. Bạn cần hỗ trợ gì? 🛍️";
         }
 
@@ -871,7 +871,7 @@ Hãy bắt đầu hỗ trợ khách hàng!";
                 var oldMessages = await _context.TbChatMessages
                     .Where(m => m.CreatedDate < cutoffDate)
                     .ToListAsync();
-                
+
                 _context.TbChatMessages.RemoveRange(oldMessages);
                 await _context.SaveChangesAsync();
             }
@@ -883,17 +883,17 @@ Hãy bắt đầu hỗ trợ khách hàng!";
 
         private List<string> ExtractProductKeywords(string message)
         {
-            var stopwords = new[] { 
+            var stopwords = new[] {
                 "có", "không", "bạn", "tôi", "mình", "cho", "của", "về", "với", "và", "hay",
-                "thì", "là", "được", "đã", "sẽ", "đang", "bị", "nào", "gì", "như", "thế", 
-                "này", "đó", "kia", "những", "các", "một", "hai", "ba", "muốn", "cần", 
+                "thì", "là", "được", "đã", "sẽ", "đang", "bị", "nào", "gì", "như", "thế",
+                "này", "đó", "kia", "những", "các", "một", "hai", "ba", "muốn", "cần",
                 "tìm", "xem", "mua", "giá", "sản", "phẩm"
             };
 
             var cleanMessage = Regex.Replace(message, @"[^\p{L}\p{N}\s]", " ");
             var words = cleanMessage.ToLower()
                 .Split(new[] { ' ', '\t', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-            
+
             return words
                 .Where(word => word.Length >= 2 && !stopwords.Contains(word))
                 .Distinct()
@@ -904,16 +904,16 @@ Hãy bắt đầu hỗ trợ khách hàng!";
         {
             if (string.IsNullOrEmpty(description))
                 return "Sản phẩm chất lượng cao";
-            
-            return description.Length <= maxLength 
-                ? description 
+
+            return description.Length <= maxLength
+                ? description
                 : description.Substring(0, maxLength) + "...";
         }
 
         private string FormatPrice(decimal? price)
         {
-            return price.HasValue 
-                ? price.Value.ToString("N0") + " ₫" 
+            return price.HasValue
+                ? price.Value.ToString("N0") + " ₫"
                 : "Liên hệ";
         }
 
