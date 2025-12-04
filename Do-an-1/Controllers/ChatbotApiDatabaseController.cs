@@ -49,7 +49,7 @@ namespace th3.Controllers
 
                     if (isAskingProductCount && (messageLower.Contains("sản phẩm") || messageLower.Contains("sp")))
                     {
-                        var totalProducts = await _context.TbProducts.CountAsync(p => p.IsActive==true);
+                        var totalProducts = await _context.TbProducts.CountAsync(p => p.IsActive == true);
                         Console.WriteLine($"[CHATBOT DEBUG] Total active products in DB: {totalProducts}");
                         contextInfo += $"[DATABASE INFO] Tổng số sản phẩm đang kinh doanh: {totalProducts}\n";
 
@@ -113,7 +113,7 @@ namespace th3.Controllers
                     else if (searchTerms.Any())
                     {
                         var products = await _context.TbProducts
-                            .Where(p => p.IsActive==true && searchTerms.Any(t =>
+                            .Where(p => p.IsActive == true && searchTerms.Any(t =>
                                 p.Title.ToLower().Contains(t) ||
                                 (p.Description != null && p.Description.ToLower().Contains(t))))
                             .Take(5)
@@ -238,29 +238,31 @@ Khi có dữ liệu sản phẩm dạng JSON ({{""title"":...,""price"":...,""st
                     requestPayload["systemInstruction"] = new
                     {
                         parts = new[] { new { text = systemInstruction } }
-                    };
+                    }
+                    ;
+
+
+                    // Add conversation contents
+                    if (request.Contents != null && request.Contents.Any())
+                    {
+                        requestPayload["contents"] = request.Contents;
+                    }
+
+                    var apiUrl = $"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={apiKey}";
+
+                    var jsonContent = JsonSerializer.Serialize(requestPayload);
+                    var httpContent = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+
+                    var response = await _httpClient.PostAsync(apiUrl, httpContent);
+                    var responseString = await response.Content.ReadAsStringAsync();
+
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        return StatusCode((int)response.StatusCode, responseString);
+                    }
+
+                    return Content(responseString, "application/json");
                 }
-
-                // Add conversation contents
-                if (request.Contents != null && request.Contents.Any())
-                {
-                    requestPayload["contents"] = request.Contents;
-                }
-
-                var apiUrl = $"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={apiKey}";
-
-                var jsonContent = JsonSerializer.Serialize(requestPayload);
-                var httpContent = new StringContent(jsonContent, Encoding.UTF8, "application/json");
-
-                var response = await _httpClient.PostAsync(apiUrl, httpContent);
-                var responseString = await response.Content.ReadAsStringAsync();
-
-                if (!response.IsSuccessStatusCode)
-                {
-                    return StatusCode((int)response.StatusCode, responseString);
-                }
-
-                return Content(responseString, "application/json");
             }
             catch (Exception ex)
             {
