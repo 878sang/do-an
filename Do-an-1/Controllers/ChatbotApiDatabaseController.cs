@@ -233,8 +233,7 @@ Khi có dữ liệu sản phẩm dạng JSON ({{""title"":...,""price"":...,""st
       <p style=""margin: 5px 0 0 0; font-size: 12px; color: #7f8c8d;"">Còn {{stock}} sản phẩm</p>
     </div>
   </div>
-</div>
-
+</div>";
                     requestPayload["systemInstruction"] = new
                     {
                         parts = new[] { new { text = systemInstruction } }
