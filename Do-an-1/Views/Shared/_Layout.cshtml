@@ -25,6 +25,7 @@
     <!-- Custom Style CSS -->
     <link rel="stylesheet" href="~/assets/css/style.css">
     <link rel="stylesheet" href="~/assets/css/chat.css">
+    <link href="~/assets/toastr/css/toastr.min.css" rel="stylesheet" />
 
 
 </head>
@@ -957,6 +958,8 @@
     <!-- Customscript js -->
     <script src="~/js/site.js"></script>
     <script src="~/assets/js/script.js"></script>
+    <script src="~/assets/toastr/js/toastr.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
     <script>
         (function () {
             var toastTimeout;
