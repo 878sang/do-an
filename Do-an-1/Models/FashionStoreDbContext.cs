@@ -57,7 +57,7 @@ public partial class FashionStoreDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("data source= ADMIN-PC; initial catalog=FashionStoreDB; integrated security=True; TrustServerCertificate=True;");
+        => optionsBuilder.UseSqlServer("data source= LAPTOP-OMH6A36G; initial catalog=FashionStoreDB; integrated security=True; TrustServerCertificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -140,7 +140,7 @@ public partial class FashionStoreDbContext : DbContext
 
         modelBuilder.Entity<TbChatMessage>(entity =>
         {
-            entity.HasKey(e => e.MessageId).HasName("PK__tb_ChatM__C87C0C9C0F8D02C6");
+            entity.HasKey(e => e.MessageId).HasName("PK__tb_ChatM__C87C0C9C5921718A");
 
             entity.ToTable("tb_ChatMessage");
 

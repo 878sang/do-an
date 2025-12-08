@@ -44,6 +44,8 @@ namespace Do_an_1.Controllers
             .Select(v => v.Color)
             .Distinct()
             .ToList();
+            ViewBag.productReview = _context.TbProductReviews.
+            Where(i => i.ProductId == id && (i.IsActive == true || i.IsActive == null)).OrderByDescending(r => r.CreatedDate).ToList();
             return View(product);
         }
         public IActionResult Preview(int id)

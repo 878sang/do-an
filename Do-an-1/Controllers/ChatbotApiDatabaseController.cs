@@ -237,31 +237,29 @@ Khi có dữ liệu sản phẩm dạng JSON ({{""title"":...,""price"":...,""st
                     requestPayload["systemInstruction"] = new
                     {
                         parts = new[] { new { text = systemInstruction } }
-                    }
-                    ;
-
-
-                    // Add conversation contents
-                    if (request.Contents != null && request.Contents.Any())
-                    {
-                        requestPayload["contents"] = request.Contents;
-                    }
-
-                    var apiUrl = $"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={apiKey}";
-
-                    var jsonContent = JsonSerializer.Serialize(requestPayload);
-                    var httpContent = new StringContent(jsonContent, Encoding.UTF8, "application/json");
-
-                    var response = await _httpClient.PostAsync(apiUrl, httpContent);
-                    var responseString = await response.Content.ReadAsStringAsync();
-
-                    if (!response.IsSuccessStatusCode)
-                    {
-                        return StatusCode((int)response.StatusCode, responseString);
-                    }
-
-                    return Content(responseString, "application/json");
+                    };
                 }
+
+                // Add conversation contents
+                if (request.Contents != null && request.Contents.Any())
+                {
+                    requestPayload["contents"] = request.Contents;
+                }
+
+                var apiUrl = $"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={apiKey}";
+
+                var jsonContent = JsonSerializer.Serialize(requestPayload);
+                var httpContent = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+
+                var response = await _httpClient.PostAsync(apiUrl, httpContent);
+                var responseString = await response.Content.ReadAsStringAsync();
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return StatusCode((int)response.StatusCode, responseString);
+                }
+
+                return Content(responseString, "application/json");
             }
             catch (Exception ex)
             {

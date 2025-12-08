@@ -1,0 +1,234 @@
+﻿@model Do_an_1.Models.TbProduct
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="content-body">
+    <div class="container-fluid">
+        <div class="row page-titles">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Form</a></li>
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Validation</a></li>
+            </ol>
+        </div>
+        <!-- row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Sửa sản phẩm</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-validation">
+                            <form asp-action="Edit" class="needs-validation" novalidate="">
+                                <input type="hidden" asp-for="ProductId" />
+                                <div class="row">
+                                    <div class="col-xl-12">
+                                        <div class="mb-3 row">
+                                            <label asp-for="Title" class="col-lg-1 col-form-label"
+                                                for="validationCustom01">Tiêu đề <span
+                                                    class="text-danger">*</span></label>
+                                            <div class="col-lg-6">
+                                                <input asp-for="Title" type="text" class="form-control"
+                                                    id="validationCustom01" required>
+                                                <span asp-validation-for="Title" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label asp-for="Alias" class="col-lg-1 col-form-label"
+                                                for="validationCustom02">Alias <span
+                                                    class="text-danger">*</span></label>
+                                            <div class="col-lg-6">
+                                                <input asp-for="Alias" type="text" class="form-control"
+                                                    id="validationCustom02" required>
+                                                <span asp-validation-for="Alias" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label asp-for="Description" class="col-lg-1 col-form-label">Mô tả</label>
+                                            <div class="col-lg-6">
+                                                <input asp-for="Description" type="text" class="form-control" />
+                                                <span asp-validation-for="Description" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label asp-for="Detail" class="col-lg-1 col-form-label">Chi tiết</label>
+                                            <div class="col-lg-6">
+                                                <input asp-for="Detail" type="text" class="form-control" />
+                                                <span asp-validation-for="Detail" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label asp-for="CategoryProductId" class="col-lg-1 col-form-label">Danh
+                                                mục</label>
+                                            <div class="col-lg-6">
+                                                <select asp-for="CategoryProductId" class="form-control"
+                                                    asp-items="ViewBag.CategoryProductId"></select>
+                                                <span asp-validation-for="CategoryProductId" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        @if (Model.TbProductVariants != null && Model.TbProductVariants.Any())
+                                        {
+                                            
+                                                <div class="card-header bg-light border-top">
+                                                    <h5 class="card-title">Các biến thể của sản phẩm</h5>
+                                                </div>
+                                                <div class="card-body px-2 py-2">
+                                                    <table class="table table-bordered table-sm mb-0">
+                                                        <thead class="table-light">
+                                                            <tr>
+                                                                <th>Màu sắc</th>
+                                                                <th>Kích thước</th>
+                                                                <th>SKU</th>
+                                                                <th>Giá</th>
+                                                                <th>Giá sale</th>
+                                                                <th>Số lượng</th>
+                                                                <th>Kích hoạt</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @for (int i = 0; i < Model.TbProductVariants.Count; i++)
+                                                            {
+                                                                var variant = Model.TbProductVariants.ElementAt(i);
+                                                                <tr>
+                                                                    <td>@variant.Color?.ColorName <input type="hidden"
+                                                                            name="Variants[@i].ColorId"
+                                                                            value="@variant.ColorId" /><input type="hidden"
+                                                                            name="Variants[@i].VariantId"
+                                                                            value="@variant.VariantId" /></td>
+                                                                    <td>@variant.Size?.SizeName <input type="hidden"
+                                                                            name="Variants[@i].SizeId"
+                                                                            value="@variant.SizeId" /></td>
+                                                                    <td><input class="form-control" name="Variants[@i].Sku"
+                                                                            value="@variant.Sku" /></td>
+                                                                    <td><input class="form-control" name="Variants[@i].Price"
+                                                                            type="number" step="0.01"
+                                                                            value="@(variant.Price.HasValue ? variant.Price.Value.ToString("0.##") : "")" />
+                                                                    </td>
+                                                                    <td><input class="form-control"
+                                                                            name="Variants[@i].PriceSale" type="number"
+                                                                            step="0.01"
+                                                                            value="@(variant.PriceSale.HasValue ? variant.PriceSale.Value.ToString("0.##") : "")" />
+                                                                    </td>
+                                                                    <td><input class="form-control" name="Variants[@i].Quantity"
+                                                                            type="number" value="@variant.Quantity" /></td>
+                                                                    <td class="text-center"><input type="checkbox"
+                                                                            name="Variants[@i].IsActive" value="true"
+                                                                            @(variant.IsActive == true ? "checked" : "") /></td>
+                                                                </tr>
+                                                            }
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="mb-3 row">
+                                                <label asp-for="Price" class="col-lg-1 col-form-label">Giá</label>
+                                                <div class="col-lg-6">
+                                                    <input asp-for="Price" type="number" class="form-control" />
+                                                    <span asp-validation-for="Price" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3 row">
+                                                <label asp-for="PriceSale" class="col-lg-1 col-form-label">Giá sale</label>
+                                                <div class="col-lg-6">
+                                                    <input asp-for="PriceSale" type="number" class="form-control" />
+                                                    <span asp-validation-for="PriceSale" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                        }
+                                        <div class="mb-3 row">
+                                            <label asp-for="Quantity" class="col-lg-1 col-form-label">Số lượng</label>
+                                            <div class="col-lg-6">
+                                                <input asp-for="Quantity" type="number" class="form-control" />
+                                                <span asp-validation-for="Quantity" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label asp-for="Star" class="col-lg-1 col-form-label">Sao</label>
+                                            <div class="col-lg-6">
+                                                <input asp-for="Star" type="number" class="form-control" />
+                                                <span asp-validation-for="Star" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label asp-for="Image" class="col-lg-1 col-form-label">Ảnh</label>
+                                            <div class="col-lg-6">
+                                                <input asp-for="Image" type="text" class="form-control" />
+                                                <span asp-validation-for="Image" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label asp-for="CreatedDate" class="col-lg-1 col-form-label">Ngày
+                                                tạo</label>
+                                            <div class="col-lg-6">
+                                                <input asp-for="CreatedDate" type="datetime-local"
+                                                    class="form-control" />
+                                                <span asp-validation-for="CreatedDate" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label asp-for="CreatedBy" class="col-lg-1 col-form-label">Người tạo</label>
+                                            <div class="col-lg-6">
+                                                <input asp-for="CreatedBy" type="text" class="form-control" />
+                                                <span asp-validation-for="CreatedBy" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label asp-for="ModifiedDate" class="col-lg-1 col-form-label">Ngày
+                                                sửa</label>
+                                            <div class="col-lg-6">
+                                                <input asp-for="ModifiedDate" type="datetime-local"
+                                                    class="form-control" />
+                                                <span asp-validation-for="ModifiedDate" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label asp-for="ModifiedBy" class="col-lg-1 col-form-label">Người
+                                                sửa</label>
+                                            <div class="col-lg-6">
+                                                <input asp-for="ModifiedBy" type="text" class="form-control" />
+                                                <span asp-validation-for="ModifiedBy" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label class="col-lg-1 col-form-label">Mới</label>
+                                            <div class="col-lg-6">
+                                                <input asp-for="IsNew" type="checkbox" class="form-check-input" />
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label class="col-lg-1 col-form-label">Bán chạy</label>
+                                            <div class="col-lg-6">
+                                                <input asp-for="IsBestSeller" type="checkbox"
+                                                    class="form-check-input" />
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label class="col-lg-1 col-form-label">Kích hoạt</label>
+                                            <div class="col-lg-6">
+                                                <input asp-for="IsActive" type="checkbox" class="form-check-input" />
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8 ms-auto">
+                                            <button type="submit" class="btn btn-primary">Lưu</button>
+                                            <a asp-action="Index" class="btn btn-secondary ms-2">Quay lại danh sách</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

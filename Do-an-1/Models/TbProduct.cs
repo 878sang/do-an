@@ -31,15 +31,15 @@ public partial class TbProduct
 
     public string? ModifiedBy { get; set; }
 
-    public bool? IsNew { get; set; }
+    public bool IsNew { get; set; }
 
-    public bool? IsBestSeller { get; set; }
+    public bool IsBestSeller { get; set; }
 
-    public bool? IsActive { get; set; }
+    public bool IsActive { get; set; }
 
     public int? Quantity { get; set; }
 
-    public int? Star { get; set; }
+    public double? Star { get; set; }
 
     public virtual TbProductCategory? CategoryProduct { get; set; }
 
