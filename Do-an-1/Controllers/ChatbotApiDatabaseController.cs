@@ -267,6 +267,7 @@ Khi có dữ liệu sản phẩm dạng JSON ({{""title"":...,""price"":...,""st
             {
                 return StatusCode(500, ex.Message);
             }
+            return BadRequest("Invalid request");
         }
 
 

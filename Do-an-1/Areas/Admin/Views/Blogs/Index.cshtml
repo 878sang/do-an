@@ -27,13 +27,16 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
+                            <a asp-action="Create" class="btn btn-success mb-3">
+                                <i class="fa fa-plus"> Tạo mới</i>
+                            </a>
                             <table id="example4" class="display" style="min-width: 845px">
                                 <thead>
                                     <tr>
                                         <th>Số Thứ tự</th>
                                         <th>Tiêu đề</th>
                                         <th>Mô Tả</th>
-                                        <th>Chi Tiết </th>
+                                        <th>Danh mục</th>
                                         <th>Ảnh</th>
                                         <th>Ngày tạo</th>
                                         <th>Người tạo</th>
@@ -51,17 +54,21 @@
                                             <td>@(i++)</td>
                                             <td>@Html.DisplayFor(ModelItem => item.Title)</td>
                                             <td>@Html.DisplayFor(ModelItem => item.Description)</td>
-                                            <td>@Html.DisplayFor(ModelItem => item.Detail)</td>
+                                            <td>@(item.BlogCategory?.Title ?? "Chưa có danh mục")</td>
                                             <td>
                                                 <img src="@Url.Content(item.Image)" width="50" height="50" />
                                             </td>
                                             <td>@Html.DisplayFor(ModelItem => item.CreatedDate)</td>
-                                            <td>@Html.DisplayFor(ModelItem => item.CreatedBy)</td>
+                                            <td>@(item.Account != null ? (item.Account.FullName ?? item.Account.Username ?? $"Account {item.Account.AccountId}") : (item.CreatedBy ?? "Chưa có"))</td>
                                             <td>@Html.DisplayFor(ModelItem => item.IsActive)</td>
                                             <td>
                                                 <div class="d-flex">
-                                                    <a asp-action="Edit" asp-route-id="@item.BlogId" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fas fa-pencil-alt"></i></a>
-                                                    <a asp-action="Delete" asp-route-id="@item.BlogId" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+                                                    <a asp-action="Edit" asp-route-id="@item.BlogId"
+                                                        class="btn btn-primary shadow btn-xs sharp me-1"><i
+                                                            class="fas fa-pencil-alt"></i></a>
+                                                    <a asp-action="Delete" asp-route-id="@item.BlogId"
+                                                        class="btn btn-danger shadow btn-xs sharp"><i
+                                                            class="fa fa-trash"></i></a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -75,4 +82,3 @@
         </div>
     </div>
 </div>
-
