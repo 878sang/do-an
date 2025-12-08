@@ -14,23 +14,24 @@ namespace Do_an_1.Controllers
     {
         private readonly FashionStoreDbContext _context;
         private readonly ILogger<ChatController> _logger;
-        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IConfiguration _configuration;
         private readonly HttpClient _httpClient;
 
-        // Gemini API Configuration
-        private const string GEMINI_API_ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
+        // Gemini API Configuration - Model có thể được config trong appsettings.json
+        private string GetGeminiApiEndpoint()
+        {
+            var modelName = _configuration["GeminiAI:ModelName"] ?? "gemini-1.5-flash";
+            return $"https://generativelanguage.googleapis.com/v1beta/models/{modelName}:generateContent";
+        }
 
         public ChatController(
             FashionStoreDbContext context,
             ILogger<ChatController> logger,
-            IHttpContextAccessor httpContextAccessor,
             IConfiguration configuration,
             IHttpClientFactory httpClientFactory)
         {
             _context = context;
             _logger = logger;
-            _httpContextAccessor = httpContextAccessor;
             _configuration = configuration;
             _httpClient = httpClientFactory.CreateClient();
             _httpClient.Timeout = TimeSpan.FromSeconds(30);
@@ -124,7 +125,12 @@ namespace Do_an_1.Controllers
             {
                 _logger.LogError(ex, "Lỗi khi gửi tin nhắn: {Message}", ex.Message);
                 _logger.LogError(ex, "Stack trace: {StackTrace}", ex.StackTrace);
-                return StatusCode(500, new { error = $"Lỗi server khi xử lý tin nhắn: {ex.Message}" });
+                
+                // Đảm bảo luôn trả về JSON
+                return StatusCode(500, new { 
+                    error = "Lỗi server khi xử lý tin nhắn. Vui lòng thử lại sau.",
+                    details = ex.Message 
+                });
             }
         }
 
@@ -160,8 +166,13 @@ namespace Do_an_1.Controllers
                 };
 
                 // Get API Key from configuration
-                var apiKey = _configuration["GeminiAI:ApiKey"] ?? "YOUR_API_KEY_HERE";
-                var requestUrl = $"{GEMINI_API_ENDPOINT}?key={apiKey}";
+                var apiKey = _configuration["GeminiAI:ApiKey"];
+                if (string.IsNullOrEmpty(apiKey))
+                {
+                    _logger.LogError("GeminiAI:ApiKey không được cấu hình trong appsettings.json");
+                    return GetFallbackResponse(userMessage);
+                }
+                var requestUrl = $"{GetGeminiApiEndpoint()}?key={apiKey}";
 
                 // Call Gemini API
                 var jsonRequest = JsonSerializer.Serialize(geminiRequest);
