@@ -27,6 +27,10 @@
                                 @Html.DisplayFor(model => model.Title)
                             </div>
                             <div class="form-group">
+                                <label for="exampleInputPassword1">Danh mục:</label>
+                                @(Model.BlogCategory?.Title ?? "Chưa có danh mục")
+                            </div>
+                            <div class="form-group">
                                 <label for="exampleInputPassword1">Mô tả:</label>
                                 @Html.DisplayFor(model => model.Description)
                             </div>

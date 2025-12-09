@@ -5,3 +5,8 @@ obj/
 *.suo
 *.vsidx
 
+# App settings - chứa API keys và secrets
+appsettings.json
+appsettings.*.json
+!appsettings.Example.json
+

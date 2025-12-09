@@ -49,8 +49,17 @@ namespace Do_an_1.Areas.Admin.Controllers
         // GET: Admin/Blogs/Create
         public IActionResult Create()
         {
-            ViewData["AccountId"] = new SelectList(_context.TbAccounts, "AccountId", "AccountId");
-            ViewData["BlogCategoryId"] = new SelectList(_context.TbBlogCategories, "BlogCategoryId", "BlogCategoryId");
+            var accounts = _context.TbAccounts
+                .Where(a => a.IsActive == true)
+                .Select(a => new
+                {
+                    AccountId = a.AccountId,
+                    DisplayName = a.FullName ?? a.Username ?? $"Account {a.AccountId}"
+                })
+                .ToList();
+            
+            ViewData["AccountId"] = new SelectList(accounts, "AccountId", "DisplayName");
+            ViewData["BlogCategoryId"] = new SelectList(_context.TbBlogCategories, "BlogCategoryId", "Title");
             return View();
         }
 
@@ -64,12 +73,38 @@ namespace Do_an_1.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 tbBlog.Alias = Do_an_1.Utilities.Function.TitleSlugGenerationAlias(tbBlog.Title);
+                
+                // Tự động lấy tên account nếu có AccountId
+                if (tbBlog.AccountId.HasValue && tbBlog.AccountId.Value > 0)
+                {
+                    var account = await _context.TbAccounts.FindAsync(tbBlog.AccountId.Value);
+                    if (account != null)
+                    {
+                        tbBlog.CreatedBy = account.FullName ?? account.Username ?? $"Account {account.AccountId}";
+                    }
+                }
+                
+                // Đảm bảo CreatedDate có giá trị nếu null
+                if (!tbBlog.CreatedDate.HasValue)
+                {
+                    tbBlog.CreatedDate = DateTime.Now;
+                }
+                
                 _context.Add(tbBlog);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AccountId"] = new SelectList(_context.TbAccounts, "AccountId", "AccountId", tbBlog.AccountId);
-            ViewData["BlogCategoryId"] = new SelectList(_context.TbBlogCategories, "BlogCategoryId", "BlogCategoryId", tbBlog.BlogCategoryId);
+            var accounts = _context.TbAccounts
+                .Where(a => a.IsActive == true)
+                .Select(a => new
+                {
+                    AccountId = a.AccountId,
+                    DisplayName = a.FullName ?? a.Username ?? $"Account {a.AccountId}"
+                })
+                .ToList();
+            
+            ViewData["AccountId"] = new SelectList(accounts, "AccountId", "DisplayName", tbBlog.AccountId);
+            ViewData["BlogCategoryId"] = new SelectList(_context.TbBlogCategories, "BlogCategoryId", "Title", tbBlog.BlogCategoryId);
             return View(tbBlog);
         }
 
@@ -86,8 +121,18 @@ namespace Do_an_1.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            ViewData["AccountId"] = new SelectList(_context.TbAccounts, "AccountId", "AccountId", tbBlog.AccountId);
-            ViewData["BlogCategoryId"] = new SelectList(_context.TbBlogCategories, "BlogCategoryId", "BlogCategoryId", tbBlog.BlogCategoryId);
+            
+            var accounts = _context.TbAccounts
+                .Where(a => a.IsActive == true)
+                .Select(a => new
+                {
+                    AccountId = a.AccountId,
+                    DisplayName = a.FullName ?? a.Username ?? $"Account {a.AccountId}"
+                })
+                .ToList();
+            
+            ViewData["AccountId"] = new SelectList(accounts, "AccountId", "DisplayName", tbBlog.AccountId);
+            ViewData["BlogCategoryId"] = new SelectList(_context.TbBlogCategories, "BlogCategoryId", "Title", tbBlog.BlogCategoryId);
             return View(tbBlog);
         }
 
@@ -107,6 +152,15 @@ namespace Do_an_1.Areas.Admin.Controllers
             {
                 try
                 {
+                    // Tự động lấy tên account nếu có AccountId
+                    if (tbBlog.AccountId.HasValue)
+                    {
+                        var account = await _context.TbAccounts.FindAsync(tbBlog.AccountId.Value);
+                        if (account != null)
+                        {
+                            tbBlog.CreatedBy = account.FullName ?? account.Username ?? $"Account {account.AccountId}";
+                        }
+                    }
                     _context.Update(tbBlog);
                     await _context.SaveChangesAsync();
                 }
@@ -123,8 +177,17 @@ namespace Do_an_1.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AccountId"] = new SelectList(_context.TbAccounts, "AccountId", "AccountId", tbBlog.AccountId);
-            ViewData["BlogCategoryId"] = new SelectList(_context.TbBlogCategories, "BlogCategoryId", "BlogCategoryId", tbBlog.BlogCategoryId);
+            var accounts = _context.TbAccounts
+                .Where(a => a.IsActive == true)
+                .Select(a => new
+                {
+                    AccountId = a.AccountId,
+                    DisplayName = a.FullName ?? a.Username ?? $"Account {a.AccountId}"
+                })
+                .ToList();
+            
+            ViewData["AccountId"] = new SelectList(accounts, "AccountId", "DisplayName", tbBlog.AccountId);
+            ViewData["BlogCategoryId"] = new SelectList(_context.TbBlogCategories, "BlogCategoryId", "Title", tbBlog.BlogCategoryId);
             return View(tbBlog);
         }
 
@@ -153,13 +216,23 @@ namespace Do_an_1.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tbBlog = await _context.TbBlogs.FindAsync(id);
+            var tbBlog = await _context.TbBlogs
+                .Include(b => b.TbBlogComments)
+                .FirstOrDefaultAsync(m => m.BlogId == id);
+            
             if (tbBlog != null)
             {
+                // Xóa tất cả các comment liên quan trước
+                if (tbBlog.TbBlogComments != null && tbBlog.TbBlogComments.Any())
+                {
+                    _context.TbBlogComments.RemoveRange(tbBlog.TbBlogComments);
+                }
+                
+                // Sau đó mới xóa blog
                 _context.TbBlogs.Remove(tbBlog);
+                await _context.SaveChangesAsync();
             }
 
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
