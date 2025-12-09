@@ -58,7 +58,7 @@
                                     </td>
                                     <td>
                                         <a href="/Admin/Contact/Detail/@item.ContactId" class="btn btn-sm btn-primary">Xem</a>
-                                        <a href="#" data-id="@item.ContactId" class="btn btn-sm btn-danger btnDelete">Xóa</a>
+                                        <a href="#" data-id="@item.ContactId" class="btn btn-danger shadow btn-xs sharp btnDelete"><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
                                 i++;
@@ -77,25 +77,35 @@
     </section>
 </div>
 
-@section Scripts {
+        @section Scripts {
     <script>
         $(document).ready(function () {
-            $('body').on('click', '.btnDelete', function () {
+            // Bắt sự kiện khi bấm nút có class .btnDelete
+            $('body').on('click', '.btnDelete', function (e) {
+                e.preventDefault(); // Chặn link nhảy linh tinh
                 var id = $(this).data("id");
-                var conf = confirm('Bạn có muốn xóa tin nhắn liên hệ này không?');
+                var conf = confirm('Bạn có chắc chắn muốn xóa tin nhắn này không?');
+                
                 if (conf === true) {
                     $.ajax({
-                        url: '/Admin/Contact/Delete',
+                        url: '/Admin/Contact/Delete', // Gọi đến hàm Delete trong Controller
                         type: 'POST',
                         data: { id: id },
                         success: function (rs) {
                             if (rs.success) {
-                                $('#trow_' + id).remove();
+                                // Nếu xóa thành công, xóa dòng đó khỏi bảng ngay lập tức
+                                $('#trow_' + id).remove(); 
+                                // Hoặc reload lại trang nếu không dùng id dòng
+                                // location.reload(); 
+                            } else {
+                                alert("Xóa thất bại!");
                             }
                         }
                     });
                 }
             });
         });
+    </script>
+}
     </script>
 }

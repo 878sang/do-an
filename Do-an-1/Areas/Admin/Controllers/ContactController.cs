@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Do_an_1.Models;
+
 using System.Linq;
 
 namespace Do_an_1.Areas.Admin.Controllers
@@ -14,30 +15,27 @@ namespace Do_an_1.Areas.Admin.Controllers
             _context = context;
         }
 
-        // 1. Hiển thị danh sách liên hệ
+        // 1. Hiển thị danh sách
         public IActionResult Index()
         {
-            // Lấy danh sách sắp xếp theo ngày mới nhất
-            var items = _context.TbContacts
-                .OrderByDescending(x => x.CreatedDate)
-                .ToList();
+            var items = _context.TbContacts.OrderByDescending(x => x.CreatedDate).ToList();
             return View(items);
         }
 
-        // 2. Xem chi tiết (đánh dấu đã đọc)
+        // 2. XEM CHI TIẾT (Fix lỗi không xem được nội dung)
         public IActionResult Detail(int id)
         {
             var item = _context.TbContacts.Find(id);
             if (item != null)
             {
-                // Cập nhật trạng thái đã đọc
+                // Đánh dấu đã đọc khi admin bấm vào xem
                 item.IsRead = true;
                 _context.SaveChanges();
             }
             return View(item);
         }
 
-        // 3. Xóa liên hệ
+        // 3. XÓA (Fix lỗi không xóa được)
         [HttpPost]
         public IActionResult Delete(int id)
         {
