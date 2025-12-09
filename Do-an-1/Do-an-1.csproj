@@ -30,5 +30,4 @@
     <None Include="wwwroot\Admin\lib\elFinder\files\.trash\.gitkeep" />
     <None Include="wwwroot\Admin\lib\elFinder\php\.tmp\.htaccess" />
   </ItemGroup>
-
 </Project>
