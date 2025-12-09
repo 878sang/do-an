@@ -24,11 +24,6 @@ public class HomeController : Controller
         return View();
     }
 
-    public IActionResult Shop()
-    {
-        return View();
-    }
-
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
@@ -39,7 +34,9 @@ public class HomeController : Controller
         var product = _context.TbProducts.FirstOrDefault(p => p.ProductId == id);
         if (product == null)
             return NotFound();
-
+        ViewBag.ProductReviewCount = _context.TbProductReviews
+    .Where(i => i.ProductId == id && (i.IsActive == true || i.IsActive == null))
+    .Count();
         return PartialView("_ProductPreview", product);
     }
 }

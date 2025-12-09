@@ -14,6 +14,7 @@ namespace Do_an_1.Controllers
         private readonly IVnPayService _vnPayService;
         private const string CartSessionKey = "Cart";
         private const string CheckoutSessionKey = "CheckoutInfo";
+        private const string BuyNowSessionKey = "BuyNowItem";
 
         public CheckoutController(FashionStoreDbContext context, IVnPayService vnPayService)
         {
@@ -24,8 +25,13 @@ namespace Do_an_1.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            var buyNowItems = HttpContext.Session.GetObjectFromJson<List<CartItem>>(BuyNowSessionKey) ?? new List<CartItem>();
             var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>(CartSessionKey) ?? new List<CartItem>();
-            if (!cart.Any())
+
+            var useBuyNow = buyNowItems.Any();
+            var items = useBuyNow ? buyNowItems : cart;
+
+            if (!items.Any())
             {
                 TempData["CheckoutMessage"] = "Giỏ hàng của bạn đang trống.";
                 return RedirectToAction("Index", "Cart");
@@ -34,9 +40,9 @@ namespace Do_an_1.Controllers
             var checkoutSession = HttpContext.Session.GetObjectFromJson<CheckoutSessionData>(CheckoutSessionKey);
             var model = new CheckoutViewModel
             {
-                Items = cart,
+                Items = items,
                 Form = checkoutSession?.Form ?? new CheckoutFormModel(),
-                TotalAmount = cart.Sum(item => (item.Price ?? 0) * item.Quantity)
+                TotalAmount = items.Sum(item => (item.Price ?? 0) * item.Quantity)
             };
 
             return View(model);
@@ -46,8 +52,13 @@ namespace Do_an_1.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult CreatePayment(CheckoutFormModel form)
         {
+            var buyNowItems = HttpContext.Session.GetObjectFromJson<List<CartItem>>(BuyNowSessionKey) ?? new List<CartItem>();
             var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>(CartSessionKey) ?? new List<CartItem>();
-            if (!cart.Any())
+
+            var useBuyNow = buyNowItems.Any();
+            var items = useBuyNow ? buyNowItems : cart;
+
+            if (!items.Any())
             {
                 TempData["CheckoutMessage"] = "Giỏ hàng của bạn đang trống.";
                 return RedirectToAction("Index", "Cart");
@@ -57,15 +68,15 @@ namespace Do_an_1.Controllers
             {
                 var invalidModel = new CheckoutViewModel
                 {
-                    Items = cart,
+                    Items = items,
                     Form = form,
-                    TotalAmount = cart.Sum(item => (item.Price ?? 0) * item.Quantity)
+                    TotalAmount = items.Sum(item => (item.Price ?? 0) * item.Quantity)
                 };
                 return View("Index", invalidModel);
             }
 
             var orderCode = DateTime.UtcNow.Ticks.ToString();
-            var totalAmount = cart.Sum(item => (item.Price ?? 0) * item.Quantity);
+            var totalAmount = items.Sum(item => (item.Price ?? 0) * item.Quantity);
             var request = new VnPayRequest
             {
                 OrderId = orderCode,
@@ -103,9 +114,13 @@ namespace Do_an_1.Controllers
             var txnRef = query["vnp_TxnRef"].ToString();
 
             var checkoutSession = HttpContext.Session.GetObjectFromJson<CheckoutSessionData>(CheckoutSessionKey);
+            var buyNowItems = HttpContext.Session.GetObjectFromJson<List<CartItem>>(BuyNowSessionKey) ?? new List<CartItem>();
             var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>(CartSessionKey) ?? new List<CartItem>();
 
-            if (checkoutSession == null || cart.Count == 0 || checkoutSession.TransactionRef != txnRef)
+            var useBuyNow = buyNowItems.Any();
+            var items = useBuyNow ? buyNowItems : cart;
+
+            if (checkoutSession == null || items.Count == 0 || checkoutSession.TransactionRef != txnRef)
             {
                 return View("Result", new CheckoutResultViewModel
                 {
@@ -136,7 +151,7 @@ namespace Do_an_1.Controllers
             _context.TbOrders.Add(order);
             _context.SaveChanges();
 
-            foreach (var item in cart)
+            foreach (var item in items)
             {
                 var detail = new TbOrderDetail
                 {
@@ -152,6 +167,7 @@ namespace Do_an_1.Controllers
 
             HttpContext.Session.Remove(CartSessionKey);
             HttpContext.Session.Remove(CheckoutSessionKey);
+            HttpContext.Session.Remove(BuyNowSessionKey);
 
             return View("Result", new CheckoutResultViewModel
             {
@@ -160,6 +176,36 @@ namespace Do_an_1.Controllers
                 OrderCode = order.Code,
                 TotalAmount = order.TotalAmount ?? 0
             });
+        }
+
+        [HttpPost]
+        public IActionResult BuyNow([FromBody] BuyNowRequest request)
+        {
+            if (request == null || request.ProductId <= 0 || request.Quantity <= 0)
+            {
+                return Json(new { success = false, message = "Dữ liệu không hợp lệ." });
+            }
+
+            var product = _context.TbProducts.FirstOrDefault(p => p.ProductId == request.ProductId);
+            if (product == null)
+            {
+                return Json(new { success = false, message = "Không tìm thấy sản phẩm." });
+            }
+
+            var item = new CartItem
+            {
+                ProductId = product.ProductId,
+                Title = product.Title,
+                Image = product.Image,
+                Price = product.PriceSale ?? product.Price,
+                Quantity = request.Quantity,
+                Size = request.Size,
+                Color = request.Color
+            };
+
+            HttpContext.Session.SetObjectAsJson(BuyNowSessionKey, new List<CartItem> { item });
+            TempData["CheckoutMessage"] = null;
+            return Json(new { success = true, redirect = Url.Action("Index", "Checkout") });
         }
     }
 }

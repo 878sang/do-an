@@ -241,3 +241,89 @@ function updateMiniCartTotal() {
   $("#minicart-total").text(total.toLocaleString("vi-VN"));
   return total;
 }
+function validateBeforeAdd(container) {
+    const sizeInputs = container.find("input[name='size']");
+    const colorInputs = container.find("input[name='color']");
+
+    const size = sizeInputs.length ? sizeInputs.filter(":checked").val() : null;
+    const color = colorInputs.length ? colorInputs.filter(":checked").val() : null;
+
+    if (sizeInputs.length && !size) {
+        alert("Bạn phải chọn size");
+        return false;
+    }
+    if (colorInputs.length && !color) {
+        alert("Bạn phải chọn màu");
+        return false;
+    }
+
+    return true;
+}
+$(document).off("click", ".quickview__value--quantity").on("click", ".quickview__value--quantity", function () {
+
+    const qtyBox = $(this).closest(".quantity__box");
+    const input = qtyBox.find(".quickview__value--number");
+    let value = parseInt(input.val());
+
+    if ($(this).hasClass("increase")) {
+        value++;
+    }
+    else if ($(this).hasClass("decrease") && value > 1) {
+        value--;
+    }
+
+    input.val(value);
+});
+$(document).off("click", ".quickview__cart--btn").on("click", ".quickview__cart--btn", function (e) {
+    if (e && e.preventDefault) e.preventDefault();
+    const container = $(this).closest(".product__variant");
+    if (!validateBeforeAdd(container)) {
+        return;
+    }
+
+    let productId = $(this).data("id");
+    let quantity = parseInt(container.find(".quickview__value--number").val()) || 1;
+
+    let color = container.find("input[name='color']:checked").val() || null;
+    let size = container.find("input[name='size']:checked").val() || null;
+    
+    addToCart(productId, size, color, quantity);
+});
+
+$(document).off("click", ".variant__buy--now__btn").on("click", ".variant__buy--now__btn", function (e) {
+    if (e && e.preventDefault) e.preventDefault();
+    const container = $(this).closest(".product__variant");
+    if (!validateBeforeAdd(container)) {
+        return;
+    }
+
+    let productId = $(this).data("id");
+    let quantity = parseInt(container.find(".quickview__value--number").val()) || 1;
+
+    let color = container.find("input[name='color']:checked").val() || null;
+    let size = container.find("input[name='size']:checked").val() || null;
+
+    fetch("/Checkout/BuyNow", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            productId: productId,
+            quantity: quantity,
+            size: size,
+            color: color,
+        }),
+    })
+        .then((res) => res.json())
+        .then((data) => {
+            if (data && data.success && data.redirect) {
+                window.location = data.redirect;
+            } else {
+                alert(data?.message || "Không thể mua ngay. Vui lòng thử lại.");
+            }
+        })
+        .catch(() => {
+            alert("Không thể mua ngay. Vui lòng thử lại.");
+        });
+});

@@ -10,12 +10,12 @@
                     <div class="swiper-slide">
                         <div class="product__media--preview__items">
                             <a class="product__media--preview__items--link glightbox"
-                                data-gallery="product-media-preview" href="~/assets/img/product/big-product1.jpg"><img
+                                data-gallery="product-media-preview" href="@Model.Image"><img
                                     class="product__media--preview__items--img"
-                                    src="~/assets/img/product/big-product1.jpg" alt="product-media-img"></a>
+                                    src="@Model.Image" alt="product-media-img"></a>
                             <div class="product__media--view__icon">
                                 <a class="product__media--view__icon--link glightbox"
-                                    href="~/assets/img/product/big-product1.jpg" data-gallery="product-media-preview">
+                                    href="@Model.Image" data-gallery="product-media-preview">
                                     <svg class="product__media--view__icon--svg" xmlns="http://www.w3.org/2000/svg"
                                         width="22.51" height="22.443" viewBox="0 0 512 512">
                                         <path d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z"
@@ -203,10 +203,9 @@
                             </li>
                         }
                     </ul>
-                    <span class="quickview__info--review__text">(5 đánh giá)</span>
+                    <span class="quickview__info--review__text">@(ViewBag.ProductReviewCount ?? 0) đánh giá</span>
                 </div>
-                <p class="product__details--info__desc mb-15">Lorem ipsum dolor sit amet, consectetur adipisicing elit
-                    is. Deserunt totam dolores ea numquam labore! Illum magnam totam tenetur fuga quo dolor.</p>
+                <p class="product__details--info__desc mb-15">@Model.Description</p>
                 <div class="product__variant">
                     <div class="product__variant--list mb-10">
                         <fieldset class="variant__input--fieldset">
@@ -247,9 +246,9 @@
                             </button>
                         </div>
                         <button class="primary__btn quickview__cart--btn" data-id="@Model.ProductId"
-                            id="quickview-add-to-cart" type="button" onclick="return validateBeforeAdd()">
-                            Thêm
-                            vào giỏ</button>
+                                id="quickview-add-to-cart" type="button">
+                            Thêm vào giỏ
+                        </button>
                     </div>
                     <div class="quickview__variant--list variant__wishlist mb-15">
                         <a class="variant__wishlist--icon" href="wishlist.html" title="Thêm vào yêu thích">
@@ -317,44 +316,3 @@
         </div>
     </div>
 </div>
-<script>
-    function validateBeforeAdd() {
-        let size = $("input[name='size']:checked").val();
-        let color = $("input[name='color']:checked").val();
-
-        if (!size || !color) {
-            alert("Bạn phải chọn size và màu");
-            return false;
-        }
-
-        return true;
-    }
-    $(document).off("click", ".quickview__value--quantity").on("click", ".quickview__value--quantity", function () {
-
-        let input = $(".quickview__value--number");
-        let value = parseInt(input.val());
-
-        if ($(this).hasClass("increase")) {
-            value++;
-        }
-        else if ($(this).hasClass("decrease") && value > 1) {
-            value--;
-        }
-
-        input.val(value);
-    });
-    $(document).off("click", ".quickview__cart--btn").on("click", ".quickview__cart--btn", function () {
-
-        if (!validateBeforeAdd()) {
-            return;
-        }
-
-        let productId = $(this).data("id");
-        let quantity = parseInt($(".quickview__value--number").val()) || 1;
-
-        let color = $("input[name='color']:checked").val() || null;
-        let size = $("input[name='size']:checked").val() || null;
-
-        addToCart(productId, size, color, quantity);
-    });
-</script>

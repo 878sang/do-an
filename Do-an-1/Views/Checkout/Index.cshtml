@@ -44,13 +44,12 @@
                                                 <td class="summary__table--list">
                                                     <div class="product__image two d-flex align-items-center">
                                                         <div class="product__thumbnail border-radius-5">
-                                                            <img src="@(Url.Content("~/assets/img/product/" + item.Image))"
-                                                                alt="cart-product" class="border-radius-5" />
+                                                            <img src="@item.Image" alt="cart-product"
+                                                                class="border-radius-5" />
                                                             <span class="product__thumbnail--quantity">@item.Quantity</span>
                                                         </div>
                                                         <div class="product__description">
                                                             <h3 class="product__description--name h4">@item.Title</h3>
-                                                            <!-- Bạn có thể thêm phần thuộc tính như màu sắc tại đây nếu có trong model -->
                                                         </div>
                                                     </div>
                                                 </td>
@@ -235,8 +234,7 @@
                                     <td class="cart__table--body__list">
                                         <div class="product__image two d-flex align-items-center">
                                             <div class="product__thumbnail border-radius-5">
-                                                <img src="@(Url.Content("~/assets/img/product/" + item.Image))"
-                                                    alt="cart-product" class="border-radius-5" />
+                                                <img src="@item.Image" alt="cart-product" class="border-radius-5" />
                                                 <span class="product__thumbnail--quantity">@item.Quantity</span>
                                             </div>
                                             <div class="product__description">
