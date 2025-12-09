@@ -143,12 +143,12 @@ namespace th3.Controllers
                     if (searchTerms.Any() && (messageLower.Contains("danh mục") || messageLower.Contains("loại") || messageLower.Contains("category")))
                     {
                         var categories = await _context.TbProductCategories
-                            .Where(c => searchTerms.Any(t =>
-                                c.Title.ToLower().Contains(t) ||
-                                (c.Description != null && c.Description.ToLower().Contains(t))))
-                            .Take(5)
-                            .Select(c => new { c.Title, c.Description })
-                            .ToListAsync();
+                                                    .Where(c => searchTerms.Any(t =>
+                                                        c.Title.ToLower().Contains(t) ||
+                                                        (c.Description != null && c.Description.ToLower().Contains(t))))
+                                                    .Take(5)
+                                                    .Select(c => new { c.Title, c.Description })
+                                                    .ToListAsync();
 
                         if (categories.Any())
                         {
@@ -248,7 +248,7 @@ Khi có dữ liệu sản phẩm dạng JSON ({{""title"":...,""price"":...,""st
                         requestPayload["contents"] = request.Contents;
                     }
 
-                    var apiUrl = $"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={apiKey}";
+                    var apiUrl = $"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:gener...{apiKey}";
 
                     var jsonContent = JsonSerializer.Serialize(requestPayload);
                     var httpContent = new StringContent(jsonContent, Encoding.UTF8, "application/json");
@@ -353,4 +353,3 @@ public class Part
     [JsonPropertyName("inline_data")]
     public object InlineData { get; set; }
 }
-
