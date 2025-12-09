@@ -25,7 +25,8 @@
                             <div class="form-group"><label>Tiêu đề:</label> @Html.DisplayFor(model => model.Title)</div>
                             <div class="form-group"><label>Mô tả:</label> @Html.DisplayFor(model => model.Description)
                             </div>
-                            <div class="form-group"><label>Chi tiết:</label> @Html.DisplayFor(model => model.Detail)
+                            <div class="form-group">
+                                <label>Chi tiết:</label> @Html.Raw(Model.Detail)
                             </div>
                             <div class="form-group"><label>Ảnh:</label>
                                 @if (!string.IsNullOrWhiteSpace(Model.Image))
@@ -56,15 +57,3 @@
         </div>
     </div>
 </div>
-<style>
-    .card-body .form-group label {
-        font-size: 14px;
-        color: #495057;
-    }
-
-    .card-header {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        border-bottom: none;
-    }
-</style>

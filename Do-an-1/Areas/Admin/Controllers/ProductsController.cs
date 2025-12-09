@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -146,7 +147,7 @@ namespace Do_an_1.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProductId,Title,Alias,CategoryProductId,Description,Detail,Image,Price,PriceSale,CreatedDate,CreatedBy,ModifiedDate,ModifiedBy,IsNew,IsBestSeller,IsActive,Quantity,Star")] TbProduct tbProduct)
+        public async Task<IActionResult> Edit(int id, [Bind("ProductId,Title,Alias,CategoryProductId,Description,Detail,Image,Price,PriceSale,CreatedDate,CreatedBy,ModifiedDate,ModifiedBy,IsNew,IsBestSeller,IsActive,Quantity,Star")] TbProduct tbProduct, IFormCollection form)
         {
             if (id != tbProduct.ProductId)
             {
@@ -157,7 +158,94 @@ namespace Do_an_1.Areas.Admin.Controllers
             {
                 try
                 {
+                    // Cập nhật thông tin sản phẩm
                     _context.Update(tbProduct);
+
+                    // Xử lý các biến thể
+                    var deletedVariantIds = new List<int>();
+                    var deletedVariants = form["DeletedVariants"].ToList();
+                    foreach (var deletedId in deletedVariants)
+                    {
+                        if (int.TryParse(deletedId, out int deletedVariantId))
+                        {
+                            deletedVariantIds.Add(deletedVariantId);
+                        }
+                    }
+
+                    // Xóa các biến thể đã được đánh dấu xóa
+                    if (deletedVariantIds.Any())
+                    {
+                        var variantsToDelete = await _context.TbProductVariants
+                            .Where(v => deletedVariantIds.Contains(v.VariantId))
+                            .ToListAsync();
+                        _context.TbProductVariants.RemoveRange(variantsToDelete);
+                    }
+
+                    // Lấy danh sách biến thể từ form
+                    var variantKeys = form.Keys.Where(k => k.StartsWith("Variants[") && k.Contains("].VariantId")).ToList();
+
+                    foreach (var key in variantKeys)
+                    {
+                        // Lấy index từ key: "Variants[0].VariantId" -> 0
+                        var match = Regex.Match(key, @"Variants\[(\d+)\]");
+                        if (!match.Success) continue;
+
+                        var index = match.Groups[1].Value;
+                        var variantIdStr = form[$"Variants[{index}].VariantId"].ToString();
+                        int variantId = 0;
+                        int.TryParse(variantIdStr, out variantId);
+
+                        var colorIdStr = form[$"Variants[{index}].ColorId"].ToString();
+                        var sizeIdStr = form[$"Variants[{index}].SizeId"].ToString();
+
+                        // Bỏ qua nếu không có ColorId hoặc SizeId
+                        if (string.IsNullOrEmpty(colorIdStr) || string.IsNullOrEmpty(sizeIdStr))
+                            continue;
+
+                        int colorId = int.Parse(colorIdStr);
+                        int sizeId = int.Parse(sizeIdStr);
+                        var sku = form[$"Variants[{index}].Sku"].ToString();
+                        var priceStr = form[$"Variants[{index}].Price"].ToString();
+                        var priceSaleStr = form[$"Variants[{index}].PriceSale"].ToString();
+                        var quantityStr = form[$"Variants[{index}].Quantity"].ToString();
+                        var isActive = form[$"Variants[{index}].IsActive"].ToString() == "true";
+
+                        if (variantId > 0)
+                        {
+                            // Cập nhật biến thể hiện có
+                            var existingVariant = await _context.TbProductVariants
+                                .FirstOrDefaultAsync(v => v.VariantId == variantId);
+
+                            if (existingVariant != null && !deletedVariantIds.Contains(variantId))
+                            {
+                                existingVariant.ColorId = colorId;
+                                existingVariant.SizeId = sizeId;
+                                existingVariant.Sku = sku;
+                                existingVariant.Price = !string.IsNullOrEmpty(priceStr) ? decimal.Parse(priceStr) : null;
+                                existingVariant.PriceSale = !string.IsNullOrEmpty(priceSaleStr) ? decimal.Parse(priceSaleStr) : null;
+                                existingVariant.Quantity = !string.IsNullOrEmpty(quantityStr) ? int.Parse(quantityStr) : null;
+                                existingVariant.IsActive = isActive;
+                                _context.Update(existingVariant);
+                            }
+                        }
+                        else
+                        {
+                            // Thêm biến thể mới
+                            var newVariant = new TbProductVariant
+                            {
+                                ProductId = tbProduct.ProductId,
+                                ColorId = colorId,
+                                SizeId = sizeId,
+                                Sku = sku,
+                                Price = !string.IsNullOrEmpty(priceStr) ? decimal.Parse(priceStr) : null,
+                                PriceSale = !string.IsNullOrEmpty(priceSaleStr) ? decimal.Parse(priceSaleStr) : null,
+                                Quantity = !string.IsNullOrEmpty(quantityStr) ? int.Parse(quantityStr) : null,
+                                IsActive = isActive
+                            };
+                            _context.TbProductVariants.Add(newVariant);
+                        }
+                    }
+
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -173,8 +261,19 @@ namespace Do_an_1.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+
+            // Reload dữ liệu nếu có lỗi
+            var tbProductWithVariants = await _context.TbProducts
+                .Include(p => p.TbProductVariants)
+                    .ThenInclude(v => v.Color)
+                .Include(p => p.TbProductVariants)
+                    .ThenInclude(v => v.Size)
+                .FirstOrDefaultAsync(p => p.ProductId == id);
+
             ViewData["CategoryProductId"] = new SelectList(_context.TbProductCategories, "CategoryProductId", "CategoryProductId", tbProduct.CategoryProductId);
-            return View(tbProduct);
+            ViewData["Colors"] = new SelectList(_context.TbColors.Where(c => c.IsActive == true), "ColorId", "ColorName");
+            ViewData["Sizes"] = new SelectList(_context.TbSizes.Where(s => s.IsActive == true), "SizeId", "SizeName");
+            return View(tbProductWithVariants ?? tbProduct);
         }
 
         // GET: Admin/Products/Delete/5
