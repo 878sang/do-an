@@ -193,8 +193,11 @@
                         {
                             <li class="rating__list">
                                 <span class="rating__list--icon">
-                                    <svg class="rating__list--icon__svg" xmlns="http://www.w3.org/2000/svg" width="14.105" height="14.732" viewBox="0 0 10.105 9.732">
-                                        <path data-name="star - Copy" d="M9.837,3.5,6.73,3.039,5.338.179a.335.335,0,0,0-.571,0L3.375,3.039.268,3.5a.3.3,0,0,0-.178.514L2.347,6.242,1.813,9.4a.314.314,0,0,0,.464.316L5.052,8.232,7.827,9.712A.314.314,0,0,0,8.292,9.4L7.758,6.242l2.257-2.231A.3.3,0,0,0,9.837,3.5Z" transform="translate(0 -0.018)" fill="currentColor"></path>
+                                    <svg class="rating__list--icon__svg" xmlns="http://www.w3.org/2000/svg" width="14.105"
+                                        height="14.732" viewBox="0 0 10.105 9.732">
+                                        <path data-name="star - Copy"
+                                            d="M9.837,3.5,6.73,3.039,5.338.179a.335.335,0,0,0-.571,0L3.375,3.039.268,3.5a.3.3,0,0,0-.178.514L2.347,6.242,1.813,9.4a.314.314,0,0,0,.464.316L5.052,8.232,7.827,9.712A.314.314,0,0,0,8.292,9.4L7.758,6.242l2.257-2.231A.3.3,0,0,0,9.837,3.5Z"
+                                            transform="translate(0 -0.018)" fill="currentColor"></path>
                                     </svg>
                                 </span>
                             </li>
@@ -211,7 +214,8 @@
                             @foreach (var item in productColor)
                             {
                                 <input id="@item.ColorName" name="color" type="radio" value="@item.ColorName">
-                                <label class="variant__color--value" for="@item.ColorName" title="@item.ColorName" style="background-color:@item.ColorCode"></label>
+                                <label class="variant__color--value" for="@item.ColorName" title="@item.ColorName"
+                                    style="background-color:@item.ColorCode"></label>
 
                             }
                         </fieldset>
@@ -230,7 +234,7 @@
                     <div class="quickview__variant--list quantity d-flex align-items-center mb-15">
                         <div class="quantity__box">
                             <button type="button" class="quantity__value quickview__value--quantity decrease"
-                                    aria-label="giảm số lượng" value="Giảm" data-product-id="@Model.ProductId">
+                                aria-label="giảm số lượng" value="Giảm" data-product-id="@Model.ProductId">
                                 -
                             </button>
                             <label>
@@ -238,11 +242,12 @@
                                     data-counter />
                             </label>
                             <button type="button" class="quantity__value quickview__value--quantity increase"
-                                    aria-label="tăng số lượng" value="Tăng" data-product-id="@Model.ProductId">
+                                aria-label="tăng số lượng" value="Tăng" data-product-id="@Model.ProductId">
                                 +
                             </button>
                         </div>
-                        <button class="primary__btn quickview__cart--btn" data-id="@Model.ProductId" id="quickview-add-to-cart" type="button">
+                        <button class="primary__btn quickview__cart--btn" data-id="@Model.ProductId"
+                            id="quickview-add-to-cart" type="button" onclick="return validateBeforeAdd()">
                             Thêm
                             vào giỏ</button>
                     </div>
@@ -313,8 +318,18 @@
     </div>
 </div>
 <script>
-    $(document).off("click", ".quickview__value--quantity");
-            $(document).on("click", ".quickview__value--quantity", function () {
+    function validateBeforeAdd() {
+        let size = $("input[name='size']:checked").val();
+        let color = $("input[name='color']:checked").val();
+
+        if (!size || !color) {
+            alert("Bạn phải chọn size và màu");
+            return false;
+        }
+
+        return true;
+    }
+    $(document).off("click", ".quickview__value--quantity").on("click", ".quickview__value--quantity", function () {
 
         let input = $(".quickview__value--number");
         let value = parseInt(input.val());
@@ -328,15 +343,16 @@
 
         input.val(value);
     });
-        $(".quickview__cart--btn").on("click", function () {
+    $(document).off("click", ".quickview__cart--btn").on("click", ".quickview__cart--btn", function () {
+
+        if (!validateBeforeAdd()) {
+            return;
+        }
 
         let productId = $(this).data("id");
         let quantity = parseInt($(".quickview__value--number").val()) || 1;
 
-        // Radio màu
         let color = $("input[name='color']:checked").val() || null;
-
-        // Radio size
         let size = $("input[name='size']:checked").val() || null;
 
         addToCart(productId, size, color, quantity);

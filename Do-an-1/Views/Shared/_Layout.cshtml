@@ -869,6 +869,17 @@
             <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48"
                 d="M112 244l144-144 144 144M256 120v292" />
         </svg></button>
+    
+        <div class="modal" id="modal1" data-animation="slideInUp">
+        <div class="modal-dialog quickview__main--wrapper">
+            <header class="modal-header quickview__header">
+                <button class="close-modal quickview__close--btn" aria-label="close modal" data-close>✕ </button>
+            </header>
+            <div class="quickview__inner">
+            </div>
+        </div>
+    </div>
+
     <!-- Chatbot Toggler -->
     <button id="chatbot-toggler">
         <span class="material-symbols-rounded">mode_comment</span>
@@ -942,7 +953,7 @@
     <script src="~/js/site.js"></script>
     <script src="~/assets/js/script.js"></script>
     <script src="~/assets/toastr/toastr.min.js"></script>
-
+    <script src="~/assets/js/chat.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
     <script>
         (function () {
@@ -1037,7 +1048,6 @@
                 });
         }
     </script>
-    <script src="~/assets/js/chat.js"></script>
 </body>
 <!-- Mirrored from risingtheme.com/html/demo-suruchi-v1/suruchi/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 10 Dec 2024 13:57:07 GMT -->
 

@@ -1,0 +1,33 @@
+@model IEnumerable<Do_an_1.Models.TbMenu>
+@{
+    ViewData["Title"] = "Menu";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content-body">
+    <div class="container-fluid">
+        <div class="row page-titles">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Giao diện</a></li>
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Menu</a></li>
+            </ol>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">QUẢN LÝ MENU</h4>
+                    </div>
+                    <div class="card-body">
+                        <a href="/Admin/Menus" class="btn btn-success mb-3">
+                            <i class="fa fa-plus"> Quản lý Menu</i>
+                        </a>
+                        <p class="text-muted">Chuyển đến trang quản lý menu.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

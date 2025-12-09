@@ -1,0 +1,61 @@
+@model IEnumerable<Do_an_1.Models.TbProduct>
+@{
+    ViewData["Title"] = "Báo cáo sản phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content-body">
+    <div class="container-fluid">
+        <div class="row page-titles">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Báo cáo</a></li>
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Sản phẩm</a></li>
+            </ol>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">BÁO CÁO SẢN PHẨM</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="example3" class="display" style="min-width: 845px">
+                                <thead>
+                                    <tr>
+                                        <th>Số TT</th>
+                                        <th>Sản phẩm</th>
+                                        <th>Danh mục</th>
+                                        <th>Số lượng bán</th>
+                                        <th>Doanh thu</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        int i = 1;
+                                        var reports = ViewBag.ProductReports as dynamic;
+                                    }
+                                    @if (reports != null)
+                                    {
+                                        @foreach (var report in reports)
+                                        {
+                                            <tr>
+                                                <td>@(i++)</td>
+                                                <td>@report.Product.Title</td>
+                                                <td>@(report.Product.CategoryProduct?.Title ?? "N/A")</td>
+                                                <td>@report.TotalSold</td>
+                                                <td>@string.Format("{0:n0}", report.TotalRevenue) đ</td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

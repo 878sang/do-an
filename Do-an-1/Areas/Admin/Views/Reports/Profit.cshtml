@@ -1,0 +1,80 @@
+@model IEnumerable<Do_an_1.Models.TbOrder>
+@{
+    ViewData["Title"] = "Báo cáo lợi nhuận";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content-body">
+    <div class="container-fluid">
+        <div class="row page-titles">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Báo cáo</a></li>
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Lợi nhuận</a></li>
+            </ol>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">BÁO CÁO LỢI NHUẬN</h4>
+                    </div>
+                    <div class="card-body">
+                        <form method="get" class="mb-4">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>Từ ngày:</label>
+                                    <input type="date" name="startDate" value="@ViewBag.StartDate?.ToString("yyyy-MM-dd")" class="form-control" />
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Đến ngày:</label>
+                                    <input type="date" name="endDate" value="@ViewBag.EndDate?.ToString("yyyy-MM-dd")" class="form-control" />
+                                </div>
+                                <div class="col-md-4">
+                                    <label>&nbsp;</label>
+                                    <button type="submit" class="btn btn-primary d-block">Lọc</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <div class="row mb-4">
+                            <div class="col-md-3">
+                                <div class="card bg-primary text-white">
+                                    <div class="card-body">
+                                        <h5>Tổng doanh thu</h5>
+                                        <h3>@string.Format("{0:n0}", ViewBag.TotalRevenue) đ</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card bg-danger text-white">
+                                    <div class="card-body">
+                                        <h5>Tổng chi phí</h5>
+                                        <h3>@string.Format("{0:n0}", ViewBag.TotalCost) đ</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card bg-success text-white">
+                                    <div class="card-body">
+                                        <h5>Lợi nhuận</h5>
+                                        <h3>@string.Format("{0:n0}", ViewBag.Profit) đ</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card bg-info text-white">
+                                    <div class="card-body">
+                                        <h5>Tỷ suất lợi nhuận</h5>
+                                        <h3>@string.Format("{0:F2}", ViewBag.ProfitMargin)%</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,106 @@
+@model IEnumerable<Do_an_1.Models.TbOrder>
+@{
+    ViewData["Title"] = "Báo cáo doanh thu";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content-body">
+    <div class="container-fluid">
+        <div class="row page-titles">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Báo cáo</a></li>
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Doanh thu</a></li>
+            </ol>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">BÁO CÁO DOANH THU</h4>
+                    </div>
+                    <div class="card-body">
+                        <form method="get" class="mb-4">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>Từ ngày:</label>
+                                    <input type="date" name="startDate" value="@ViewBag.StartDate?.ToString("yyyy-MM-dd")" class="form-control" />
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Đến ngày:</label>
+                                    <input type="date" name="endDate" value="@ViewBag.EndDate?.ToString("yyyy-MM-dd")" class="form-control" />
+                                </div>
+                                <div class="col-md-4">
+                                    <label>&nbsp;</label>
+                                    <button type="submit" class="btn btn-primary d-block">Lọc</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <div class="row mb-4">
+                            <div class="col-md-3">
+                                <div class="card bg-primary text-white">
+                                    <div class="card-body">
+                                        <h5>Tổng doanh thu</h5>
+                                        <h3>@string.Format("{0:n0}", ViewBag.TotalRevenue) đ</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card bg-info text-white">
+                                    <div class="card-body">
+                                        <h5>Tổng đơn hàng</h5>
+                                        <h3>@ViewBag.TotalOrders</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card bg-success text-white">
+                                    <div class="card-body">
+                                        <h5>Đơn hoàn thành</h5>
+                                        <h3>@ViewBag.CompletedOrders</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card bg-warning text-white">
+                                    <div class="card-body">
+                                        <h5>Đơn trung bình</h5>
+                                        <h3>@string.Format("{0:n0}", ViewBag.TotalOrders > 0 ? (ViewBag.TotalRevenue / ViewBag.TotalOrders) : 0) đ</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Mã đơn</th>
+                                        <th>Ngày</th>
+                                        <th>Khách hàng</th>
+                                        <th>Tổng tiền</th>
+                                        <th>Trạng thái</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>@item.Code</td>
+                                            <td>@(item.CreatedDate?.ToString("dd/MM/yyyy") ?? "")</td>
+                                            <td>@(item.Customer?.Name ?? "N/A")</td>
+                                            <td>@string.Format("{0:n0}", item.TotalAmount) đ</td>
+                                            <td>@(item.OrderStatus?.Name ?? "N/A")</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

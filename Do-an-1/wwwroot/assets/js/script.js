@@ -487,8 +487,6 @@ $(document).on("click", ".add__to--cart", function () {
         success: function (data) {
             let container = $('#' + modalId + ' .quickview__inner');
             container.html(data);
-
-            console.log("AJAX chạy, dữ liệu trả về:", data);
             new Swiper(".product__media--preview", {
                 loop: true,
                 slidesPerView: 1,

@@ -84,6 +84,7 @@
                                     <div class="form-group">
                                         <input type="submit" value="Thêm mới" class="btn btn-primary" />
                                     </div>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -92,3 +93,7 @@
         </div>
     </div>
 </div>
+@{
+    var summerNote = new Do_an_1.Areas.Admin.Models.SummerNote("#Detail");
+    <partial name="_SummerNote" model="summerNote" />
+}
