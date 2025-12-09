@@ -30,15 +30,15 @@
                     <div class="blog__details--wrapper">
                         <div class="entry__blog">
                             <div class="blog__post--header mb-30">
-@{
-    var createdByText = string.IsNullOrWhiteSpace(Model.CreatedBy) ? "Không xác định" : Model.CreatedBy;
-    var createdDateText = Model.CreatedDate.HasValue ? Model.CreatedDate.Value.ToString("dd/MM/yyyy") : "Không rõ";
-    var categoriesToShow = (blogCatetory != null && blogCatetory.Count > 0)
-        ? blogCatetory
-        : (Model.BlogCategory != null
-            ? new List<TbBlogCategory> { Model.BlogCategory }
-            : new List<TbBlogCategory>());
-}
+                                @{
+                                    var createdByText = string.IsNullOrWhiteSpace(Model.CreatedBy) ? "Không xác định" : Model.CreatedBy;
+                                    var createdDateText = Model.CreatedDate.HasValue ? Model.CreatedDate.Value.ToString("dd/MM/yyyy") : "Không rõ";
+                                    var categoriesToShow = (blogCatetory != null && blogCatetory.Count > 0)
+                                        ? blogCatetory
+                                        : (Model.BlogCategory != null
+                                            ? new List<TbBlogCategory> { Model.BlogCategory }
+                                            : new List<TbBlogCategory>());
+                                }
                                 <h2 class="post__header--title mb-15">@Model.Description</h2>
                                 <p class="blog__post--meta">
                                     Posted by : @createdByText / On : @createdDateText / In :
@@ -151,53 +151,33 @@
                         </div>
                         <div class="comment__box">
                             <div class="reviews__comment--area2 mb-50">
-                                <h2 class="reviews__comment--reply__title mb-25">Recent Comment</h2>
+                                <h2 class="reviews__comment--reply__title mb-25">Bình luận gần đây</h2>
                                 <div class="reviews__comment--inner">
-                                    <div class="reviews__comment--list d-flex">
-                                        <div class="reviews__comment--thumb">
-                                            <img class="display-block" src="~/assets/img/other/comment-thumb1.png" alt="comment-thumb">
-                                        </div>
-                                        <div class="reviews__comment--content ">
-                                            <div class="comment__content--topbar d-flex justify-content-between">
-                                                <div class="comment__content--topbar__left">
-                                                    <h4 class="reviews__comment--content__title2">Jakes on</h4>
-                                                    <span class="reviews__comment--content__date2">February 18, 2022</span>
-                                                </div>
-                                                <button class="comment__reply--btn primary__btn" type="submit">Reply</button>
+                                    @{
+                                        int k = 0;
+                                    }
+                                    @foreach (var item in blogComment)
+                                    {
+                                        k++;
+                                        var divClass = (k % 2 == 0)
+                                        ? "reviews__comment--list d-flex"
+                                        : "reviews__comment--list margin__left d-flex";
+                                        <div class="@divClass">
+                                            <div class="reviews__comment--thumb">
+                                                <img class="display-block" src="~/assets/img/other/comment-thumb1.png" alt="comment-thumb">
                                             </div>
-                                            <p class="reviews__comment--content__desc">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eos ex repellat officiis neque. Veniam, rem nesciunt. Assumenda distinctio, autem error repellat eveniet ratione dolor facilis accusantium amet pariatur, non eius!</p>
-                                        </div>
-                                    </div>
-                                    <div class="reviews__comment--list margin__left d-flex">
-                                        <div class="reviews__comment--thumb">
-                                            <img class="display-block" src="~/assets/img/other/comment-thumb2.png" alt="comment-thumb">
-                                        </div>
-                                        <div class="reviews__comment--content">
-                                            <div class="comment__content--topbar d-flex justify-content-between">
-                                                <div class="comment__content--topbar__left">
-                                                    <h4 class="reviews__comment--content__title2">John Deo</h4>
-                                                    <span class="reviews__comment--content__date2">February 18, 2022</span>
+                                            <div class="reviews__comment--content ">
+                                                <div class="comment__content--topbar d-flex justify-content-between">
+                                                    <div class="comment__content--topbar__left">
+                                                        <h4 class="reviews__comment--content__title2">@item.Name</h4>
+                                                        <span class="reviews__comment--content__date2">@item.CreatedDate.Value.ToString("dd/MMMM/yyyy")</span>
+                                                    </div>
+                                                    @* <button class="comment__reply--btn primary__btn" type="submit">Reply</button> *@
                                                 </div>
-                                                <button class="comment__reply--btn primary__btn" type="submit">Reply</button>
+                                                <p class="reviews__comment--content__desc">@item.Detail</p>
                                             </div>
-                                            <p class="reviews__comment--content__desc">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eos ex repellat officiis neque. Veniam, rem nesciunt. Assumenda distinctio, autem error repellat eveniet ratione dolor facilis accusantium amet pariatur, non eius!</p>
                                         </div>
-                                    </div>
-                                    <div class="reviews__comment--list d-flex">
-                                        <div class="reviews__comment--thumb">
-                                            <img class="display-block" src="~/assets/img/other/comment-thumb3.png" alt="comment-thumb">
-                                        </div>
-                                        <div class="reviews__comment--content">
-                                            <div class="comment__content--topbar d-flex justify-content-between">
-                                                <div class="comment__content--topbar__left">
-                                                    <h4 class="reviews__comment--content__title2">Laura Johnson</h4>
-                                                    <span class="reviews__comment--content__date2">February 18, 2022</span>
-                                                </div>
-                                                <button class="comment__reply--btn primary__btn" type="submit">Reply</button>
-                                            </div>
-                                            <p class="reviews__comment--content__desc">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eos ex repellat officiis neque. Veniam, rem nesciunt. Assumenda distinctio, autem error repellat eveniet ratione dolor facilis accusantium amet pariatur, non eius!</p>
-                                        </div>
-                                    </div>
+                                    }
                                 </div>
                             </div>
                             <div class="reviews__comment--reply__area">
@@ -206,25 +186,25 @@
                                     <div class="row">
                                         <div class="col-lg-4 col-md-6 mb-20">
                                             <label>
-                                                <input class="reviews__comment--reply__input" placeholder="Your Name...." type="text">
+                                                <input class="reviews__comment--reply__input" id="c_name" placeholder="Your Name...." type="text">
                                             </label>
                                         </div>
                                         <div class="col-lg-4 col-md-6 mb-20">
                                             <label>
-                                                <input class="reviews__comment--reply__input" placeholder="Your Email...." type="email">
+                                                <input class="reviews__comment--reply__input" id="c_email" placeholder="Your Email...." type="email">
                                             </label>
                                         </div>
-                                        <div class="col-lg-4 col-md-6 mb-20">
+                                        @* <div class="col-lg-4 col-md-6 mb-20"> 
                                             <label>
-                                                <input class="reviews__comment--reply__input" placeholder="Your Website...." type="text">
+                                                <input class="reviews__comment--reply__input" id="r_details" placeholder="Your Website...." type="text">
                                             </label>
-                                        </div>
+                                        </div>*@
                                         <div class="col-12 mb-15">
-                                            <textarea class="reviews__comment--reply__textarea" placeholder="Your Comments...."></textarea>
+                                            <textarea class="reviews__comment--reply__textarea" id="c_detail" placeholder="Your Comments...."></textarea>
                                         </div>
 
                                     </div>
-                                    <button class="reviews__comment--btn primary__btn text-white" data-hover="Submit" type="submit">SUBMIT</button>
+                                    <button class="reviews__comment--btn primary__btn text-white" id="c_submit" data-hover="Submit" type="button">SUBMIT</button>
                                 </form>
                             </div>
                         </div>
@@ -250,185 +230,17 @@
                                 {
                                     <li class="widget__categories--menu__list">
                                         <label class="widget__categories--menu__label d-flex align-items-center">
-                                            <img class="widget__categories--menu__img" src="~/assets/img/product/small-product1.png" alt="categories-img">
-                                            <span class="widget__categories--menu__text">Denim Jacket</span>
+                                            <img class="widget__categories--menu__img" src="@item.Image" alt="categories-img">
+                                            <span class="widget__categories--menu__text">@item.Title</span>
                                             <svg class="widget__categories--menu__arrowdown--icon" xmlns="http://www.w3.org/2000/svg" width="12.355" height="8.394">
                                                 <path d="M15.138,8.59l-3.961,3.952L7.217,8.59,6,9.807l5.178,5.178,5.178-5.178Z" transform="translate(-6 -8.59)" fill="currentColor"></path>
                                             </svg>
                                         </label>
-                                        <ul class="widget__categories--sub__menu">
-                                            <li class="widget__categories--sub__menu--list">
-                                                <a class="widget__categories--sub__menu--link d-flex align-items-center" href="blog-details.html">
-                                                    <img class="widget__categories--sub__menu--img" src="~/assets/img/product/small-product2.png" alt="categories-img">
-                                                    <span class="widget__categories--sub__menu--text">Jacket, Women</span>
-                                                </a>
-                                            </li>
-                                            <li class="widget__categories--sub__menu--list">
-                                                <a class="widget__categories--sub__menu--link d-flex align-items-center" href="blog-details.html">
-                                                    <img class="widget__categories--sub__menu--img" src="~/assets/img/product/small-product3.png" alt="categories-img">
-                                                    <span class="widget__categories--sub__menu--text">Woolend Jacket</span>
-                                                </a>
-                                            </li>
-                                            <li class="widget__categories--sub__menu--list">
-                                                <a class="widget__categories--sub__menu--link d-flex align-items-center" href="blog-details.html">
-                                                    <img class="widget__categories--sub__menu--img" src="~/assets/img/product/small-product4.png" alt="categories-img">
-                                                    <span class="widget__categories--sub__menu--text">Western denim</span>
-                                                </a>
-                                            </li>
-                                            <li class="widget__categories--sub__menu--list">
-                                                <a class="widget__categories--sub__menu--link d-flex align-items-center" href="blog-details.html">
-                                                    <img class="widget__categories--sub__menu--img" src="~/assets/img/product/small-product5.png" alt="categories-img">
-                                                    <span class="widget__categories--sub__menu--text">Mini Dresss</span>
-                                                </a>
-                                            </li>
-                                        </ul>
                                     </li>
                                 }
-
-
-                                <li class="widget__categories--menu__list">
-                                    <label class="widget__categories--menu__label d-flex align-items-center">
-                                        <img class="widget__categories--menu__img" src="~/assets/img/product/small-product2.png" alt="categories-img">
-                                        <span class="widget__categories--menu__text">Oversize Cotton</span>
-                                        <svg class="widget__categories--menu__arrowdown--icon" xmlns="http://www.w3.org/2000/svg" width="12.355" height="8.394">
-                                            <path d="M15.138,8.59l-3.961,3.952L7.217,8.59,6,9.807l5.178,5.178,5.178-5.178Z" transform="translate(-6 -8.59)" fill="currentColor"></path>
-                                        </svg>
-                                    </label>
-                                    <ul class="widget__categories--sub__menu">
-                                        <li class="widget__categories--sub__menu--list">
-                                            <a class="widget__categories--sub__menu--link d-flex align-items-center" href="blog-details.html">
-                                                <img class="widget__categories--sub__menu--img" src="~/assets/img/product/small-product2.png" alt="categories-img">
-                                                <span class="widget__categories--sub__menu--text">Jacket, Women</span>
-                                            </a>
-                                        </li>
-                                        <li class="widget__categories--sub__menu--list">
-                                            <a class="widget__categories--sub__menu--link d-flex align-items-center" href="blog-details.html">
-                                                <img class="widget__categories--sub__menu--img" src="~/assets/img/product/small-product3.png" alt="categories-img">
-                                                <span class="widget__categories--sub__menu--text">Woolend Jacket</span>
-                                            </a>
-                                        </li>
-                                        <li class="widget__categories--sub__menu--list">
-                                            <a class="widget__categories--sub__menu--link d-flex align-items-center" href="blog-details.html">
-                                                <img class="widget__categories--sub__menu--img" src="~/assets/img/product/small-product4.png" alt="categories-img">
-                                                <span class="widget__categories--sub__menu--text">Western denim</span>
-                                            </a>
-                                        </li>
-                                        <li class="widget__categories--sub__menu--list">
-                                            <a class="widget__categories--sub__menu--link d-flex align-items-center" href="blog-details.html">
-                                                <img class="widget__categories--sub__menu--img" src="~/assets/img/product/small-product5.png" alt="categories-img">
-                                                <span class="widget__categories--sub__menu--text">Mini Dresss</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="widget__categories--menu__list">
-                                    <label class="widget__categories--menu__label d-flex align-items-center">
-                                        <img class="widget__categories--menu__img" src="~/assets/img/product/small-product3.png" alt="categories-img">
-                                        <span class="widget__categories--menu__text">Dairy & chesse</span>
-                                        <svg class="widget__categories--menu__arrowdown--icon" xmlns="http://www.w3.org/2000/svg" width="12.355" height="8.394">
-                                            <path d="M15.138,8.59l-3.961,3.952L7.217,8.59,6,9.807l5.178,5.178,5.178-5.178Z" transform="translate(-6 -8.59)" fill="currentColor"></path>
-                                        </svg>
-                                    </label>
-                                    <ul class="widget__categories--sub__menu">
-                                        <li class="widget__categories--sub__menu--list">
-                                            <a class="widget__categories--sub__menu--link d-flex align-items-center" href="blog-details.html">
-                                                <img class="widget__categories--sub__menu--img" src="~/assets/img/product/small-product2.png" alt="categories-img">
-                                                <span class="widget__categories--sub__menu--text">Jacket, Women</span>
-                                            </a>
-                                        </li>
-                                        <li class="widget__categories--sub__menu--list">
-                                            <a class="widget__categories--sub__menu--link d-flex align-items-center" href="blog-details.html">
-                                                <img class="widget__categories--sub__menu--img" src="~/assets/img/product/small-product3.png" alt="categories-img">
-                                                <span class="widget__categories--sub__menu--text">Woolend Jacket</span>
-                                            </a>
-                                        </li>
-                                        <li class="widget__categories--sub__menu--list">
-                                            <a class="widget__categories--sub__menu--link d-flex align-items-center" href="blog-details.html">
-                                                <img class="widget__categories--sub__menu--img" src="~/assets/img/product/small-product4.png" alt="categories-img">
-                                                <span class="widget__categories--sub__menu--text">Western denim</span>
-                                            </a>
-                                        </li>
-                                        <li class="widget__categories--sub__menu--list">
-                                            <a class="widget__categories--sub__menu--link d-flex align-items-center" href="blog-details.html">
-                                                <img class="widget__categories--sub__menu--img" src="~/assets/img/product/small-product5.png" alt="categories-img">
-                                                <span class="widget__categories--sub__menu--text">Mini Dresss</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="widget__categories--menu__list">
-                                    <label class="widget__categories--menu__label d-flex align-items-center">
-                                        <img class="widget__categories--menu__img" src="~/assets/img/product/small-product4.png" alt="categories-img">
-                                        <span class="widget__categories--menu__text">Shoulder Bag</span>
-                                        <svg class="widget__categories--menu__arrowdown--icon" xmlns="http://www.w3.org/2000/svg" width="12.355" height="8.394">
-                                            <path d="M15.138,8.59l-3.961,3.952L7.217,8.59,6,9.807l5.178,5.178,5.178-5.178Z" transform="translate(-6 -8.59)" fill="currentColor"></path>
-                                        </svg>
-                                    </label>
-                                    <ul class="widget__categories--sub__menu">
-                                        <li class="widget__categories--sub__menu--list">
-                                            <a class="widget__categories--sub__menu--link d-flex align-items-center" href="blog-details.html">
-                                                <img class="widget__categories--sub__menu--img" src="~/assets/img/product/small-product2.png" alt="categories-img">
-                                                <span class="widget__categories--sub__menu--text">Jacket, Women</span>
-                                            </a>
-                                        </li>
-                                        <li class="widget__categories--sub__menu--list">
-                                            <a class="widget__categories--sub__menu--link d-flex align-items-center" href="blog-details.html">
-                                                <img class="widget__categories--sub__menu--img" src="~/assets/img/product/small-product3.png" alt="categories-img">
-                                                <span class="widget__categories--sub__menu--text">Woolend Jacket</span>
-                                            </a>
-                                        </li>
-                                        <li class="widget__categories--sub__menu--list">
-                                            <a class="widget__categories--sub__menu--link d-flex align-items-center" href="blog-details.html">
-                                                <img class="widget__categories--sub__menu--img" src="~/assets/img/product/small-product4.png" alt="categories-img">
-                                                <span class="widget__categories--sub__menu--text">Western denim</span>
-                                            </a>
-                                        </li>
-                                        <li class="widget__categories--sub__menu--list">
-                                            <a class="widget__categories--sub__menu--link d-flex align-items-center" href="blog-details.html">
-                                                <img class="widget__categories--sub__menu--img" src="~/assets/img/product/small-product5.png" alt="categories-img">
-                                                <span class="widget__categories--sub__menu--text">Mini Dresss</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="widget__categories--menu__list">
-                                    <label class="widget__categories--menu__label d-flex align-items-center">
-                                        <img class="widget__categories--menu__img" src="~/assets/img/product/small-product5.png" alt="categories-img">
-                                        <span class="widget__categories--menu__text">Denim Jacket</span>
-                                        <svg class="widget__categories--menu__arrowdown--icon" xmlns="http://www.w3.org/2000/svg" width="12.355" height="8.394">
-                                            <path d="M15.138,8.59l-3.961,3.952L7.217,8.59,6,9.807l5.178,5.178,5.178-5.178Z" transform="translate(-6 -8.59)" fill="currentColor"></path>
-                                        </svg>
-                                    </label>
-                                    <ul class="widget__categories--sub__menu">
-                                        <li class="widget__categories--sub__menu--list">
-                                            <a class="widget__categories--sub__menu--link d-flex align-items-center" href="blog-details.html">
-                                                <img class="widget__categories--sub__menu--img" src="~/assets/img/product/small-product2.png" alt="categories-img">
-                                                <span class="widget__categories--sub__menu--text">Jacket, Women</span>
-                                            </a>
-                                        </li>
-                                        <li class="widget__categories--sub__menu--list">
-                                            <a class="widget__categories--sub__menu--link d-flex align-items-center" href="blog-details.html">
-                                                <img class="widget__categories--sub__menu--img" src="~/assets/img/product/small-product3.png" alt="categories-img">
-                                                <span class="widget__categories--sub__menu--text">Woolend Jacket</span>
-                                            </a>
-                                        </li>
-                                        <li class="widget__categories--sub__menu--list">
-                                            <a class="widget__categories--sub__menu--link d-flex align-items-center" href="blog-details.html">
-                                                <img class="widget__categories--sub__menu--img" src="~/assets/img/product/small-product4.png" alt="categories-img">
-                                                <span class="widget__categories--sub__menu--text">Western denim</span>
-                                            </a>
-                                        </li>
-                                        <li class="widget__categories--sub__menu--list">
-                                            <a class="widget__categories--sub__menu--link d-flex align-items-center" href="blog-details.html">
-                                                <img class="widget__categories--sub__menu--img" src="~/assets/img/product/small-product5.png" alt="categories-img">
-                                                <span class="widget__categories--sub__menu--text">Mini Dresss</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
                             </ul>
                         </div>
-                        <div class="single__widget widget__bg">
+                        @* <div class="single__widget widget__bg"> 
                             <h2 class="widget__title h3">Post Article</h2>
                             <div class="product__grid--inner">
                                 <div class="product__items product__items--grid d-flex align-items-center">
@@ -481,7 +293,7 @@
                                 <li class="widget__tagcloud--list"><a class="widget__tagcloud--link" href="blog-details.html">Accessories</a></li>
                                 <li class="widget__tagcloud--list"><a class="widget__tagcloud--link" href="blog-details.html">Dress </a></li>
                             </ul>
-                        </div>
+                        </div>*@
                     </div>
                 </div>
             </div>
@@ -533,3 +345,36 @@
     </section>
     <!-- End shipping section -->
 </main>
+@section Scripts {
+<script>
+    $(document).ready(function(){
+        console.log("ready!");
+            $("#c_submit").click(function(){
+                _blogId = '@Model.BlogId';
+                _name=$("#c_name").val();
+                _email=$("#c_email").val();
+                _detail=$("#c_detail").val();
+                $.ajax({
+                    url:'/BlogComment/Create',
+                    type:'Post',
+                    data:{blogId:_blogId,name:_name,email:_email,detail:_detail},
+                    success:function(result){
+                        if(result!=null){
+                            $("#c_name").val("");
+                            $("#c_email").val("");
+                            $("#c_detail").val("");
+                            toastr.success("Gửi thành công");
+                                setTimeout(function() {
+                location.reload();
+            }, 1000);
+                    }
+                    else{
+                           toastr.error("Gửi thất bại");
+
+                    }
+                    }
+                })
+            });
+        })
+</script>
+}

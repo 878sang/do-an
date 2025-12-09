@@ -38,9 +38,9 @@ namespace Do_an_1.Controllers
                 .Where(i => i.BlogId == id)
                 .OrderByDescending(i => i.CreatedDate)
                 .ToListAsync();
-            ViewBag.Catetory = blog.BlogCategory != null
-                ? new List<TbBlogCategory> { blog.BlogCategory }
-                : new List<TbBlogCategory>();
+            ViewBag.Catetory = _context.TbBlogCategories
+                .OrderByDescending(c => c.CreatedDate)
+                .ToList();
 
             var relatedBlogsQuery = _context.TbBlogs
                 .Where(b => b.BlogId != blog.BlogId && b.IsActive == true);

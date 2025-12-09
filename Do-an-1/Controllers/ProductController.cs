@@ -32,6 +32,16 @@ namespace Do_an_1.Controllers
             {
                 return NotFound();
             }
+            ViewBag.colorSizeMapping = _context.TbProductVariants
+            .Where(v => v.Color != null && v.Size != null)
+            .GroupBy(v => v.Color.ColorName)
+            .ToDictionary(
+                g => g.Key,
+                g => g.Select(v => v.Size?.SizeName)
+                     .Where(name => name != null)
+                     .Distinct()
+                     .ToList()
+            );
             ViewBag.productSize = _context.TbProductVariants
             .Include(v => v.Size)
             .Where(v => v.ProductId == id && v.IsActive == true && v.Size != null)

@@ -114,6 +114,7 @@ public partial class FashionStoreDbContext : DbContext
             entity.Property(e => e.CreatedDate)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
+            entity.Property(e => e.Image).HasMaxLength(200);
             entity.Property(e => e.Title).HasMaxLength(200);
         });
 

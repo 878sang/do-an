@@ -15,5 +15,7 @@ public partial class TbBlogCategory
 
     public DateTime? CreatedDate { get; set; }
 
+    public string? Image { get; set; }
+
     public virtual ICollection<TbBlog> TbBlogs { get; set; } = new List<TbBlog>();
 }
