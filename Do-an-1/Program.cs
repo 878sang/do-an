@@ -11,6 +11,13 @@ builder.Services.AddDbContext<FashionStoreDbContext>(options =>
 // Add services to the container.
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 builder.Services.AddSession();
+
+// Add HttpContextAccessor for accessing HttpContext in services
+builder.Services.AddHttpContextAccessor();
+
+// Add HttpClientFactory for making HTTP requests
+builder.Services.AddHttpClient();
+
 builder.Services.Configure<VnPaySettings>(builder.Configuration.GetSection("VnPay"));
 builder.Services.AddScoped<IVnPayService, VnPayService>();
 
