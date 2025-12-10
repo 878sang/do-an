@@ -89,8 +89,8 @@
                                             <tr class="account__table--body__child">
                                                 <td class="account__table--body__child--items">@order.Code</td>
                                                 <td class="account__table--body__child--items">@order.CreatedDate?.ToString("dd/MM/yyyy")</td>
-                                                <td class="account__table--body__child--items">@(order.TotalAmount > 0 ? "Đã thanh toán" : "Chưa thanh toán")</td>
-                                                <td class="account__table--body__child--items">@order.OrderStatus?.Name</td>
+                                                <td class="account__table--body__child--items">@(order.PaymentMethod=="VNPAY" ? "Đã thanh toán" : "Chưa thanh toán")</td>
+                                                <td class="account__table--body__child--items">@(order.OrderStatus.Description ?? "Chưa cập nhật")</td>
                                                 <td class="account__table--body__child--items">@order.TotalAmount?.ToString("N0") VNĐ</td>
                                             </tr>
                                         }

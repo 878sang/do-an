@@ -21,6 +21,10 @@ public partial class TbOrder
 
     public DateTime? ModifiedDate { get; set; }
 
+    public string? Note { get; set; }
+
+    public string? PaymentMethod { get; set; }
+
     public virtual TbCustomer? Customer { get; set; }
 
     public virtual TbOrderStatus? OrderStatus { get; set; }

@@ -391,7 +391,6 @@ function resetFileInput() {
         fileUploadBtn.addEventListener("click", (e) => fileInput.click());
     }
     
-    // Event listener cho nút toggle chatbot
     chatbotToggler.addEventListener("click", function(e) {
         e.preventDefault();
         e.stopPropagation();
@@ -400,12 +399,11 @@ function resetFileInput() {
         console.log("Chatbot state:", document.body.classList.contains("show-chatbot") ? "shown" : "hidden");
     });
     
-    // Event listener cho nút đóng chatbot
     closeChatbot.addEventListener("click", function(e) {
         e.preventDefault();
         e.stopPropagation();
-        console.log("Close chatbot clicked");
         document.body.classList.remove("show-chatbot");
     });
+    
     }
 })();

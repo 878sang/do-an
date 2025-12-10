@@ -27,7 +27,6 @@ namespace Do_an_1.Controllers
         {
             var buyNowItems = HttpContext.Session.GetObjectFromJson<List<CartItem>>(BuyNowSessionKey) ?? new List<CartItem>();
             var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>(CartSessionKey) ?? new List<CartItem>();
-
             var useBuyNow = buyNowItems.Any();
             var items = useBuyNow ? buyNowItems : cart;
 
@@ -38,32 +37,46 @@ namespace Do_an_1.Controllers
             }
 
             var checkoutSession = HttpContext.Session.GetObjectFromJson<CheckoutSessionData>(CheckoutSessionKey);
+            CheckoutFormModel autoForm = null;
+            if (checkoutSession == null && HttpContext.Session.GetString("CustomerId") != null)
+            {
+                if (int.TryParse(HttpContext.Session.GetString("CustomerId"), out int customerId))
+                {
+                    var customer = _context.TbCustomers.FirstOrDefault(c => c.CustomerId == customerId);
+                    if (customer != null)
+                    {
+                        autoForm = new CheckoutFormModel
+                        {
+                            FullName = customer.Name ?? string.Empty,
+                            Address = customer.Location ?? string.Empty,
+                            PhoneNumber = customer.Phone ?? string.Empty,
+                            Note = string.Empty
+                        };
+                    }
+                }
+            }
             var model = new CheckoutViewModel
             {
                 Items = items,
-                Form = checkoutSession?.Form ?? new CheckoutFormModel(),
+                Form = checkoutSession?.Form ?? autoForm ?? new CheckoutFormModel(),
                 TotalAmount = items.Sum(item => (item.Price ?? 0) * item.Quantity)
             };
-
             return View(model);
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult CreatePayment(CheckoutFormModel form)
+        public IActionResult CreatePayment(CheckoutFormModel form, string PaymentMethod)
         {
+            Console.WriteLine("PaymentMethod");
             var buyNowItems = HttpContext.Session.GetObjectFromJson<List<CartItem>>(BuyNowSessionKey) ?? new List<CartItem>();
             var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>(CartSessionKey) ?? new List<CartItem>();
-
             var useBuyNow = buyNowItems.Any();
             var items = useBuyNow ? buyNowItems : cart;
-
             if (!items.Any())
             {
                 TempData["CheckoutMessage"] = "Giỏ hàng của bạn đang trống.";
                 return RedirectToAction("Index", "Cart");
             }
-
             if (!ModelState.IsValid)
             {
                 var invalidModel = new CheckoutViewModel
@@ -74,27 +87,75 @@ namespace Do_an_1.Controllers
                 };
                 return View("Index", invalidModel);
             }
-
             var orderCode = DateTime.UtcNow.Ticks.ToString();
             var totalAmount = items.Sum(item => (item.Price ?? 0) * item.Quantity);
-            var request = new VnPayRequest
+            if (PaymentMethod == "VNPAY")
             {
-                OrderId = orderCode,
-                Amount = totalAmount,
-                OrderDescription = $"Thanh toan don hang {orderCode}"
-            };
-
-            var checkoutSession = new CheckoutSessionData
+                var request = new VnPayRequest
+                {
+                    OrderId = orderCode,
+                    Amount = totalAmount,
+                    OrderDescription = $"Thanh toan don hang {orderCode}"
+                };
+                var checkoutSession = new CheckoutSessionData
+                {
+                    TransactionRef = orderCode,
+                    TotalAmount = totalAmount,
+                    Form = form
+                };
+                HttpContext.Session.SetObjectAsJson(CheckoutSessionKey, checkoutSession);
+                var paymentUrl = _vnPayService.CreatePaymentUrl(HttpContext, request);
+                return Redirect(paymentUrl);
+            }
+            else // Thanh toán khi nhận hàng
             {
-                TransactionRef = orderCode,
-                TotalAmount = totalAmount,
-                Form = form
-            };
+                // Lấy CustomerId từ session nếu có
+                int? customerId = null;
+                if (HttpContext.Session.GetString("CustomerId") != null)
+                {
+                    if (int.TryParse(HttpContext.Session.GetString("CustomerId"), out int parsedCustomerId))
+                    {
+                        customerId = parsedCustomerId;
+                    }
+                }
 
-            HttpContext.Session.SetObjectAsJson(CheckoutSessionKey, checkoutSession);
-
-            var paymentUrl = _vnPayService.CreatePaymentUrl(HttpContext, request);
-            return Redirect(paymentUrl);
+                var order = new TbOrder
+                {
+                    Code = orderCode,
+                    CustomerId = customerId,
+                    ShippingAddress = $"{form.FullName} - {form.PhoneNumber} - {form.Address}",
+                    TotalAmount = totalAmount,
+                    OrderStatusId = 1, // COD: trạng thái 1
+                    CreatedDate = DateTime.Now,
+                    PaymentMethod = "cod",
+                    Note = form.Note // lưu ghi chú vào note
+                };
+                _context.TbOrders.Add(order);
+                _context.SaveChanges();
+                foreach (var item in items)
+                {
+                    var detail = new TbOrderDetail
+                    {
+                        OrderId = order.OrderId,
+                        ProductId = item.ProductId,
+                        Price = item.Price ?? 0,
+                        Quantity = item.Quantity
+                    };
+                    _context.TbOrderDetails.Add(detail);
+                }
+                _context.SaveChanges();
+                HttpContext.Session.Remove(CartSessionKey);
+                HttpContext.Session.Remove(CheckoutSessionKey);
+                HttpContext.Session.Remove(BuyNowSessionKey);
+                // Thay vì return View, chuyển hướng sang action GET để tránh giữ lại route POST
+                return RedirectToAction("Result", new CheckoutResultViewModel
+                {
+                    IsSuccess = true,
+                    Message = "Đặt hàng thành công. Bạn sẽ thanh toán khi nhận hàng!",
+                    OrderCode = order.Code,
+                    TotalAmount = order.TotalAmount ?? 0
+                });
+            }
         }
 
         [HttpGet]
@@ -140,12 +201,26 @@ namespace Do_an_1.Controllers
                 });
             }
 
+            // Lấy CustomerId từ session nếu có
+            int? customerId = null;
+            if (HttpContext.Session.GetString("CustomerId") != null)
+            {
+                if (int.TryParse(HttpContext.Session.GetString("CustomerId"), out int parsedCustomerId))
+                {
+                    customerId = parsedCustomerId;
+                }
+            }
+
             var order = new TbOrder
             {
                 Code = checkoutSession.TransactionRef,
+                CustomerId = customerId,
                 ShippingAddress = $"{checkoutSession.Form.FullName} - {checkoutSession.Form.PhoneNumber} - {checkoutSession.Form.Address}",
                 TotalAmount = checkoutSession.TotalAmount,
-                CreatedDate = DateTime.Now
+                OrderStatusId = 2, // VNPAY: trạng thái 2
+                CreatedDate = DateTime.Now,
+                PaymentMethod = "VNPAY",
+                Note = checkoutSession.Form.Note // lưu ghi chú vào note cho đơn vnpay
             };
 
             _context.TbOrders.Add(order);
@@ -176,6 +251,12 @@ namespace Do_an_1.Controllers
                 OrderCode = order.Code,
                 TotalAmount = order.TotalAmount ?? 0
             });
+        }
+
+        [HttpGet]
+        public IActionResult Result(CheckoutResultViewModel model)
+        {
+            return View(model);
         }
 
         [HttpPost]

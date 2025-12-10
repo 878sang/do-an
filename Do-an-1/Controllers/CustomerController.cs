@@ -6,6 +6,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System;
 using System.IO;
+using Microsoft.EntityFrameworkCore;
 
 namespace Do_an_1.Controllers
 {
@@ -60,8 +61,7 @@ namespace Do_an_1.Controllers
                     _context.SaveChanges();
 
                     HttpContext.Session.SetString("CustomerId", customer.CustomerId.ToString());
-                    HttpContext.Session.SetString("Name", customer.Name ?? "Khách hàng");
-                    HttpContext.Session.SetString("Email", customer.Email);
+                    HttpContext.Session.SetString("UserName", customer.Username ?? "Khách hàng");
 
                     return RedirectToAction("Index", "Home");
                 }
@@ -141,7 +141,9 @@ namespace Do_an_1.Controllers
             var customer = _context.TbCustomers.Find(int.Parse(customerId));
             if (customer == null) return RedirectToAction("Index");
 
-            var orders = _context.TbOrders.Where(x => x.CustomerId == customer.CustomerId)
+            var orders = _context.TbOrders
+                .Include(x => x.OrderStatus)
+                .Where(x => x.CustomerId == customer.CustomerId)
                 .OrderByDescending(x => x.CreatedDate)
                 .ToList();
             var vm = new Models.ViewModels.CustomerDashboardViewModel
