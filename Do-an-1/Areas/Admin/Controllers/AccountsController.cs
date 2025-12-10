@@ -65,7 +65,7 @@ namespace Do_an_1.Areas.Admin.Controllers
 
                     // Lưu Session dành riêng cho Admin
                     HttpContext.Session.SetString("AdminId", account.AccountId.ToString());
-                    HttpContext.Session.SetString("AdminName", account.FullName ?? account.Username);
+                    HttpContext.Session.SetString("AdminName",account.Username ?? account.FullName );
                     HttpContext.Session.SetString("RoleId", account.RoleId.ToString() ?? "0");
 
                     // Cập nhật thời gian đăng nhập
@@ -135,7 +135,7 @@ namespace Do_an_1.Areas.Admin.Controllers
                     FullName = fullName,
                     Phone = phone,
                     IsActive = true, // Mặc định kích hoạt
-                    RoleId = null // Có thể set mặc định nếu cần
+                    RoleId = 1 // Có thể set mặc định nếu cần
                 };
 
                 _context.TbAccounts.Add(newAccount);

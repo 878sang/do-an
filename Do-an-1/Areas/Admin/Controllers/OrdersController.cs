@@ -21,6 +21,10 @@ namespace Do_an_1.Areas.Admin.Controllers
         // GET: Admin/Orders
         public async Task<IActionResult> Index(string status = "all")
         {
+            if (HttpContext.Session.GetString("AdminId") == null)
+            {
+                return RedirectToAction("Login", "Accounts", new { area = "Admin" });
+            }
             var query = _context.TbOrders
                 .Include(o => o.Customer)
                 .Include(o => o.OrderStatus)
@@ -73,7 +77,7 @@ namespace Do_an_1.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            ViewBag.OrderStatuses = new SelectList(_context.TbOrderStatuses, "OrderStatusId", "Name", order.OrderStatusId);
+            ViewBag.OrderStatuses = new SelectList(_context.TbOrderStatuses, "OrderStatusId", "Description", order.OrderStatusId);
             return View(order);
         }
 

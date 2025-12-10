@@ -24,6 +24,10 @@ namespace Do_an_1.Areas.Admin.Controllers
         // GET: Admin/Products
         public async Task<IActionResult> Index()
         {
+            if (HttpContext.Session.GetString("AdminId") == null)
+            {
+                return RedirectToAction("Login", "Accounts", new { area = "Admin" });
+            }
             var fashionStoreDbContext = _context.TbProducts
                 .Include(t => t.CategoryProduct)
                 .Include(t => t.TbProductVariants)

@@ -22,6 +22,10 @@ namespace Do_an_1.Areas.Admin.Controllers
         // GET: Admin/Blogs
         public async Task<IActionResult> Index()
         {
+            if (HttpContext.Session.GetString("AdminId") == null)
+            {
+                return RedirectToAction("Login", "Accounts", new { area = "Admin" });
+            }
             var fashionStoreDbContext = _context.TbBlogs.Include(t => t.Account).Include(t => t.BlogCategory);
             return View(await fashionStoreDbContext.ToListAsync());
         }

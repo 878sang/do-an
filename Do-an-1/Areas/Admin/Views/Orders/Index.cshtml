@@ -63,7 +63,7 @@
                                                                                                                             item.OrderStatus?.Name?.Contains("Giao hàng") == true ? "info" :
                                                                                                                             item.OrderStatus?.Name?.Contains("Hoàn thành") == true ? "success" :
                                                                                                                             item.OrderStatus?.Name?.Contains("Hủy") == true ? "danger" : "secondary")">
-                                                @(item.OrderStatus?.Name ?? "N/A")
+                                                @(item.OrderStatus?.Description ?? "N/A")
                                             </span>
                                         </td>
                                         <td>@(item.CreatedDate?.ToString("dd/MM/yyyy HH:mm") ?? "")</td>
