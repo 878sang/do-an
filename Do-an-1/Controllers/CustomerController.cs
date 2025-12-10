@@ -45,7 +45,7 @@ namespace Do_an_1.Controllers
             if (ModelState.IsValid)
             {
                 string passHash = ToMD5(password);
-                var customer = _context.TbCustomers.FirstOrDefault(x => x.Email == email && x.Password == passHash);
+                var customer = _context.TbCustomers.FirstOrDefault(x => (x.Email == email || x.Username == email) && x.Password == passHash);
 
                 if (customer != null)
                 {
@@ -74,10 +74,11 @@ namespace Do_an_1.Controllers
 
         // POST: /Customer/Register
         [HttpPost]
-        public IActionResult Register(string name, string email, string password, string confirmPassword)
+        public IActionResult Register(string username, string name, string email, string password, string confirmPassword)
         {
             try
             {
+                // 1. Kiểm tra xác nhận mật khẩu
                 if (password != confirmPassword)
                 {
                     ViewBag.RegisterError = "Mật khẩu xác nhận không khớp!";
@@ -85,6 +86,7 @@ namespace Do_an_1.Controllers
                     return View("Index");
                 }
 
+                // 2. Kiểm tra Email đã tồn tại chưa
                 var checkEmail = _context.TbCustomers.FirstOrDefault(x => x.Email == email);
                 if (checkEmail != null)
                 {
@@ -93,12 +95,24 @@ namespace Do_an_1.Controllers
                     return View("Index");
                 }
 
+                // 3. Kiểm tra Username đã tồn tại chưa (THÊM MỚI)
+                var checkUsername = _context.TbCustomers.FirstOrDefault(x => x.Username == username);
+                if (checkUsername != null)
+                {
+                    ViewBag.RegisterError = "Tên đăng nhập này đã có người dùng!";
+                    ViewBag.ActiveTab = "register";
+                    return View("Index");
+                }
+
+                // 4. Lưu vào Database
                 TbCustomer user = new TbCustomer();
-                user.Name = name;
-                user.Email = email;
-                user.Password = ToMD5(password);
+                user.Name = name;          // Họ tên
+                user.Username = username;  // Tên đăng nhập (Mới)
+                user.Email = email;        // Email
+                user.Password = ToMD5(password); // Mã hóa pass
                 user.IsActive = true;
                 user.LastLogin = DateTime.Now;
+           
 
                 _context.Add(user);
                 _context.SaveChanges();
@@ -109,7 +123,7 @@ namespace Do_an_1.Controllers
             }
             catch
             {
-                ViewBag.RegisterError = "Đăng ký thất bại.";
+                ViewBag.RegisterError = "Đăng ký thất bại. Vui lòng thử lại.";
                 ViewBag.ActiveTab = "register";
                 return View("Index");
             }
