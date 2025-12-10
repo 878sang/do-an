@@ -55,7 +55,7 @@ public partial class FashionStoreDbContext : DbContext
 
     public virtual DbSet<TbSize> TbSizes { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<TbAccount>(entity =>
         {
