@@ -1,4 +1,6 @@
-﻿﻿<!doctype html>
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor﻿
+<!doctype html>
 <html lang="zxx">
 
 
@@ -15,10 +17,10 @@
     <link rel="stylesheet" href="~/assets/css/plugins/swiper-bundle.min.css">
     <link rel="stylesheet" href="~/assets/css/plugins/glightbox.min.css">
     <link
-        href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
-        rel="stylesheet">
+    href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+    rel="stylesheet">
     <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" />
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" />
     <!-- Plugin css -->
     <link rel="stylesheet" href="~/assets/css/vendor/bootstrap.min.css">
 
@@ -81,12 +83,12 @@
                         <ul class="header__shipping--wrapper d-flex">
                             <li class="header__shipping--text text-white">Chào mừng đến với cửa hàng Netmark</li>
                             <li class="header__shipping--text text-white d-sm-2-none"><img
-                                    class="header__shipping--text__icon" src="~/assets/img/icon/bus.png" alt="bus-icon">
+                                class="header__shipping--text__icon" src="~/assets/img/icon/bus.png" alt="bus-icon">
                                 Theo dõi đơn hàng</li>
                             <li class="header__shipping--text text-white d-sm-2-none"><img
-                                    class="header__shipping--text__icon" src="~/assets/img/icon/email.png"
-                                    alt="email-icon"> <a class="header__shipping--text__link"
-                                    href="mailto:demo@gmail.com">demo@gmail.com</a></li>
+                                class="header__shipping--text__icon" src="~/assets/img/icon/email.png"
+                                alt="email-icon"> <a class="header__shipping--text__link"
+                                href="mailto:demo@gmail.com">demo@gmail.com</a></li>
                         </ul>
                     </div>
                     <div class="language__currency d-none d-lg-block">
@@ -94,12 +96,12 @@
                             <li class="language__currency--list">
                                 <a class="language__switcher text-white" href="#">
                                     <img class="language__switcher--icon__img" src="~/assets/img/icon/language-icon.png"
-                                        alt="currency">
+                                    alt="currency">
                                     <span>Tiếng Việt</span>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="11.797" height="9.05"
-                                        viewBox="0 0 9.797 6.05">
+                                    viewBox="0 0 9.797 6.05">
                                         <path d="M14.646,8.59,10.9,12.329,7.151,8.59,6,9.741l4.9,4.9,4.9-4.9Z"
-                                            transform="translate(-6 -8.59)" fill="currentColor" opacity="0.7" />
+                                        transform="translate(-6 -8.59)" fill="currentColor" opacity="0.7" />
                                     </svg>
                                 </a>
                                 <div class="dropdown__language">
@@ -116,9 +118,9 @@
                                     <img src="~/assets/img/icon/usd-icon.png" alt="currency">
                                     <span>$ Đô la Mỹ</span>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="11.797" height="9.05"
-                                        viewBox="0 0 9.797 6.05">
+                                    viewBox="0 0 9.797 6.05">
                                         <path d="M14.646,8.59,10.9,12.329,7.151,8.59,6,9.741l4.9,4.9,4.9-4.9Z"
-                                            transform="translate(-6 -8.59)" fill="currentColor" opacity="0.7" />
+                                        transform="translate(-6 -8.59)" fill="currentColor" opacity="0.7" />
                                     </svg>
                                 </a>
                                 <div class="dropdown__currency">
@@ -141,16 +143,16 @@
                     <div class="offcanvas__header--menu__open ">
                         <a class="offcanvas__header--menu__open--btn" href="javascript:void(0)" data-offcanvas>
                             <svg xmlns="http://www.w3.org/2000/svg" class="ionicon offcanvas__header--menu__open--svg"
-                                viewBox="0 0 512 512">
+                            viewBox="0 0 512 512">
                                 <path fill="currentColor" stroke="currentColor" stroke-linecap="round"
-                                    stroke-miterlimit="10" stroke-width="32" d="M80 160h352M80 256h352M80 352h352" />
+                                stroke-miterlimit="10" stroke-width="32" d="M80 160h352M80 256h352M80 352h352" />
                             </svg>
                             <span class="visually-hidden">Mở menu</span>
                         </a>
                     </div>
                     <div class="main__logo">
                         <h1 class="main__logo--title"><a class="main__logo--link" href="index.html"><img
-                                    class="main__logo--img" src="~/assets/img/logo/nav-log.png" alt="logo-img"></a></h1>
+                                class="main__logo--img" src="~/assets/img/logo/nav-log.png" alt="logo-img"></a></h1>
                     </div>
                     <div class="header__search--widget header__sticky--none d-none d-lg-block">
                         <form class="d-flex header__search--form" action="#">
@@ -168,14 +170,14 @@
                                     <input class="header__search--input" placeholder="Nhập từ khóa..." type="text">
                                 </label>
                                 <button class="header__search--button bg__secondary text-white" type="submit"
-                                    aria-label="search button">
+                                aria-label="search button">
                                     <svg class="header__search--button__svg" xmlns="http://www.w3.org/2000/svg"
-                                        width="27.51" height="26.443" viewBox="0 0 512 512">
+                                    width="27.51" height="26.443" viewBox="0 0 512 512">
                                         <path d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z"
-                                            fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32">
+                                        fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32">
                                         </path>
                                         <path fill="none" stroke="currentColor" stroke-linecap="round"
-                                            stroke-miterlimit="10" stroke-width="32" d="M338.29 338.29L448 448"></path>
+                                        stroke-miterlimit="10" stroke-width="32" d="M338.29 338.29L448 448"></path>
                                     </svg>
                                 </button>
                             </div>
@@ -186,20 +188,27 @@
                             <li class="header__account--items">
                                 <a class="header__account--btn" href="/Customer/Dashboard">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="26.51" height="23.443"
-                                        viewBox="0 0 512 512">
+                                    viewBox="0 0 512 512">
                                         <path
-                                            d="M344 144c-3.92 52.87-44 96-88 96s-84.15-43.12-88-96c-4-55 35-96 88-96s92 42 88 96z"
-                                            fill="none" stroke="currentColor" stroke-linecap="round"
-                                            stroke-linejoin="round" stroke-width="32" />
+                                        d="M344 144c-3.92 52.87-44 96-88 96s-84.15-43.12-88-96c-4-55 35-96 88-96s92 42 88 96z"
+                                        fill="none" stroke="currentColor" stroke-linecap="round"
+                                        stroke-linejoin="round" stroke-width="32" />
                                         <path
-                                            d="M256 304c-87 0-175.3 48-191.64 138.6C62.39 453.52 68.57 464 80 464h352c11.44 0 17.62-10.48 15.65-21.4C431.3 352 343 304 256 304z"
-                                            fill="none" stroke="currentColor" stroke-miterlimit="10"
-                                            stroke-width="32" />
+                                        d="M256 304c-87 0-175.3 48-191.64 138.6C62.39 453.52 68.57 464 80 464h352c11.44 0 17.62-10.48 15.65-21.4C431.3 352 343 304 256 304z"
+                                        fill="none" stroke="currentColor" stroke-miterlimit="10"
+                                        stroke-width="32" />
                                     </svg>
-                                    <span class="header__account--btn__text">Tài khoản</span>
+                                    @if (Context.Session.GetString("CustomerId") != null)
+                                    {
+                                        <div class="mt-2">Xin chào @Context.Session.GetString("Name")</div>
+                                    }
+                                    else
+                                    {
+                                        <span class="header__account--btn__text">Tài khoản</span>
+                                    }
                                 </a>
                             </li>
-                            <li class="header__account--items d-none d-lg-block">
+                            @* <li class="header__account--items d-none d-lg-block">
                                 <a class="header__account--btn" href="wishlist.html">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="28.51" height="23.443"
                                         viewBox="0 0 512 512">
@@ -211,7 +220,7 @@
                                     <span class="header__account--btn__text"> Yêu thích</span>
                                     <span class="items__count wishlist">02</span>
                                 </a>
-                            </li>
+                            </li> *@
                             <li class="header__account--items">
                                 <a class="header__account--btn minicart__open--btn" href="javascript:void(0)"
                                     data-offcanvas>
@@ -270,7 +279,7 @@
                                 </a>
                             </li>
                             <li class="header__account--items header__account2--items">
-                                <a class="header__account--btn" href="my-account.html">
+                                <a class="header__account--btn" href="/Customer/Dashboard">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="26.51" height="23.443"
                                         viewBox="0 0 512 512">
                                         <path
@@ -282,10 +291,9 @@
                                             fill="none" stroke="currentColor" stroke-miterlimit="10"
                                             stroke-width="32" />
                                     </svg>
-                                    <span class="visually-hidden">Tài khoản của tôi</span>
                                 </a>
                             </li>
-                            <li class="header__account--items header__account2--items d-none d-lg-block">
+                            @* <li class="header__account--items header__account2--items d-none d-lg-block"> 
                                 <a class="header__account--btn" href="wishlist.html">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="28.51" height="23.443"
                                         viewBox="0 0 512 512">
@@ -296,7 +304,7 @@
                                     </svg>
                                     <span class="items__count  wishlist style2">02</span>
                                 </a>
-                            </li>
+                            </li>*@
                             <li class="header__account--items header__account2--items">
                                 <a class="header__account--btn minicart__open--btn" href="javascript:void(0)"
                                     data-offcanvas>
@@ -408,6 +416,7 @@
                                 <li class="offcanvas__sub_menu_li">
                                     <a href="#" class="offcanvas__sub_menu_item">Cột Ba</a>
                                     <ul class="offcanvas__sub_menu">
+
                                         <li class="offcanvas__sub_menu_li"><a class="offcanvas__sub_menu_item"
                                                 href="my-account.html">Tài khoản</a></li>
                                         <li class="offcanvas__sub_menu_li"><a class="offcanvas__sub_menu_item"

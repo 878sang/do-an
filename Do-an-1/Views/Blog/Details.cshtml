@@ -4,7 +4,8 @@
     List<TbBlogCategory> blogCatetory = ViewBag.Catetory;
     List<TbBlog> relatedBlogs = ViewBag.RelatedBlogs ?? new List<TbBlog>();
 }
-
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor﻿
 <main class="main__content_wrapper">
 
     <!-- Start breadcrumb section -->
@@ -164,12 +165,12 @@
                                         : "reviews__comment--list margin__left d-flex";
                                         <div class="@divClass">
                                             <div class="reviews__comment--thumb">
-                                                <img class="display-block" src="~/assets/img/other/comment-thumb1.png" alt="comment-thumb">
+                                                <img class="display-block" src="@(string.IsNullOrEmpty(item.Customer.Avatar) ? "/assets/img/avatar/default.png" : item.Customer.Avatar)" alt="comment-thumb" style="border-radius:50%;object-fit:cover;">
                                             </div>
                                             <div class="reviews__comment--content ">
                                                 <div class="comment__content--topbar d-flex justify-content-between">
                                                     <div class="comment__content--topbar__left">
-                                                        <h4 class="reviews__comment--content__title2">@item.Name</h4>
+                                                        <h4 class="reviews__comment--content__title2">@item.Customer.Name</h4>
                                                         <span class="reviews__comment--content__date2">@item.CreatedDate.Value.ToString("dd/MMMM/yyyy")</span>
                                                     </div>
                                                     @* <button class="comment__reply--btn primary__btn" type="submit">Reply</button> *@
@@ -180,33 +181,33 @@
                                     }
                                 </div>
                             </div>
-                            <div class="reviews__comment--reply__area">
-                                <form action="#">
-                                    <h2 class="reviews__comment--reply__title mb-20">Leave A Comment</h2>
-                                    <div class="row">
-                                        <div class="col-lg-4 col-md-6 mb-20">
-                                            <label>
-                                                <input class="reviews__comment--reply__input" id="c_name" placeholder="Your Name...." type="text">
-                                            </label>
-                                        </div>
-                                        <div class="col-lg-4 col-md-6 mb-20">
-                                            <label>
-                                                <input class="reviews__comment--reply__input" id="c_email" placeholder="Your Email...." type="email">
-                                            </label>
-                                        </div>
-                                        @* <div class="col-lg-4 col-md-6 mb-20"> 
-                                            <label>
-                                                <input class="reviews__comment--reply__input" id="r_details" placeholder="Your Website...." type="text">
-                                            </label>
-                                        </div>*@
-                                        <div class="col-12 mb-15">
-                                            <textarea class="reviews__comment--reply__textarea" id="c_detail" placeholder="Your Comments...."></textarea>
+                            @if (Context.Session.GetString("CustomerId") != null)
+                            {
+                                <div class="reviews__comment--reply__area">
+                                    <form>
+                                        <h2 class="reviews__comment--reply__title mb-20">Leave A Comment</h2>
+
+                                        <div class="row">
+                                            <div class="col-12 mb-15">
+                                                <textarea class="reviews__comment--reply__textarea"
+                                                          id="c_detail"
+                                                          placeholder="Your Comments...."></textarea>
+                                            </div>
                                         </div>
 
-                                    </div>
-                                    <button class="reviews__comment--btn primary__btn text-white" id="c_submit" data-hover="Submit" type="button">SUBMIT</button>
-                                </form>
-                            </div>
+                                        <button class="reviews__comment--btn primary__btn text-white" id="c_submit" type="button">
+                                            SUBMIT
+                                        </button>
+                                    </form>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="alert alert-warning mt-3">
+                                    Bạn cần <a href="/Customer/Index" class="text-primary">đăng nhập</a> để bình luận.
+                                </div>
+                            }
+
                         </div>
                     </div>
                 </div>
@@ -351,17 +352,13 @@
         console.log("ready!");
             $("#c_submit").click(function(){
                 _blogId = '@Model.BlogId';
-                _name=$("#c_name").val();
-                _email=$("#c_email").val();
                 _detail=$("#c_detail").val();
                 $.ajax({
                     url:'/BlogComment/Create',
                     type:'Post',
-                    data:{blogId:_blogId,name:_name,email:_email,detail:_detail},
+                    data:{blogId:_blogId,detail:_detail},
                     success:function(result){
                         if(result!=null){
-                            $("#c_name").val("");
-                            $("#c_email").val("");
                             $("#c_detail").val("");
                             toastr.success("Gửi thành công");
                                 setTimeout(function() {

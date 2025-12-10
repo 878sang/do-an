@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System;
+using System.IO;
 
 namespace Do_an_1.Controllers
 {
@@ -126,7 +127,51 @@ namespace Do_an_1.Controllers
             var customer = _context.TbCustomers.Find(int.Parse(customerId));
             if (customer == null) return RedirectToAction("Index");
 
-            return View(customer);
+            var orders = _context.TbOrders.Where(x => x.CustomerId == customer.CustomerId)
+                .OrderByDescending(x => x.CreatedDate)
+                .ToList();
+            var vm = new Models.ViewModels.CustomerDashboardViewModel
+            {
+                Customer = customer,
+                Orders = orders
+            };
+            return View(vm);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateProfile(string Name, string Phone, string Birthday, string Location, IFormFile AvatarFile)
+        {
+            var customerId = HttpContext.Session.GetString("CustomerId");
+            if (string.IsNullOrEmpty(customerId))
+                return RedirectToAction("Index");
+            var customer = _context.TbCustomers.Find(int.Parse(customerId));
+            if (customer == null) return RedirectToAction("Index");
+
+            customer.Name = Name;
+            customer.Phone = Phone;
+            if (DateTime.TryParse(Birthday, out var birth))
+            {
+                customer.Birthday = DateOnly.FromDateTime(birth);
+            }
+            customer.Location = Location;
+
+            if (AvatarFile != null && AvatarFile.Length > 0)
+            {
+                var fileName = $"avatar_{customer.CustomerId}_{DateTime.Now.Ticks}{System.IO.Path.GetExtension(AvatarFile.FileName)}";
+                var uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "assets", "img", "avatar");
+                if (!Directory.Exists(uploadPath)) Directory.CreateDirectory(uploadPath);
+                var filePath = Path.Combine(uploadPath, fileName);
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    AvatarFile.CopyTo(stream);
+                }
+                customer.Avatar = $"/assets/img/avatar/{fileName}";
+            }
+
+            _context.Update(customer);
+            _context.SaveChanges();
+            TempData["SuccessMessage"] = "Cập nhật thông tin thành công!";
+            return RedirectToAction("Dashboard");
         }
 
         public IActionResult Logout()

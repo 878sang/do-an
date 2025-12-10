@@ -41,7 +41,7 @@
                                     {
                                         <tr>
                                             <td>@(i++)</td>
-                                            <td>@(item.Customer?.Name ?? item.Name ?? "N/A")</td>
+                                            <td>@(item.Customer?.Name ?? "N/A")</td>
                                             <td>@(item.Product?.Title ?? "N/A")</td>
                                             <td>
                                                 @for (int j = 0; j < (item.Star ?? 0); j++)

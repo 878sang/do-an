@@ -18,16 +18,15 @@ namespace Do_an_1.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(int blogId, string name, string email, string detail)
+        public IActionResult Create(int blogId, string detail)
         {
-            //var userId = HttpContext.Session.GetInt32("UserId");
+            var CustomerId = int.Parse(HttpContext.Session.GetString("CustomerId"));
             try
             {
                 TbBlogComment comment = new TbBlogComment();
 
                 comment.BlogId = blogId;
-                comment.Name = name;
-                comment.Email = email;
+                comment.CustomerId = CustomerId;
                 comment.CreatedDate = DateTime.Now;
                 comment.Detail = detail;
                 _context.Add(comment);

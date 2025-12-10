@@ -17,6 +17,8 @@ namespace Do_an_1.Controllers
         .Where(b => b.IsActive == true)
         .OrderByDescending(b => b.CreatedDate)
         .ToList();
+            ViewBag.ProductCategories = _context.TbProductCategories
+                .ToList();
             return View(products);
         }
         [Route("/product/{alias}-{id}.html")]
@@ -32,20 +34,20 @@ namespace Do_an_1.Controllers
             {
                 return NotFound();
             }
-            ViewBag.colorSizeMapping = _context.TbProductVariants
-            .Where(v => v.Color != null && v.Size != null)
-            .GroupBy(v => v.Color.ColorName)
-            .ToDictionary(
-                g => g.Key,
-                g => g.Select(v => v.Size?.SizeName)
-                     .Where(name => name != null)
-                     .Distinct()
-                     .ToList()
-            );
+            //ViewBag.colorSizeMapping = _context.TbProductVariants
+            //.Where(v => v.Color != null && v.Size != null)
+            //.GroupBy(v => v.Color.ColorName)
+            //.ToDictionary(
+            //    g => g.Key,
+            //    g => g.Select(v => v.Size?.SizeName)
+            //         .Where(name => name != null)
+            //         .Distinct()
+            //         .ToList()
+            //);
             ViewBag.productSize = _context.TbProductVariants
             .Include(v => v.Size)
             .Where(v => v.ProductId == id && v.IsActive == true && v.Size != null)
-            .Select(v => v.Size.SizeName)
+            .Select(v => v.Size)
             .Distinct()
             .ToList();
             ViewBag.productColor = _context.TbProductVariants
@@ -55,6 +57,7 @@ namespace Do_an_1.Controllers
             .Distinct()
             .ToList();
             ViewBag.productReview = _context.TbProductReviews.
+                Include(i => i.Customer).
             Where(i => i.ProductId == id && (i.IsActive == true || i.IsActive == null)).OrderByDescending(r => r.CreatedDate).ToList();
             return View(product);
         }

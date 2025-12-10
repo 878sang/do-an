@@ -35,6 +35,7 @@ namespace Do_an_1.Controllers
                 return NotFound();
             }
             ViewBag.BlogComment = await _context.TbBlogComments
+                .Include(m=>m.Customer)
                 .Where(i => i.BlogId == id)
                 .OrderByDescending(i => i.CreatedDate)
                 .ToListAsync();

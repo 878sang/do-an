@@ -16,18 +16,17 @@ namespace Do_an_1.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(int productId, int rating, string name, string phone, string email, string detail)
+        public IActionResult Create(int productId, int rating, string detail)
         {
-            //var userId = HttpContext.Session.GetInt32("UserId");
+            var CustomerId = int.Parse(HttpContext.Session.GetString("CustomerId"));
             try
             {
 
                 TbProductReview review = new TbProductReview();
 
                 review.ProductId = productId;
-                review.Name = name;
+                review.CustomerId= CustomerId;
                 review.Star = rating;
-                review.Email = email;
                 review.CreatedDate = DateTime.Now;
                 review.Detail = detail;
                 review.IsActive = true;

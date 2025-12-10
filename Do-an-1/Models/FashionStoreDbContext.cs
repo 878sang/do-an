@@ -127,8 +127,6 @@ public partial class FashionStoreDbContext : DbContext
             entity.Property(e => e.CreatedDate)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
-            entity.Property(e => e.Email).HasMaxLength(100);
-            entity.Property(e => e.Name).HasMaxLength(100);
 
             entity.HasOne(d => d.Blog).WithMany(p => p.TbBlogComments)
                 .HasForeignKey(d => d.BlogId)
@@ -353,8 +351,6 @@ public partial class FashionStoreDbContext : DbContext
             entity.Property(e => e.CreatedDate)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
-            entity.Property(e => e.Email).HasMaxLength(100);
-            entity.Property(e => e.Name).HasMaxLength(100);
 
             entity.HasOne(d => d.Customer).WithMany(p => p.TbProductReviews)
                 .HasForeignKey(d => d.CustomerId)
