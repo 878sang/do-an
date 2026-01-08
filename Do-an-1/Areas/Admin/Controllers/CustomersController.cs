@@ -116,39 +116,6 @@ namespace Do_an_1.Areas.Admin.Controllers
             return View(customer);
         }
 
-        // GET: Admin/Customers/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var customer = await _context.TbCustomers
-                .FirstOrDefaultAsync(m => m.CustomerId == id);
-
-            if (customer == null)
-            {
-                return NotFound();
-            }
-
-            return View(customer);
-        }
-
-        // POST: Admin/Customers/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var customer = await _context.TbCustomers.FindAsync(id);
-            if (customer != null)
-            {
-                _context.TbCustomers.Remove(customer);
-                await _context.SaveChangesAsync();
-            }
-            return RedirectToAction(nameof(Index));
-        }
-
         // GET: Admin/Customers/Groups
         public IActionResult Groups()
         {

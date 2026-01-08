@@ -304,13 +304,40 @@ namespace Do_an_1.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tbProduct = await _context.TbProducts.FindAsync(id);
+            var tbProduct = await _context.TbProducts
+                .Include(p => p.TbProductVariants)
+                .Include(p => p.TbProductReviews)
+                .Include(p => p.TbOrderDetails)
+                .FirstOrDefaultAsync(p => p.ProductId == id);
+
             if (tbProduct != null)
             {
+                // Kiểm tra xem sản phẩm có trong đơn hàng không
+                if (tbProduct.TbOrderDetails.Any())
+                {
+                    TempData["ErrorMessage"] = "Không thể xóa sản phẩm này vì đã có trong đơn hàng. Vui lòng xóa các đơn hàng liên quan trước.";
+                    return RedirectToAction(nameof(Index));
+                }
+
+                // Xóa tất cả các biến thể sản phẩm trước
+                if (tbProduct.TbProductVariants.Any())
+                {
+                    _context.TbProductVariants.RemoveRange(tbProduct.TbProductVariants);
+                }
+
+                // Xóa tất cả các đánh giá sản phẩm
+                if (tbProduct.TbProductReviews.Any())
+                {
+                    _context.TbProductReviews.RemoveRange(tbProduct.TbProductReviews);
+                }
+
+                // Sau đó mới xóa sản phẩm
                 _context.TbProducts.Remove(tbProduct);
+                
+                await _context.SaveChangesAsync();
+                TempData["SuccessMessage"] = "Xóa sản phẩm thành công.";
             }
 
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
