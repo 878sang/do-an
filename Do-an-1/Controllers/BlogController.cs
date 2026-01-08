@@ -12,12 +12,31 @@ namespace Do_an_1.Controllers
         {
             _context = context;
         }
-        public IActionResult Index()
+        public IActionResult Index(int? categoryId)
         {
-            var blog = _context.TbBlogs
-        .Where(b => b.IsActive == true)
-        .OrderByDescending(b => b.CreatedDate)
-        .ToList();
+            // Lấy tất cả blog đang active
+            var query = _context.TbBlogs
+                .Include(b => b.BlogCategory)
+                .Where(b => b.IsActive == true)
+                .AsQueryable();
+
+            // Lọc theo danh mục nếu có
+            if (categoryId.HasValue && categoryId.Value > 0)
+            {
+                query = query.Where(b => b.BlogCategoryId == categoryId.Value);
+            }
+
+            var blog = query
+                .OrderByDescending(b => b.CreatedDate)
+                .ToList();
+
+            // Lưu thông tin filter để hiển thị
+            ViewBag.BlogCategories = _context.TbBlogCategories
+                .OrderByDescending(c => c.CreatedDate)
+                .ToList();
+            ViewBag.SelectedCategoryId = categoryId;
+            ViewBag.TotalResults = blog.Count;
+
             return View(blog);
         }
         [Route("/blog/{alias}-{id}.html")]
@@ -35,7 +54,7 @@ namespace Do_an_1.Controllers
                 return NotFound();
             }
             ViewBag.BlogComment = await _context.TbBlogComments
-                .Include(m=>m.Customer)
+                .Include(m => m.Customer)
                 .Where(i => i.BlogId == id)
                 .OrderByDescending(i => i.CreatedDate)
                 .ToListAsync();

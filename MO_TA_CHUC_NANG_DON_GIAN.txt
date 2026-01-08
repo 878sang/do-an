@@ -1,0 +1,175 @@
+================================================================================
+                    MÔ TẢ CHỨC NĂNG TRANG WEB
+                    FASHION STORE E-COMMERCE SYSTEM
+                    (Định dạng: Đầu vào - Xử lý - Đầu ra)
+================================================================================
+
+PHẦN 1: CHỨC NĂNG DÀNH CHO NGƯỜI DÙNG
+================================================================================
+
+2.3.1. Xem sản phẩm
+Khách hàng truy cập vào địa chỉ của website trên thanh URL, chọn vào các page trên site để xem thông tin.
+Đầu vào: Thông tin yêu cầu của khách hàng về sản phẩm.
+Xử lý: Khi khách hàng chọn một sản phẩm bất kỳ trên page, thông tin mà khách hàng gửi sẽ được xử lý, hệ thống sẽ lấy dữ liệu từ cơ sở dữ liệu, gửi lên cho người dùng.
+Đầu ra: Thông tin về sản phẩm bao gồm tên sản phẩm, danh mục, màu sắc, kích thước, giá cả, tình trạng, hình ảnh, mô tả, đánh giá của khách hàng.
+
+2.3.2. Xem danh sách sản phẩm
+Cho phép khách hàng duyệt tất cả các sản phẩm có trên website, có thể lọc theo danh mục.
+Đầu vào: Yêu cầu xem danh sách sản phẩm từ khách hàng.
+Xử lý: Hệ thống sẽ lấy danh sách tất cả sản phẩm đang hoạt động từ cơ sở dữ liệu, sắp xếp theo ngày tạo mới nhất, trả về kết quả cho người dùng.
+Đầu ra: Danh sách sản phẩm hiển thị với thông tin tên sản phẩm, hình ảnh, giá bán, danh mục và link xem chi tiết.
+
+2.3.3. Bình luận sản phẩm
+Người xem có thể chia sẻ cảm nghĩ của họ về sản phẩm, thông tin bình luận của khách hàng sẽ được lưu vào database.
+Đầu vào: Thông tin về người bình luận bao gồm tên khách hàng, số sao đánh giá, nội dung bình luận và ngày giờ bình luận.
+Xử lý: Kiểm tra nội dung mà người dùng nhập vào và kiểm tra khách hàng đã mua sản phẩm chưa, nếu hợp lệ thì lưu trữ dữ liệu đó vào database, nếu không thì thông báo lỗi cho người dùng.
+Đầu ra: Thông báo từ hệ thống, nếu hợp lệ thì thông báo: "Cảm ơn bạn đã đánh giá sản phẩm!". Nếu không hợp lệ thì thông báo: "Dữ liệu bạn nhập vào không hợp lệ" hoặc "Bạn cần mua sản phẩm trước khi đánh giá".
+
+2.3.4. Thêm vào giỏ hàng
+Cho phép khách hàng duyệt sản phẩm trên trang web. Khi khách hàng chọn sản phẩm muốn mua thì sản phẩm đó sẽ được thêm vào giỏ hàng.
+Đầu vào: Thông tin về sản phẩm mà khách hàng muốn mua bao gồm ID sản phẩm, màu sắc, kích thước và số lượng.
+Xử lý: Khi khách hàng chọn sản phẩm muốn mua, ở phiên làm việc đó nếu khách hàng chọn lần đầu tiên thì ở giỏ hàng sẽ tạo mới sản phẩm số lượng bằng số lượng đã chọn. Nếu đã tồn tại sản phẩm đó trong giỏ hàng rồi thì số lượng của sản phẩm đó sẽ được tăng lên theo số lượng đã chọn.
+Đầu ra: Thông tin của sản phẩm đó lưu trong giỏ hàng, thông báo "Đã thêm sản phẩm vào giỏ hàng" và cập nhật số lượng sản phẩm trong icon giỏ hàng.
+
+2.3.5. Giỏ hàng
+Cho phép khách hàng xem, điều chỉnh, thêm, xóa sản phẩm mà khách hàng đã đặt mua. Có chức năng tính tổng giá trị của đơn hàng đó.
+Đầu vào: Thông tin của các sản phẩm mà khách hàng đã thêm vào giỏ hàng, số lượng sản phẩm mà khách hàng muốn mua.
+Xử lý: Khách hàng có thể thay đổi số lượng sản phẩm muốn mua, khi khách hàng chọn lại số lượng và chọn cập nhật thì số lượng của sản phẩm đó cần được cập nhật lại, tổng giá cũng được tính lại. Khi khách hàng chọn xóa sản phẩm thì sản phẩm đó sẽ được xóa khỏi giỏ hàng. Khách hàng chọn xóa hết thì sẽ thông báo không có sản phẩm nào trong giỏ hàng. Khách hàng chọn mua tiếp thì sẽ chuyển về trang sản phẩm, chọn thanh toán thì sẽ chuyển đến trang thanh toán.
+Đầu ra: Thông tin về giỏ hàng bao gồm danh sách sản phẩm, số lượng, giá từng sản phẩm, tổng giá trị đơn hàng.
+
+2.3.6. Thanh toán đơn hàng
+Cho phép khách hàng hoàn tất việc đặt hàng bằng cách nhập thông tin giao hàng và chọn phương thức thanh toán.
+Đầu vào: Thông tin giao hàng bao gồm họ và tên, địa chỉ, số điện thoại, ghi chú (tùy chọn) và phương thức thanh toán (VNPAY hoặc COD).
+Xử lý: Khi khách hàng nhập đầy đủ thông tin và chọn phương thức thanh toán, hệ thống sẽ kiểm tra tính hợp lệ của thông tin. Nếu chọn VNPAY, hệ thống sẽ tạo URL thanh toán và chuyển hướng khách hàng đến trang thanh toán VNPAY. Nếu chọn COD, hệ thống sẽ lưu đơn hàng vào database và xóa giỏ hàng. Sau khi thanh toán VNPAY thành công, hệ thống sẽ lưu đơn hàng vào database.
+Đầu ra: Nếu thành công, hiển thị thông báo "Đặt hàng thành công" kèm mã đơn hàng và tổng tiền. Nếu thất bại, hiển thị thông báo lỗi tương ứng.
+
+2.3.7. Tìm kiếm sản phẩm
+Để không mất thời gian duyệt từng sản phẩm trên website, khách hàng có thể biết thông tin về sản phẩm mình muốn mua bằng cách nhập thông tin vào ô tìm kiếm.
+Đầu vào: Tên sản phẩm hoặc từ khóa mà khách hàng muốn tìm kiếm.
+Xử lý: Khi khách hàng nhập từ khóa muốn tìm kiếm, hệ thống sẽ so sánh từ khóa đó với dữ liệu đã có trong database. Nếu nhận được kết quả sẽ trả kết quả tìm kiếm cho người dùng, nếu không tìm thấy kết quả nào thì hệ thống sẽ gửi thông báo: "Không tìm thấy kết quả".
+Đầu ra: Thông báo, kết quả từ hệ thống bao gồm danh sách sản phẩm phù hợp với từ khóa tìm kiếm.
+
+2.3.8. Xem sản phẩm mới
+Khách hàng có thể xem thông tin các sản phẩm mới nhất của cửa hàng.
+Đầu vào: Yêu cầu xem sản phẩm mới từ khách hàng.
+Xử lý: Hệ thống sẽ lựa chọn những sản phẩm mới nhất mà người quản trị web mới nhập vào (được đánh dấu là sản phẩm mới), trả về kết quả, hiển thị cho người dùng xem.
+Đầu ra: Thông tin về các sản phẩm mới nhất bao gồm tên sản phẩm, hình ảnh, giá bán và link xem chi tiết.
+
+2.3.9. Xem sản phẩm bán chạy
+Hiển thị thông tin sản phẩm bán chạy nhất của cửa hàng.
+Đầu vào: Yêu cầu xem sản phẩm bán chạy từ khách hàng.
+Xử lý: Hệ thống sẽ lựa chọn những sản phẩm có số lượng bán được nhiều nhất hoặc được đánh dấu là sản phẩm bán chạy để trả về kết quả và hiển thị cho người dùng.
+Đầu ra: Thông tin về các sản phẩm bán chạy nhất bao gồm tên sản phẩm, hình ảnh, giá bán và link xem chi tiết.
+
+2.3.10. Đăng ký tài khoản
+Cho phép khách hàng tạo tài khoản mới để sử dụng các dịch vụ của website.
+Đầu vào: Thông tin đăng ký bao gồm tên đăng nhập, họ và tên, email, mật khẩu và xác nhận mật khẩu.
+Xử lý: Kiểm tra thông tin người dùng nhập vào, kiểm tra email và tên đăng nhập đã tồn tại chưa, kiểm tra mật khẩu xác nhận có khớp không. Nếu hợp lệ thì mã hóa mật khẩu và lưu trữ dữ liệu vào database, nếu không thì thông báo lỗi cho người dùng.
+Đầu ra: Thông báo từ hệ thống, nếu hợp lệ thì thông báo: "Đăng ký thành công! Hãy đăng nhập.". Nếu không hợp lệ thì thông báo: "Email này đã được sử dụng" hoặc "Mật khẩu xác nhận không khớp".
+
+2.3.11. Đăng nhập
+Cho phép khách hàng đã có tài khoản đăng nhập vào hệ thống.
+Đầu vào: Thông tin đăng nhập bao gồm email hoặc tên đăng nhập và mật khẩu.
+Xử lý: Kiểm tra thông tin đăng nhập, mã hóa mật khẩu và so sánh với dữ liệu trong database. Nếu đúng thì lưu thông tin đăng nhập vào session, nếu sai thì thông báo lỗi.
+Đầu ra: Nếu thành công, chuyển hướng về trang chủ và hiển thị tên người dùng. Nếu thất bại, hiển thị thông báo: "Email hoặc mật khẩu không đúng" hoặc "Tài khoản đang bị khóa".
+
+2.3.12. Xem lịch sử đơn hàng
+Cho phép khách hàng đã đăng nhập xem các đơn hàng mà họ đã đặt.
+Đầu vào: Yêu cầu xem lịch sử đơn hàng từ khách hàng đã đăng nhập.
+Xử lý: Hệ thống sẽ lấy thông tin khách hàng từ session, sau đó lấy danh sách đơn hàng của khách hàng đó từ database, sắp xếp theo ngày đặt hàng mới nhất.
+Đầu ra: Hiển thị thông tin tài khoản và danh sách đơn hàng bao gồm mã đơn hàng, ngày đặt hàng, trạng thái đơn hàng, tổng tiền và chi tiết sản phẩm trong đơn.
+
+2.3.13. Xem blog
+Cho phép khách hàng xem các bài viết blog trên website.
+Đầu vào: Yêu cầu xem danh sách blog hoặc chi tiết bài viết từ khách hàng.
+Xử lý: Hệ thống sẽ lấy danh sách bài viết blog từ database, lọc các bài viết đang hoạt động, sắp xếp theo ngày đăng mới nhất, trả về kết quả cho người dùng.
+Đầu ra: Danh sách bài viết blog hoặc chi tiết bài viết bao gồm tiêu đề, hình ảnh, mô tả, nội dung, tác giả, ngày đăng và danh sách bình luận.
+
+2.3.14. Bình luận blog
+Cho phép khách hàng đã đăng nhập bình luận về bài viết blog.
+Đầu vào: Thông tin bình luận bao gồm nội dung bình luận và ID bài viết blog.
+Xử lý: Kiểm tra nội dung bình luận, nếu hợp lệ thì lưu thông tin bình luận vào database kèm thông tin khách hàng và ngày giờ bình luận.
+Đầu ra: Thông báo "Bình luận đã được gửi thành công" và hiển thị bình luận ngay trên trang blog.
+
+2.3.15. Gửi yêu cầu liên hệ
+Cho phép khách hàng gửi yêu cầu hỗ trợ hoặc liên hệ với cửa hàng.
+Đầu vào: Thông tin liên hệ bao gồm tên, email, tiêu đề và nội dung yêu cầu.
+Xử lý: Kiểm tra thông tin người dùng nhập vào, nếu hợp lệ thì lưu trữ dữ liệu vào database, nếu không thì thông báo lỗi cho người dùng.
+Đầu ra: Thông báo từ hệ thống, nếu hợp lệ thì thông báo: "Gửi yêu cầu thành công!". Nếu không hợp lệ thì thông báo: "Dữ liệu bạn nhập vào không hợp lệ".
+
+2.3.16. Chat hỗ trợ với AI
+Cho phép khách hàng chat với AI để được hỗ trợ tìm kiếm sản phẩm hoặc tra cứu đơn hàng.
+Đầu vào: Tin nhắn của khách hàng trong cửa sổ chat.
+Xử lý: Hệ thống sẽ lưu tin nhắn của khách hàng, kiểm tra các truy vấn đặc biệt như tìm kiếm sản phẩm hoặc tra cứu đơn hàng, sau đó gọi API Gemini AI để tạo phản hồi, lưu phản hồi vào database.
+Đầu ra: Hiển thị tin nhắn của khách hàng và phản hồi từ AI, nếu có tìm kiếm sản phẩm thì hiển thị danh sách sản phẩm liên quan, nếu có tra cứu đơn hàng thì hiển thị thông tin đơn hàng.
+
+
+================================================================================
+PHẦN 2: CHỨC NĂNG DÀNH CHO QUẢN TRỊ VIÊN
+================================================================================
+
+2.3.17. Đăng nhập Admin
+Cho phép quản trị viên đăng nhập vào hệ thống quản trị.
+Đầu vào: Thông tin đăng nhập bao gồm email hoặc tên đăng nhập và mật khẩu.
+Xử lý: Kiểm tra thông tin đăng nhập, mã hóa mật khẩu và so sánh với dữ liệu trong database. Kiểm tra tài khoản có bị khóa không. Nếu đúng thì lưu thông tin đăng nhập vào session, nếu sai thì thông báo lỗi.
+Đầu ra: Nếu thành công, chuyển hướng đến trang quản trị. Nếu thất bại, hiển thị thông báo: "Tài khoản hoặc mật khẩu không đúng" hoặc "Tài khoản quản trị này đã bị khóa".
+
+2.3.18. Quản lý sản phẩm
+Cho phép quản trị viên xem, thêm, sửa, xóa sản phẩm trong hệ thống.
+Đầu vào: Thông tin sản phẩm bao gồm tên sản phẩm, mô tả, giá bán, hình ảnh, danh mục, màu sắc, kích thước, số lượng tồn kho.
+Xử lý: Khi quản trị viên thực hiện các thao tác với sản phẩm, hệ thống sẽ kiểm tra tính hợp lệ của dữ liệu, sau đó thực hiện các thao tác thêm, sửa, xóa trong database. Với sản phẩm có biến thể, hệ thống sẽ lưu thông tin từng biến thể riêng.
+Đầu ra: Hiển thị danh sách sản phẩm với đầy đủ thông tin, thông báo thành công hoặc thất bại khi thực hiện các thao tác.
+
+2.3.19. Quản lý đơn hàng
+Cho phép quản trị viên xem, cập nhật trạng thái và xóa đơn hàng.
+Đầu vào: Yêu cầu xem đơn hàng hoặc cập nhật trạng thái đơn hàng từ quản trị viên.
+Xử lý: Hệ thống sẽ lấy danh sách đơn hàng từ database, có thể lọc theo trạng thái. Khi cập nhật trạng thái, hệ thống sẽ cập nhật thông tin trạng thái đơn hàng trong database.
+Đầu ra: Hiển thị danh sách đơn hàng với thông tin khách hàng, sản phẩm, tổng tiền, trạng thái. Thông báo thành công khi cập nhật trạng thái.
+
+2.3.20. Quản lý khách hàng
+Cho phép quản trị viên xem, thêm, sửa, xóa thông tin khách hàng.
+Đầu vào: Thông tin khách hàng hoặc yêu cầu xem danh sách khách hàng.
+Xử lý: Hệ thống sẽ lấy danh sách khách hàng từ database, khi thực hiện thêm, sửa, xóa thì kiểm tra tính hợp lệ và cập nhật dữ liệu trong database.
+Đầu ra: Hiển thị danh sách khách hàng với thông tin đầy đủ, lịch sử đơn hàng và đánh giá sản phẩm của khách hàng.
+
+2.3.21. Quản lý blog
+Cho phép quản trị viên xem, thêm, sửa, xóa bài viết blog.
+Đầu vào: Thông tin bài viết blog bao gồm tiêu đề, nội dung, hình ảnh, danh mục blog, tác giả.
+Xử lý: Khi quản trị viên thực hiện các thao tác với blog, hệ thống sẽ kiểm tra tính hợp lệ, tự động tạo alias từ tiêu đề, sau đó thực hiện các thao tác thêm, sửa, xóa trong database.
+Đầu ra: Hiển thị danh sách bài viết blog, thông báo thành công hoặc thất bại khi thực hiện các thao tác.
+
+2.3.22. Xem báo cáo doanh thu
+Cho phép quản trị viên xem báo cáo doanh thu theo khoảng thời gian.
+Đầu vào: Khoảng thời gian muốn xem báo cáo (ngày bắt đầu và ngày kết thúc).
+Xử lý: Hệ thống sẽ lấy danh sách đơn hàng trong khoảng thời gian đó, tính tổng doanh thu từ các đơn hàng đã hoàn thành, đếm số đơn hàng và số đơn hoàn thành.
+Đầu ra: Hiển thị báo cáo doanh thu bao gồm tổng doanh thu, tổng số đơn hàng, số đơn hoàn thành và danh sách đơn hàng trong khoảng thời gian.
+
+2.3.23. Quản lý tài khoản Admin
+Cho phép quản trị viên xem, thêm, sửa, xóa tài khoản quản trị viên khác.
+Đầu vào: Thông tin tài khoản Admin hoặc yêu cầu xem danh sách tài khoản.
+Xử lý: Hệ thống sẽ lấy danh sách tài khoản Admin từ database, khi thực hiện thêm, sửa, xóa thì kiểm tra tính hợp lệ, mã hóa mật khẩu và cập nhật dữ liệu trong database.
+Đầu ra: Hiển thị danh sách tài khoản Admin với thông tin đầy đủ, phân quyền và trạng thái hoạt động.
+
+2.3.24. Quản lý liên hệ
+Cho phép quản trị viên xem và xử lý các yêu cầu liên hệ từ khách hàng.
+Đầu vào: Yêu cầu xem danh sách liên hệ hoặc xem chi tiết yêu cầu liên hệ.
+Xử lý: Hệ thống sẽ lấy danh sách yêu cầu liên hệ từ database, sắp xếp theo ngày gửi mới nhất. Khi xem chi tiết, hệ thống sẽ đánh dấu đã đọc.
+Đầu ra: Hiển thị danh sách yêu cầu liên hệ với thông tin tên, email, tiêu đề, nội dung và trạng thái đã đọc/chưa đọc.
+
+
+================================================================================
+KẾT LUẬN
+================================================================================
+
+Tất cả các chức năng trên đều tuân theo quy trình:
+1. ĐẦU VÀO: Người dùng thực hiện hành động và cung cấp thông tin
+2. XỬ LÝ: Hệ thống nhận yêu cầu, kiểm tra tính hợp lệ và xử lý dữ liệu
+3. ĐẦU RA: Hiển thị kết quả hoặc thông báo cho người dùng
+
+Hệ thống đảm bảo tính bảo mật, tính hợp lệ của dữ liệu và trải nghiệm người dùng tốt.
+
+================================================================================
+Ngày tạo: 2024
+Phiên bản: 1.0
+================================================================================
+

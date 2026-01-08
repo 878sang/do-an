@@ -11,14 +11,69 @@ namespace Do_an_1.Controllers
         {
             _context = context;
         }
-        public IActionResult Index()
+        public IActionResult Index(int? categoryId, decimal? priceMin, decimal? priceMax, string? sortBy, string? search)
         {
-            var products = _context.TbProducts
-        .Where(b => b.IsActive == true)
-        .OrderByDescending(b => b.CreatedDate)
-        .ToList();
-            ViewBag.ProductCategories = _context.TbProductCategories
-                .ToList();
+            // Lấy tất cả sản phẩm đang active
+            var query = _context.TbProducts
+                .Include(p => p.CategoryProduct)
+                .Where(p => p.IsActive == true);
+
+            // Lọc theo danh mục
+            if (categoryId.HasValue && categoryId.Value > 0)
+            {
+                query = query.Where(p => p.CategoryProductId == categoryId.Value);
+            }
+
+            // Lọc theo khoảng giá (sử dụng PriceSale nếu có, nếu không thì dùng Price)
+            if (priceMin.HasValue)
+            {
+                query = query.Where(p => (p.PriceSale ?? p.Price ?? 0) >= priceMin.Value);
+            }
+            if (priceMax.HasValue)
+            {
+                query = query.Where(p => (p.PriceSale ?? p.Price ?? 0) <= priceMax.Value);
+            }
+
+            // Tìm kiếm theo tên sản phẩm
+            if (!string.IsNullOrEmpty(search))
+            {
+                query = query.Where(p => p.Title != null && p.Title.Contains(search));
+            }
+
+            // Sắp xếp
+            switch (sortBy)
+            {
+                case "popularity":
+                    query = query.OrderByDescending(p => p.IsBestSeller).ThenByDescending(p => p.Star ?? 0);
+                    break;
+                case "newness":
+                    query = query.OrderByDescending(p => p.CreatedDate);
+                    break;
+                case "rating":
+                    query = query.OrderByDescending(p => p.Star ?? 0);
+                    break;
+                case "price_asc":
+                    query = query.OrderBy(p => p.PriceSale ?? p.Price ?? 0);
+                    break;
+                case "price_desc":
+                    query = query.OrderByDescending(p => p.PriceSale ?? p.Price ?? 0);
+                    break;
+                default: // latest
+                    query = query.OrderByDescending(p => p.CreatedDate);
+                    break;
+            }
+
+            var products = query.ToList();
+
+            // Lưu các giá trị filter để hiển thị lại trên view
+            ViewBag.ProductCategories = _context.TbProductCategories.ToList();
+            ViewBag.SelectedCategoryId = categoryId;
+            ViewBag.PriceMin = priceMin;
+            ViewBag.PriceMax = priceMax;
+            ViewBag.SortBy = sortBy ?? "latest";
+            ViewBag.Search = search;
+            ViewBag.TotalResults = products.Count;
+
             return View(products);
         }
         [Route("/product/{alias}-{id}.html")]
