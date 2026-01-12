@@ -84,6 +84,7 @@
                                                                 <th>Giá</th>
                                                                 <th>Giá sale</th>
                                                                 <th>Số lượng</th>
+                                                                <th>Chọn ảnh</th>
                                                                 <th>Kích hoạt</th>
                                                                 <th>Thao tác</th>
                                                             </tr>
@@ -116,6 +117,21 @@
                                                                     <td><input class="form-control form-control-sm" name="Variants[@i].Price" type="number" step="0.01" value="@(variant.Price.HasValue ? variant.Price.Value.ToString("0.##") : "")" /></td>
                                                                     <td><input class="form-control form-control-sm" name="Variants[@i].PriceSale" type="number" step="0.01" value="@(variant.PriceSale.HasValue ? variant.PriceSale.Value.ToString("0.##") : "")" /></td>
                                                                     <td><input class="form-control form-control-sm" name="Variants[@i].Quantity" type="number" value="@variant.Quantity" /></td>
+                                                                    <td>
+                                                                        <div class="input-group mb-2">
+                                                                            <input type="text" class="form-control form-control-sm" 
+                                                                                   name="Variants[@i].Image" 
+                                                                                   id="variant-image-@i" 
+                                                                                   value="@variant.Image" 
+                                                                                   placeholder="Đường dẫn ảnh" />
+                                                                            <div class="input-group-append">
+                                                                                <button type="button" class="btn btn-success btn-sm"
+                                                                                        onclick="openDialog('variant-image-@i')">
+                                                                                    Chọn ảnh
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
                                                                     <td class="text-center">
                                                                         <input type="checkbox" name="Variants[@i].IsActive" value="true" @(variant.IsActive == true ? "checked" : "") />
                                                                     </td>
@@ -146,6 +162,7 @@
                                                                 <th>Giá</th>
                                                                 <th>Giá sale</th>
                                                                 <th>Số lượng</th>
+                                                                <th>Chọn ảnh</th>
                                                                 <th>Kích hoạt</th>
                                                                 <th>Thao tác</th>
                                                             </tr>
@@ -170,20 +187,24 @@
                                                 </div>
                                             </div>
                                         }
-                                        <div class="mb-3 row">
-                                            <label asp-for="Quantity" class="col-lg-1 col-form-label">Số lượng</label>
+                                        @if (Model.TbProductVariants == null || !Model.TbProductVariants.Any())
+                                        {
+                                            <div class="mb-3 row">
+                                                <label asp-for="Quantity" class="col-lg-1 col-form-label">Số lượng</label>
+                                                <div class="col-lg-6">
+                                                    <input asp-for="Quantity" type="number" class="form-control" />
+                                                    <span asp-validation-for="Quantity" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                        }
+                                        <div class="mb-3 row"> 
+                                            <label asp-for="Star" class="col-lg-1 col-form-label">Đánh giá</label>
                                             <div class="col-lg-6">
-                                                <input asp-for="Quantity" type="number" class="form-control" />
-                                                <span asp-validation-for="Quantity" class="text-danger"></span>
+                                                <input asp-for="Star" type="number" class="form-control" readonly />
+                                                <span asp-validation-for="Star" class="text-danger"></span>
+                                                <small class="form-text text-muted">Đánh giá được tính tự động từ người dùng, không thể chỉnh sửa</small>
                                             </div>
                                         </div>
-                                        @* <div class="mb-3 row"> 
-                                            <label asp-for="Star" class="col-lg-1 col-form-label">Sao</label>
-                                            <div class="col-lg-6">
-                                                <input asp-for="Star" type="number" class="form-control" />
-                                                <span asp-validation-for="Star" class="text-danger"></span>
-                                            </div>
-                                        </div>*@
                                         <div class="mb-3 row">
                                             <label asp-for="Image" class="col-lg-1 col-form-label">Ảnh</label>
                                             <div class="col-lg-6">
@@ -297,8 +318,21 @@
                  <td><input class="form-control form-control-sm" name="Variants[${variantIndex}].Sku" /></td>
                  <td><input class="form-control form-control-sm" name="Variants[${variantIndex}].Price" type="number" step="0.01" /></td>
                  <td><input class="form-control form-control-sm" name="Variants[${variantIndex}].PriceSale" type="number" step="0.01" /></td>
+                 
                  <td><input class="form-control form-control-sm" name="Variants[${variantIndex}].Quantity" type="number" /></td>
-                 <td class="text-center"><input type="checkbox" name="Variants[${variantIndex}].IsActive" value="true" checked /></td>
+                <td>
+                   <div class="input-group mb-2">
+                       <input type="text" class="form-control form-control-sm" 
+                              name="Variants[${variantIndex}].Image" 
+                              id="variant-image-${variantIndex}" 
+                              placeholder="Đường dẫn ảnh" />
+                       <div class="input-group-append">
+                           <button type="button" class="btn btn-success btn-sm"
+                                   onclick="openDialog('variant-image-${variantIndex}')">Chọn ảnh</button>
+                       </div>
+                   </div>
+               </td>
+               <td class="text-center"><input type="checkbox" name="Variants[${variantIndex}].IsActive" value="true" checked /></td>
                  <td class="text-center"><button type="button" class="btn btn-danger btn-sm" onclick="removeVariantRow(this)">Xóa</button></td>
              `;
              document.getElementById('variants-body').appendChild(tr);
@@ -340,8 +374,17 @@
                  row.querySelectorAll('input, select').forEach(function(input) {
                      if (input.name && input.name.includes('Variants[')) {
                          input.name = input.name.replace(/Variants\[\d+\]/, 'Variants[' + index + ']');
+                         // Cập nhật ID của input ảnh
+                         if (input.id && input.id.startsWith('variant-image-')) {
+                             input.id = 'variant-image-' + index;
+                         }
                      }
                  });
+                 // Cập nhật onclick của button chọn ảnh
+                 var imageButton = row.querySelector('button[onclick*="openDialog"]');
+                 if (imageButton) {
+                     imageButton.setAttribute('onclick', 'openDialog(\'variant-image-' + index + '\')');
+                 }
              });
              variantIndex = rows.length;
          }

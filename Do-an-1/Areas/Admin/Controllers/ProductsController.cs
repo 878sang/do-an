@@ -113,6 +113,48 @@ namespace Do_an_1.Areas.Admin.Controllers
                         _context.TbProductVariants.Add(variant);
                     }
                     await _context.SaveChangesAsync();
+
+                    // Cập nhật giá sản phẩm từ giá thấp nhất của các biến thể
+                    var allVariants = await _context.TbProductVariants
+                        .Where(v => v.ProductId == product.ProductId && v.IsActive == true)
+                        .ToListAsync();
+
+                    if (allVariants.Any())
+                    {
+                        // Tìm giá thấp nhất (ưu tiên PriceSale, nếu không có thì dùng Price)
+                        decimal? minPrice = null;
+                        decimal? minPriceSale = null;
+                        decimal? minFinalPrice = null;
+
+                        // Tính tổng số lượng từ tất cả các biến thể đang active
+                        int totalQuantity = allVariants
+                            .Where(v => v.Quantity.HasValue)
+                            .Sum(v => v.Quantity.Value);
+
+                        foreach (var variant in allVariants)
+                        {
+                            decimal? variantFinalPrice = variant.PriceSale ?? variant.Price;
+                            if (variantFinalPrice.HasValue)
+                            {
+                                if (!minFinalPrice.HasValue || variantFinalPrice.Value < minFinalPrice.Value)
+                                {
+                                    minPrice = variant.Price;
+                                    minPriceSale = variant.PriceSale;
+                                    minFinalPrice = variantFinalPrice;
+                                }
+                            }
+                        }
+
+                        // Cập nhật giá và số lượng tổng vào sản phẩm
+                        product.Price = minPrice;
+                        product.PriceSale = minPriceSale;
+                        product.Quantity = totalQuantity; // Lưu tổng số lượng từ các biến thể
+                    }
+                    // Nếu không có biến thể, giữ nguyên giá và số lượng từ form
+
+                    // Lưu thay đổi vào database
+                    _context.Update(product);
+                    await _context.SaveChangesAsync();
                 }
                 return RedirectToAction(nameof(Index));
             }
@@ -208,11 +250,21 @@ namespace Do_an_1.Areas.Admin.Controllers
 
                         int colorId = int.Parse(colorIdStr);
                         int sizeId = int.Parse(sizeIdStr);
-                        var sku = form[$"Variants[{index}].Sku"].ToString();
-                        var priceStr = form[$"Variants[{index}].Price"].ToString();
-                        var priceSaleStr = form[$"Variants[{index}].PriceSale"].ToString();
-                        var quantityStr = form[$"Variants[{index}].Quantity"].ToString();
-                        var isActive = form[$"Variants[{index}].IsActive"].ToString() == "true";
+
+                        // Lấy các giá trị từ form, xử lý cả trường hợp null/empty
+                        var skuValue = form[$"Variants[{index}].Sku"];
+                        var priceValue = form[$"Variants[{index}].Price"];
+                        var priceSaleValue = form[$"Variants[{index}].PriceSale"];
+                        var quantityValue = form[$"Variants[{index}].Quantity"];
+                        var imageValue = form[$"Variants[{index}].Image"];
+                        var isActiveValue = form[$"Variants[{index}].IsActive"];
+
+                        var sku = skuValue.ToString().Trim();
+                        var priceStr = priceValue.ToString().Trim();
+                        var priceSaleStr = priceSaleValue.ToString().Trim();
+                        var quantityStr = quantityValue.ToString().Trim();
+                        var imageStr = imageValue.ToString().Trim();
+                        var isActive = isActiveValue.ToString() == "true";
 
                         if (variantId > 0)
                         {
@@ -224,12 +276,19 @@ namespace Do_an_1.Areas.Admin.Controllers
                             {
                                 existingVariant.ColorId = colorId;
                                 existingVariant.SizeId = sizeId;
-                                existingVariant.Sku = sku;
-                                existingVariant.Price = !string.IsNullOrEmpty(priceStr) ? decimal.Parse(priceStr) : null;
-                                existingVariant.PriceSale = !string.IsNullOrEmpty(priceSaleStr) ? decimal.Parse(priceSaleStr) : null;
-                                existingVariant.Quantity = !string.IsNullOrEmpty(quantityStr) ? int.Parse(quantityStr) : null;
+                                existingVariant.Sku = !string.IsNullOrWhiteSpace(sku) ? sku : null;
+                                existingVariant.Price = !string.IsNullOrWhiteSpace(priceStr) ? decimal.Parse(priceStr) : null;
+                                existingVariant.PriceSale = !string.IsNullOrWhiteSpace(priceSaleStr) ? decimal.Parse(priceSaleStr) : null;
+                                existingVariant.Quantity = !string.IsNullOrWhiteSpace(quantityStr) ? int.Parse(quantityStr) : null;
+
+                                // Đảm bảo cập nhật Image ngay cả khi giá trị là null hoặc rỗng
+                                var newImageValue = !string.IsNullOrWhiteSpace(imageStr) ? imageStr : null;
+                                existingVariant.Image = newImageValue;
+
                                 existingVariant.IsActive = isActive;
-                                _context.Update(existingVariant);
+
+                                // Đánh dấu entity là đã modified để đảm bảo cập nhật
+                                _context.Entry(existingVariant).State = EntityState.Modified;
                             }
                         }
                         else
@@ -240,10 +299,11 @@ namespace Do_an_1.Areas.Admin.Controllers
                                 ProductId = tbProduct.ProductId,
                                 ColorId = colorId,
                                 SizeId = sizeId,
-                                Sku = sku,
-                                Price = !string.IsNullOrEmpty(priceStr) ? decimal.Parse(priceStr) : null,
-                                PriceSale = !string.IsNullOrEmpty(priceSaleStr) ? decimal.Parse(priceSaleStr) : null,
-                                Quantity = !string.IsNullOrEmpty(quantityStr) ? int.Parse(quantityStr) : null,
+                                Sku = !string.IsNullOrWhiteSpace(sku) ? sku : null,
+                                Price = !string.IsNullOrWhiteSpace(priceStr) ? decimal.Parse(priceStr) : null,
+                                PriceSale = !string.IsNullOrWhiteSpace(priceSaleStr) ? decimal.Parse(priceSaleStr) : null,
+                                Quantity = !string.IsNullOrWhiteSpace(quantityStr) ? int.Parse(quantityStr) : null,
+                                Image = !string.IsNullOrWhiteSpace(imageStr) ? imageStr : null,
                                 IsActive = isActive
                             };
                             _context.TbProductVariants.Add(newVariant);
@@ -251,6 +311,58 @@ namespace Do_an_1.Areas.Admin.Controllers
                     }
 
                     await _context.SaveChangesAsync();
+
+                    // Cập nhật giá sản phẩm từ giá thấp nhất của các biến thể
+                    var allVariants = await _context.TbProductVariants
+                        .Where(v => v.ProductId == tbProduct.ProductId && v.IsActive == true)
+                        .ToListAsync();
+
+                    var productToUpdate = await _context.TbProducts
+                        .FirstOrDefaultAsync(p => p.ProductId == tbProduct.ProductId);
+
+                    if (productToUpdate != null)
+                    {
+                        if (allVariants.Any())
+                        {
+                            // Tìm giá thấp nhất (ưu tiên PriceSale, nếu không có thì dùng Price)
+                            decimal? minPrice = null;
+                            decimal? minPriceSale = null;
+                            decimal? minFinalPrice = null; // Giá cuối cùng để so sánh (PriceSale ?? Price)
+
+                            // Tính tổng số lượng từ tất cả các biến thể đang active
+                            int totalQuantity = allVariants
+                                .Where(v => v.Quantity.HasValue)
+                                .Sum(v => v.Quantity.Value);
+
+                            foreach (var variant in allVariants)
+                            {
+                                decimal? variantFinalPrice = variant.PriceSale ?? variant.Price;
+                                if (variantFinalPrice.HasValue)
+                                {
+                                    if (!minFinalPrice.HasValue || variantFinalPrice.Value < minFinalPrice.Value)
+                                    {
+                                        minPrice = variant.Price;
+                                        minPriceSale = variant.PriceSale;
+                                        minFinalPrice = variantFinalPrice;
+                                    }
+                                }
+                            }
+
+                            // Cập nhật giá và số lượng tổng vào sản phẩm
+                            productToUpdate.Price = minPrice;
+                            productToUpdate.PriceSale = minPriceSale;
+                            productToUpdate.Quantity = totalQuantity; // Lưu tổng số lượng từ các biến thể
+                        }
+                        else
+                        {
+                            // Nếu không có biến thể, giữ nguyên giá và số lượng từ form
+                            // Giá và số lượng đã được bind từ tbProduct
+                        }
+
+                        // Lưu thay đổi vào database
+                        _context.Update(productToUpdate);
+                        await _context.SaveChangesAsync();
+                    }
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -333,7 +445,7 @@ namespace Do_an_1.Areas.Admin.Controllers
 
                 // Sau đó mới xóa sản phẩm
                 _context.TbProducts.Remove(tbProduct);
-                
+
                 await _context.SaveChangesAsync();
                 TempData["SuccessMessage"] = "Xóa sản phẩm thành công.";
             }

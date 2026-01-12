@@ -112,7 +112,7 @@
         }).dialogelfinder('instance');
     }
 
-    function openDialog() {
+    function openDialog(targetInputId) {
         var fm = $('<div/>').dialogelfinder({
             baseUrl: "@Url.Content("~/admin/lib/elFinder/")",
             url: '/Admin/el-finder-file-system/connector',
@@ -122,7 +122,14 @@
             destroyOnClose: true,
             closeOnEditorCallback: true,
             getFileCallback: function (files) {
-                document.getElementById('file_input').value = files.url;
+                if (targetInputId) {
+                    document.getElementById(targetInputId).value = files.url;
+                } else {
+                    var fileInput = document.getElementById('file_input');
+                    if (fileInput) {
+                        fileInput.value = files.url;
+                    }
+                }
             },
             commandsOptions: {
                 getfile: {

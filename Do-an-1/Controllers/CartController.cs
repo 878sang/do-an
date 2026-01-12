@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Do_an_1.Models;
 using Newtonsoft.Json;
+using Microsoft.EntityFrameworkCore;
 
 namespace Do_an_1.Controllers
 {
@@ -16,12 +17,27 @@ namespace Do_an_1.Controllers
         public IActionResult AddToCart([FromBody] CartRequest req)
         {
             var product = _context.TbProducts.FirstOrDefault(p => p.ProductId == req.Id);
+            if (product == null)
+            {
+                return Json(new { success = false, message = "Sản phẩm không tồn tại" });
+            }
 
             var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>("Cart") ?? new List<CartItem>();
-            var existing = cart.FirstOrDefault(x => x.ProductId == req.Id);
+
+            // Tìm sản phẩm trùng (cùng ProductId, Size và Color)
+            var existing = cart.FirstOrDefault(x =>
+                x.ProductId == req.Id &&
+                x.Size == req.Size &&
+                x.Color == req.Color);
+
             if (existing != null)
-                existing.Quantity += 1;
+            {
+                // Cộng dồn số lượng
+                existing.Quantity += req.Quantity;
+            }
             else
+            {
+                // Thêm sản phẩm mới
                 cart.Add(new CartItem
                 {
                     ProductId = product.ProductId,
@@ -32,6 +48,8 @@ namespace Do_an_1.Controllers
                     Size = req.Size,
                     Color = req.Color,
                 });
+            }
+
             HttpContext.Session.SetObjectAsJson("Cart", cart);
             return Json(new { success = true, cartCount = cart.Sum(x => x.Quantity) });
         }

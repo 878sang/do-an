@@ -25,6 +25,7 @@ namespace Do_an_1.Areas.Admin.Controllers
             {
                 return RedirectToAction("Login", "Accounts", new { area = "Admin" });
             }
+
             var query = _context.TbOrders
                 .Include(o => o.Customer)
                 .Include(o => o.OrderStatus)
@@ -33,32 +34,37 @@ namespace Do_an_1.Areas.Admin.Controllers
                 .AsQueryable();
 
             // Lọc theo trạng thái
-            if (status != "all")
+            if (status != "all" && !string.IsNullOrEmpty(status))
             {
                 var statusId = GetStatusId(status);
                 if (statusId.HasValue)
                 {
-                    query = query.Where(o => o.OrderStatusId == statusId.Value);
+                    // Lọc chính xác theo OrderStatusId (xử lý cả trường hợp nullable)
+                    int filterStatusId = statusId.Value;
+                    query = query.Where(o => o.OrderStatusId.HasValue && o.OrderStatusId.Value == filterStatusId);
                 }
             }
 
             ViewBag.Status = status;
-            ViewBag.StatusList = new SelectList(new[]
+
+            // Lấy danh sách trạng thái từ database và chỉ lấy các trạng thái cần thiết
+            var allStatuses = await _context.TbOrderStatuses.ToListAsync();
+            var statusList = new List<object> { new { Value = "all", Text = "Tất cả đơn hàng" } };
+
+            // Chỉ lấy các trạng thái theo yêu cầu: 1, 3, 4, 5, 6, 7, 9, 10
+            var allowedStatusIds = new[] { 1, 3, 4, 5, 6, 7, 9, 10 };
+            foreach (var statusItem in allStatuses.Where(s => allowedStatusIds.Contains(s.OrderStatusId)))
             {
-                new { Value = "all", Text = "Tất cả đơn hàng" },
-                new { Value = "new", Text = "Đơn hàng mới" },
-                new { Value = "processing", Text = "Đang xử lý" },
-                new { Value = "shipping", Text = "Đang giao hàng" },
-                new { Value = "completed", Text = "Đã hoàn thành" },
-                new { Value = "cancelled", Text = "Đã hủy" },
-                new { Value = "returned", Text = "Hoàn trả" }
-            }, "Value", "Text", status);
+                statusList.Add(new { Value = statusItem.OrderStatusId.ToString(), Text = statusItem.Description ?? statusItem.Name ?? $"Trạng thái {statusItem.OrderStatusId}" });
+            }
+
+            ViewBag.StatusList = new SelectList(statusList, "Value", "Text", status);
 
             return View(await query.OrderByDescending(o => o.CreatedDate).ToListAsync());
         }
 
         // GET: Admin/Orders/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int? id, string status = "all")
         {
             if (id == null)
             {
@@ -78,13 +84,14 @@ namespace Do_an_1.Areas.Admin.Controllers
             }
 
             ViewBag.OrderStatuses = new SelectList(_context.TbOrderStatuses, "OrderStatusId", "Description", order.OrderStatusId);
+            ViewBag.Status = status; // Lưu status để quay lại
             return View(order);
         }
 
         // POST: Admin/Orders/UpdateStatus/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> UpdateStatus(int id, int orderStatusId)
+        public async Task<IActionResult> UpdateStatus(int id, int orderStatusId, string status = "all")
         {
             var order = await _context.TbOrders.FindAsync(id);
             if (order == null)
@@ -96,11 +103,11 @@ namespace Do_an_1.Areas.Admin.Controllers
             order.ModifiedDate = DateTime.Now;
             await _context.SaveChangesAsync();
 
-            return RedirectToAction(nameof(Details), new { id });
+            return RedirectToAction(nameof(Details), new { id, status });
         }
 
         // GET: Admin/Orders/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? id, string status = "all")
         {
             if (id == null)
             {
@@ -117,13 +124,14 @@ namespace Do_an_1.Areas.Admin.Controllers
                 return NotFound();
             }
 
+            ViewBag.Status = status; // Lưu status để quay lại
             return View(order);
         }
 
         // POST: Admin/Orders/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int id, string status = "all")
         {
             var order = await _context.TbOrders
                 .Include(o => o.TbOrderDetails)
@@ -136,21 +144,20 @@ namespace Do_an_1.Areas.Admin.Controllers
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index), new { status });
         }
 
         private int? GetStatusId(string status)
         {
-            return status switch
+            if (string.IsNullOrEmpty(status) || status == "all")
+                return null;
+
+            if (int.TryParse(status, out int statusId))
             {
-                "new" => _context.TbOrderStatuses.FirstOrDefault(s => s.Name.Contains("Mới"))?.OrderStatusId,
-                "processing" => _context.TbOrderStatuses.FirstOrDefault(s => s.Name.Contains("Xử lý"))?.OrderStatusId,
-                "shipping" => _context.TbOrderStatuses.FirstOrDefault(s => s.Name.Contains("Giao hàng"))?.OrderStatusId,
-                "completed" => _context.TbOrderStatuses.FirstOrDefault(s => s.Name.Contains("Hoàn thành"))?.OrderStatusId,
-                "cancelled" => _context.TbOrderStatuses.FirstOrDefault(s => s.Name.Contains("Hủy"))?.OrderStatusId,
-                "returned" => _context.TbOrderStatuses.FirstOrDefault(s => s.Name.Contains("Hoàn trả"))?.OrderStatusId,
-                _ => null
-            };
+                return statusId;
+            }
+
+            return null;
         }
     }
 }

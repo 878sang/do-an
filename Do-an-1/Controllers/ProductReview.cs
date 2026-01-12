@@ -25,7 +25,7 @@ namespace Do_an_1.Controllers
                 TbProductReview review = new TbProductReview();
 
                 review.ProductId = productId;
-                review.CustomerId= CustomerId;
+                review.CustomerId = CustomerId;
                 review.Star = rating;
                 review.CreatedDate = DateTime.Now;
                 review.Detail = detail;
@@ -36,7 +36,6 @@ namespace Do_an_1.Controllers
                 var product = _context.TbProducts.FirstOrDefault(p => p.ProductId == productId);
                 if (product != null)
                 {
-                    // Lấy tất cả review active
                     var reviews = _context.TbProductReviews
                         .Where(r => r.ProductId == productId && r.IsActive == true)
                         .ToList();

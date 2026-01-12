@@ -1,4 +1,5 @@
 @model Do_an_1.Models.ViewModels.CheckoutViewModel
+@using Microsoft.AspNetCore.Http
 @{
     var hasItems = Model.Items != null && Model.Items.Count > 0;
     var totalAmount = Model.TotalAmount;
@@ -191,12 +192,24 @@
                             </div>
                         </div>
                         <div class="checkout__content--step__footer d-flex align-items-center">
-                            <button type="submit" name="PaymentMethod" value="VNPAY"
-                                class="continue__shipping--btn primary__btn border-radius-5">Thanh toán với
-                                VNPAY</button>
-                            <button type="submit" name="PaymentMethod" value="cod" style="margin-left: 10px;"
-                                class="continue__shipping--btn primary__btn border-radius-5">Thanh toán khi nhận
-                                hàng</button>
+                            @if (Context.Session.GetString("CustomerId") != null)
+                            {
+                                <button type="submit" name="PaymentMethod" value="VNPAY"
+                                    class="continue__shipping--btn primary__btn border-radius-5">
+                                    Thanh toán với VNPAY
+                                </button>
+
+                                <button type="submit" name="PaymentMethod" value="cod" style="margin-left: 10px;"
+                                    class="continue__shipping--btn primary__btn border-radius-5">
+                                    Thanh toán khi nhận hàng
+                                </button>
+                            }
+                            else
+                            {
+                                <p class="mb-0">
+                                    <a href="/Customer/Index" class="text-primary">Đăng nhập</a> để thanh toán.
+                                </p>
+                            }
                             <a class="previous__link--content" asp-controller="Cart" asp-action="Index">Quay lại giỏ
                                 hàng</a>
                         </div>

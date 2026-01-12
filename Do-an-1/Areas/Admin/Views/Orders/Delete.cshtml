@@ -2,13 +2,14 @@
 @{
     ViewData["Title"] = "Xóa đơn hàng";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var status = ViewBag.Status as string ?? "all";
 }
 
 <div class="content-body">
     <div class="container-fluid">
         <div class="row page-titles">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a asp-action="Index">Đơn hàng</a></li>
+                <li class="breadcrumb-item"><a asp-action="Index" asp-route-status="@status">Đơn hàng</a></li>
                 <li class="breadcrumb-item active">Xóa</li>
             </ol>
         </div>
@@ -35,8 +36,9 @@
 
                             <form asp-action="Delete" method="post">
                                 <input type="hidden" asp-for="OrderId" />
+                                <input type="hidden" name="status" value="@status" />
                                 <input type="submit" value="Xóa" class="btn btn-danger" />
-                                <a asp-action="Index" class="btn btn-secondary">Hủy</a>
+                                <a asp-action="Index" asp-route-status="@status" class="btn btn-secondary">Hủy</a>
                             </form>
                         </div>
                     </div>

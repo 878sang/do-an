@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Trang chủ";
     List<TbBlog> Blogs = ViewBag.Blog;
+    List<TbProductReview> Reviews = ViewBag.Reviews ?? new List<TbProductReview>();
 }
 
 <main class="main__content_wrapper">
@@ -211,7 +212,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="trending" class="tab_pane">
+                @* <div id="trending" class="tab_pane"> 
                     <div class="product__section--inner">
                         <div class="row row-cols-xl-5 row-cols-lg-4 row-cols-md-3 row-cols-2 mb--n30">
                             <div class="col mb-30">
@@ -283,19 +284,19 @@
                                                             </g>
                                                         </g>
                                                     </svg>
-                                                    <span class="add__to--cart__text"> + Add to cart</span>
+                                                    <span class="add__to--cart__text"> + Thêm vào giỏ</span>
                                                 </a>
                                             </li>
                                             <li class="product__items--action__list">
                                                 <a class="product__items--action__btn" href="wishlist.html">
                                                     <svg class="product__items--action__btn--svg" xmlns="http://www.w3.org/2000/svg" width="25.51" height="23.443" viewBox="0 0 512 512"><path d="M352.92 80C288 80 256 144 256 144s-32-64-96.92-64c-52.76 0-94.54 44.14-95.08 96.81-1.1 109.33 86.73 187.08 183 252.42a16 16 0 0018 0c96.26-65.34 184.09-143.09 183-252.42-.54-52.67-42.32-96.81-95.08-96.81z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"></path></svg>
-                                                    <span class="visually-hidden">Wishlist</span>
+                                                    <span class="visually-hidden">Yêu thích</span>
                                                 </a>
                                             </li>
                                             <li class="product__items--action__list">
                                                 <a class="product__items--action__btn" data-open="modal1" href="javascript:void(0)">
                                                     <svg class="product__items--action__btn--svg" xmlns="http://www.w3.org/2000/svg" width="25.51" height="23.443" viewBox="0 0 512 512"><path d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 00-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 000-17.47C428.89 172.28 347.8 112 255.66 112z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" /><circle cx="256" cy="256" r="80" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32" /></svg>
-                                                    <span class="visually-hidden">Quick View</span>
+                                                    <span class="visually-hidden">Xem nhanh</span>
                                                 </a>
                                             </li>
 
@@ -311,7 +312,7 @@
                                             <img class="product__items--img product__secondary--img" src="~/assets/img/product/product10.png" alt="product-img">
                                         </a>
                                         <div class="product__badge">
-                                            <span class="product__badge--items sale">Sale</span>
+                                            <span class="product__badge--items sale">Giảm giá</span>
                                         </div>
                                     </div>
                                     <div class="product__items--content">
@@ -372,19 +373,19 @@
                                                             </g>
                                                         </g>
                                                     </svg>
-                                                    <span class="add__to--cart__text"> + Add to cart</span>
+                                                    <span class="add__to--cart__text"> + Thêm vào giỏ</span>
                                                 </a>
                                             </li>
                                             <li class="product__items--action__list">
                                                 <a class="product__items--action__btn" href="wishlist.html">
                                                     <svg class="product__items--action__btn--svg" xmlns="http://www.w3.org/2000/svg" width="25.51" height="23.443" viewBox="0 0 512 512"><path d="M352.92 80C288 80 256 144 256 144s-32-64-96.92-64c-52.76 0-94.54 44.14-95.08 96.81-1.1 109.33 86.73 187.08 183 252.42a16 16 0 0018 0c96.26-65.34 184.09-143.09 183-252.42-.54-52.67-42.32-96.81-95.08-96.81z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"></path></svg>
-                                                    <span class="visually-hidden">Wishlist</span>
+                                                    <span class="visually-hidden">Yêu thích</span>
                                                 </a>
                                             </li>
                                             <li class="product__items--action__list">
                                                 <a class="product__items--action__btn" data-open="modal1" href="javascript:void(0)">
                                                     <svg class="product__items--action__btn--svg" xmlns="http://www.w3.org/2000/svg" width="25.51" height="23.443" viewBox="0 0 512 512"><path d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 00-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 000-17.47C428.89 172.28 347.8 112 255.66 112z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" /><circle cx="256" cy="256" r="80" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32" /></svg>
-                                                    <span class="visually-hidden">Quick View</span>
+                                                    <span class="visually-hidden">Xem nhanh</span>
                                                 </a>
                                             </li>
 
@@ -400,7 +401,7 @@
                                             <img class="product__items--img product__secondary--img" src="~/assets/img/product/product13.png" alt="product-img">
                                         </a>
                                         <div class="product__badge">
-                                            <span class="product__badge--items sale">Sale</span>
+                                            <span class="product__badge--items sale">Giảm giá</span>
                                         </div>
                                     </div>
                                     <div class="product__items--content">
@@ -461,19 +462,19 @@
                                                             </g>
                                                         </g>
                                                     </svg>
-                                                    <span class="add__to--cart__text"> + Add to cart</span>
+                                                    <span class="add__to--cart__text"> + Thêm vào giỏ</span>
                                                 </a>
                                             </li>
                                             <li class="product__items--action__list">
                                                 <a class="product__items--action__btn" href="wishlist.html">
                                                     <svg class="product__items--action__btn--svg" xmlns="http://www.w3.org/2000/svg" width="25.51" height="23.443" viewBox="0 0 512 512"><path d="M352.92 80C288 80 256 144 256 144s-32-64-96.92-64c-52.76 0-94.54 44.14-95.08 96.81-1.1 109.33 86.73 187.08 183 252.42a16 16 0 0018 0c96.26-65.34 184.09-143.09 183-252.42-.54-52.67-42.32-96.81-95.08-96.81z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"></path></svg>
-                                                    <span class="visually-hidden">Wishlist</span>
+                                                    <span class="visually-hidden">Yêu thích</span>
                                                 </a>
                                             </li>
                                             <li class="product__items--action__list">
                                                 <a class="product__items--action__btn" data-open="modal1" href="javascript:void(0)">
                                                     <svg class="product__items--action__btn--svg" xmlns="http://www.w3.org/2000/svg" width="25.51" height="23.443" viewBox="0 0 512 512"><path d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 00-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 000-17.47C428.89 172.28 347.8 112 255.66 112z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" /><circle cx="256" cy="256" r="80" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32" /></svg>
-                                                    <span class="visually-hidden">Quick View</span>
+                                                    <span class="visually-hidden">Xem nhanh</span>
                                                 </a>
                                             </li>
 
@@ -489,7 +490,7 @@
                                             <img class="product__items--img product__secondary--img" src="~/assets/img/product/product8.png" alt="product-img">
                                         </a>
                                         <div class="product__badge">
-                                            <span class="product__badge--items sale">Sale</span>
+                                            <span class="product__badge--items sale">Giảm giá</span>
                                         </div>
                                     </div>
                                     <div class="product__items--content">
@@ -550,19 +551,19 @@
                                                             </g>
                                                         </g>
                                                     </svg>
-                                                    <span class="add__to--cart__text"> + Add to cart</span>
+                                                    <span class="add__to--cart__text"> + Thêm vào giỏ</span>
                                                 </a>
                                             </li>
                                             <li class="product__items--action__list">
                                                 <a class="product__items--action__btn" href="wishlist.html">
                                                     <svg class="product__items--action__btn--svg" xmlns="http://www.w3.org/2000/svg" width="25.51" height="23.443" viewBox="0 0 512 512"><path d="M352.92 80C288 80 256 144 256 144s-32-64-96.92-64c-52.76 0-94.54 44.14-95.08 96.81-1.1 109.33 86.73 187.08 183 252.42a16 16 0 0018 0c96.26-65.34 184.09-143.09 183-252.42-.54-52.67-42.32-96.81-95.08-96.81z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"></path></svg>
-                                                    <span class="visually-hidden">Wishlist</span>
+                                                    <span class="visually-hidden">Yêu thích</span>
                                                 </a>
                                             </li>
                                             <li class="product__items--action__list">
                                                 <a class="product__items--action__btn" data-open="modal1" href="javascript:void(0)">
                                                     <svg class="product__items--action__btn--svg" xmlns="http://www.w3.org/2000/svg" width="25.51" height="23.443" viewBox="0 0 512 512"><path d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 00-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 000-17.47C428.89 172.28 347.8 112 255.66 112z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" /><circle cx="256" cy="256" r="80" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32" /></svg>
-                                                    <span class="visually-hidden">Quick View</span>
+                                                    <span class="visually-hidden">Xem nhanh</span>
                                                 </a>
                                             </li>
 
@@ -578,7 +579,7 @@
                                             <img class="product__items--img product__secondary--img" src="~/assets/img/product/product15.png" alt="product-img">
                                         </a>
                                         <div class="product__badge">
-                                            <span class="product__badge--items sale">Sale</span>
+                                            <span class="product__badge--items sale">Giảm giá</span>
                                         </div>
                                     </div>
                                     <div class="product__items--content">
@@ -639,19 +640,19 @@
                                                             </g>
                                                         </g>
                                                     </svg>
-                                                    <span class="add__to--cart__text"> + Add to cart</span>
+                                                    <span class="add__to--cart__text"> + Thêm vào giỏ</span>
                                                 </a>
                                             </li>
                                             <li class="product__items--action__list">
                                                 <a class="product__items--action__btn" href="wishlist.html">
                                                     <svg class="product__items--action__btn--svg" xmlns="http://www.w3.org/2000/svg" width="25.51" height="23.443" viewBox="0 0 512 512"><path d="M352.92 80C288 80 256 144 256 144s-32-64-96.92-64c-52.76 0-94.54 44.14-95.08 96.81-1.1 109.33 86.73 187.08 183 252.42a16 16 0 0018 0c96.26-65.34 184.09-143.09 183-252.42-.54-52.67-42.32-96.81-95.08-96.81z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"></path></svg>
-                                                    <span class="visually-hidden">Wishlist</span>
+                                                    <span class="visually-hidden">Yêu thích</span>
                                                 </a>
                                             </li>
                                             <li class="product__items--action__list">
                                                 <a class="product__items--action__btn" data-open="modal1" href="javascript:void(0)">
                                                     <svg class="product__items--action__btn--svg" xmlns="http://www.w3.org/2000/svg" width="25.51" height="23.443" viewBox="0 0 512 512"><path d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 00-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 000-17.47C428.89 172.28 347.8 112 255.66 112z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" /><circle cx="256" cy="256" r="80" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32" /></svg>
-                                                    <span class="visually-hidden">Quick View</span>
+                                                    <span class="visually-hidden">Xem nhanh</span>
                                                 </a>
                                             </li>
 
@@ -667,7 +668,7 @@
                                             <img class="product__items--img product__secondary--img" src="~/assets/img/product/product1.png" alt="product-img">
                                         </a>
                                         <div class="product__badge">
-                                            <span class="product__badge--items sale">Sale</span>
+                                            <span class="product__badge--items sale">Giảm giá</span>
                                         </div>
                                     </div>
                                     <div class="product__items--content">
@@ -728,19 +729,19 @@
                                                             </g>
                                                         </g>
                                                     </svg>
-                                                    <span class="add__to--cart__text"> + Add to cart</span>
+                                                    <span class="add__to--cart__text"> + Thêm vào giỏ</span>
                                                 </a>
                                             </li>
                                             <li class="product__items--action__list">
                                                 <a class="product__items--action__btn" href="wishlist.html">
                                                     <svg class="product__items--action__btn--svg" xmlns="http://www.w3.org/2000/svg" width="25.51" height="23.443" viewBox="0 0 512 512"><path d="M352.92 80C288 80 256 144 256 144s-32-64-96.92-64c-52.76 0-94.54 44.14-95.08 96.81-1.1 109.33 86.73 187.08 183 252.42a16 16 0 0018 0c96.26-65.34 184.09-143.09 183-252.42-.54-52.67-42.32-96.81-95.08-96.81z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"></path></svg>
-                                                    <span class="visually-hidden">Wishlist</span>
+                                                    <span class="visually-hidden">Yêu thích</span>
                                                 </a>
                                             </li>
                                             <li class="product__items--action__list">
                                                 <a class="product__items--action__btn" data-open="modal1" href="javascript:void(0)">
                                                     <svg class="product__items--action__btn--svg" xmlns="http://www.w3.org/2000/svg" width="25.51" height="23.443" viewBox="0 0 512 512"><path d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 00-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 000-17.47C428.89 172.28 347.8 112 255.66 112z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" /><circle cx="256" cy="256" r="80" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32" /></svg>
-                                                    <span class="visually-hidden">Quick View</span>
+                                                    <span class="visually-hidden">Xem nhanh</span>
                                                 </a>
                                             </li>
 
@@ -756,7 +757,7 @@
                                             <img class="product__items--img product__secondary--img" src="~/assets/img/product/product2.png" alt="product-img">
                                         </a>
                                         <div class="product__badge">
-                                            <span class="product__badge--items sale">Sale</span>
+                                            <span class="product__badge--items sale">Giảm giá</span>
                                         </div>
                                     </div>
                                     <div class="product__items--content">
@@ -934,7 +935,7 @@
                                             <img class="product__items--img product__secondary--img" src="~/assets/img/product/product11.png" alt="product-img">
                                         </a>
                                         <div class="product__badge">
-                                            <span class="product__badge--items sale">Sale</span>
+                                            <span class="product__badge--items sale">Giảm giá</span>
                                         </div>
                                     </div>
                                     <div class="product__items--content">
@@ -995,19 +996,19 @@
                                                             </g>
                                                         </g>
                                                     </svg>
-                                                    <span class="add__to--cart__text"> + Add to cart</span>
+                                                    <span class="add__to--cart__text"> + Thêm vào giỏ</span>
                                                 </a>
                                             </li>
                                             <li class="product__items--action__list">
                                                 <a class="product__items--action__btn" href="wishlist.html">
                                                     <svg class="product__items--action__btn--svg" xmlns="http://www.w3.org/2000/svg" width="25.51" height="23.443" viewBox="0 0 512 512"><path d="M352.92 80C288 80 256 144 256 144s-32-64-96.92-64c-52.76 0-94.54 44.14-95.08 96.81-1.1 109.33 86.73 187.08 183 252.42a16 16 0 0018 0c96.26-65.34 184.09-143.09 183-252.42-.54-52.67-42.32-96.81-95.08-96.81z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"></path></svg>
-                                                    <span class="visually-hidden">Wishlist</span>
+                                                    <span class="visually-hidden">Yêu thích</span>
                                                 </a>
                                             </li>
                                             <li class="product__items--action__list">
                                                 <a class="product__items--action__btn" data-open="modal1" href="javascript:void(0)">
                                                     <svg class="product__items--action__btn--svg" xmlns="http://www.w3.org/2000/svg" width="25.51" height="23.443" viewBox="0 0 512 512"><path d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 00-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 000-17.47C428.89 172.28 347.8 112 255.66 112z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" /><circle cx="256" cy="256" r="80" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32" /></svg>
-                                                    <span class="visually-hidden">Quick View</span>
+                                                    <span class="visually-hidden">Xem nhanh</span>
                                                 </a>
                                             </li>
 
@@ -1023,7 +1024,7 @@
                                             <img class="product__items--img product__secondary--img" src="~/assets/img/product/product7.png" alt="product-img">
                                         </a>
                                         <div class="product__badge">
-                                            <span class="product__badge--items sale">Sale</span>
+                                            <span class="product__badge--items sale">Giảm giá</span>
                                         </div>
                                     </div>
                                     <div class="product__items--content">
@@ -1084,19 +1085,19 @@
                                                             </g>
                                                         </g>
                                                     </svg>
-                                                    <span class="add__to--cart__text"> + Add to cart</span>
+                                                    <span class="add__to--cart__text"> + Thêm vào giỏ</span>
                                                 </a>
                                             </li>
                                             <li class="product__items--action__list">
                                                 <a class="product__items--action__btn" href="wishlist.html">
                                                     <svg class="product__items--action__btn--svg" xmlns="http://www.w3.org/2000/svg" width="25.51" height="23.443" viewBox="0 0 512 512"><path d="M352.92 80C288 80 256 144 256 144s-32-64-96.92-64c-52.76 0-94.54 44.14-95.08 96.81-1.1 109.33 86.73 187.08 183 252.42a16 16 0 0018 0c96.26-65.34 184.09-143.09 183-252.42-.54-52.67-42.32-96.81-95.08-96.81z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"></path></svg>
-                                                    <span class="visually-hidden">Wishlist</span>
+                                                    <span class="visually-hidden">Yêu thích</span>
                                                 </a>
                                             </li>
                                             <li class="product__items--action__list">
                                                 <a class="product__items--action__btn" data-open="modal1" href="javascript:void(0)">
                                                     <svg class="product__items--action__btn--svg" xmlns="http://www.w3.org/2000/svg" width="25.51" height="23.443" viewBox="0 0 512 512"><path d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 00-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 000-17.47C428.89 172.28 347.8 112 255.66 112z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" /><circle cx="256" cy="256" r="80" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32" /></svg>
-                                                    <span class="visually-hidden">Quick View</span>
+                                                    <span class="visually-hidden">Xem nhanh</span>
                                                 </a>
                                             </li>
 
@@ -1118,7 +1119,7 @@
                                             <img class="product__items--img product__secondary--img" src="~/assets/img/product/product7.png" alt="product-img">
                                         </a>
                                         <div class="product__badge">
-                                            <span class="product__badge--items sale">Sale</span>
+                                            <span class="product__badge--items sale">Giảm giá</span>
                                         </div>
                                     </div>
                                     <div class="product__items--content">
@@ -1179,19 +1180,19 @@
                                                             </g>
                                                         </g>
                                                     </svg>
-                                                    <span class="add__to--cart__text"> + Add to cart</span>
+                                                    <span class="add__to--cart__text"> + Thêm vào giỏ</span>
                                                 </a>
                                             </li>
                                             <li class="product__items--action__list">
                                                 <a class="product__items--action__btn" href="wishlist.html">
                                                     <svg class="product__items--action__btn--svg" xmlns="http://www.w3.org/2000/svg" width="25.51" height="23.443" viewBox="0 0 512 512"><path d="M352.92 80C288 80 256 144 256 144s-32-64-96.92-64c-52.76 0-94.54 44.14-95.08 96.81-1.1 109.33 86.73 187.08 183 252.42a16 16 0 0018 0c96.26-65.34 184.09-143.09 183-252.42-.54-52.67-42.32-96.81-95.08-96.81z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"></path></svg>
-                                                    <span class="visually-hidden">Wishlist</span>
+                                                    <span class="visually-hidden">Yêu thích</span>
                                                 </a>
                                             </li>
                                             <li class="product__items--action__list">
                                                 <a class="product__items--action__btn" data-open="modal1" href="javascript:void(0)">
                                                     <svg class="product__items--action__btn--svg" xmlns="http://www.w3.org/2000/svg" width="25.51" height="23.443" viewBox="0 0 512 512"><path d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 00-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 000-17.47C428.89 172.28 347.8 112 255.66 112z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" /><circle cx="256" cy="256" r="80" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32" /></svg>
-                                                    <span class="visually-hidden">Quick View</span>
+                                                    <span class="visually-hidden">Xem nhanh</span>
                                                 </a>
                                             </li>
 
@@ -1207,7 +1208,7 @@
                                             <img class="product__items--img product__secondary--img" src="~/assets/img/product/product15.png" alt="product-img">
                                         </a>
                                         <div class="product__badge">
-                                            <span class="product__badge--items sale">Sale</span>
+                                            <span class="product__badge--items sale">Giảm giá</span>
                                         </div>
                                     </div>
                                     <div class="product__items--content">
@@ -1268,19 +1269,19 @@
                                                             </g>
                                                         </g>
                                                     </svg>
-                                                    <span class="add__to--cart__text"> + Add to cart</span>
+                                                    <span class="add__to--cart__text"> + Thêm vào giỏ</span>
                                                 </a>
                                             </li>
                                             <li class="product__items--action__list">
                                                 <a class="product__items--action__btn" href="wishlist.html">
                                                     <svg class="product__items--action__btn--svg" xmlns="http://www.w3.org/2000/svg" width="25.51" height="23.443" viewBox="0 0 512 512"><path d="M352.92 80C288 80 256 144 256 144s-32-64-96.92-64c-52.76 0-94.54 44.14-95.08 96.81-1.1 109.33 86.73 187.08 183 252.42a16 16 0 0018 0c96.26-65.34 184.09-143.09 183-252.42-.54-52.67-42.32-96.81-95.08-96.81z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"></path></svg>
-                                                    <span class="visually-hidden">Wishlist</span>
+                                                    <span class="visually-hidden">Yêu thích</span>
                                                 </a>
                                             </li>
                                             <li class="product__items--action__list">
                                                 <a class="product__items--action__btn" data-open="modal1" href="javascript:void(0)">
                                                     <svg class="product__items--action__btn--svg" xmlns="http://www.w3.org/2000/svg" width="25.51" height="23.443" viewBox="0 0 512 512"><path d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 00-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 000-17.47C428.89 172.28 347.8 112 255.66 112z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" /><circle cx="256" cy="256" r="80" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32" /></svg>
-                                                    <span class="visually-hidden">Quick View</span>
+                                                    <span class="visually-hidden">Xem nhanh</span>
                                                 </a>
                                             </li>
 
@@ -1296,7 +1297,7 @@
                                             <img class="product__items--img product__secondary--img" src="~/assets/img/product/product10.png" alt="product-img">
                                         </a>
                                         <div class="product__badge">
-                                            <span class="product__badge--items sale">Sale</span>
+                                            <span class="product__badge--items sale">Giảm giá</span>
                                         </div>
                                     </div>
                                     <div class="product__items--content">
@@ -1357,19 +1358,19 @@
                                                             </g>
                                                         </g>
                                                     </svg>
-                                                    <span class="add__to--cart__text"> + Add to cart</span>
+                                                    <span class="add__to--cart__text"> + Thêm vào giỏ</span>
                                                 </a>
                                             </li>
                                             <li class="product__items--action__list">
                                                 <a class="product__items--action__btn" href="wishlist.html">
                                                     <svg class="product__items--action__btn--svg" xmlns="http://www.w3.org/2000/svg" width="25.51" height="23.443" viewBox="0 0 512 512"><path d="M352.92 80C288 80 256 144 256 144s-32-64-96.92-64c-52.76 0-94.54 44.14-95.08 96.81-1.1 109.33 86.73 187.08 183 252.42a16 16 0 0018 0c96.26-65.34 184.09-143.09 183-252.42-.54-52.67-42.32-96.81-95.08-96.81z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"></path></svg>
-                                                    <span class="visually-hidden">Wishlist</span>
+                                                    <span class="visually-hidden">Yêu thích</span>
                                                 </a>
                                             </li>
                                             <li class="product__items--action__list">
                                                 <a class="product__items--action__btn" data-open="modal1" href="javascript:void(0)">
                                                     <svg class="product__items--action__btn--svg" xmlns="http://www.w3.org/2000/svg" width="25.51" height="23.443" viewBox="0 0 512 512"><path d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 00-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 000-17.47C428.89 172.28 347.8 112 255.66 112z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" /><circle cx="256" cy="256" r="80" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32" /></svg>
-                                                    <span class="visually-hidden">Quick View</span>
+                                                    <span class="visually-hidden">Xem nhanh</span>
                                                 </a>
                                             </li>
 
@@ -1385,7 +1386,7 @@
                                             <img class="product__items--img product__secondary--img" src="~/assets/img/product/product13.png" alt="product-img">
                                         </a>
                                         <div class="product__badge">
-                                            <span class="product__badge--items sale">Sale</span>
+                                            <span class="product__badge--items sale">Giảm giá</span>
                                         </div>
                                     </div>
                                     <div class="product__items--content">
@@ -1446,19 +1447,19 @@
                                                             </g>
                                                         </g>
                                                     </svg>
-                                                    <span class="add__to--cart__text"> + Add to cart</span>
+                                                    <span class="add__to--cart__text"> + Thêm vào giỏ</span>
                                                 </a>
                                             </li>
                                             <li class="product__items--action__list">
                                                 <a class="product__items--action__btn" href="wishlist.html">
                                                     <svg class="product__items--action__btn--svg" xmlns="http://www.w3.org/2000/svg" width="25.51" height="23.443" viewBox="0 0 512 512"><path d="M352.92 80C288 80 256 144 256 144s-32-64-96.92-64c-52.76 0-94.54 44.14-95.08 96.81-1.1 109.33 86.73 187.08 183 252.42a16 16 0 0018 0c96.26-65.34 184.09-143.09 183-252.42-.54-52.67-42.32-96.81-95.08-96.81z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"></path></svg>
-                                                    <span class="visually-hidden">Wishlist</span>
+                                                    <span class="visually-hidden">Yêu thích</span>
                                                 </a>
                                             </li>
                                             <li class="product__items--action__list">
                                                 <a class="product__items--action__btn" data-open="modal1" href="javascript:void(0)">
                                                     <svg class="product__items--action__btn--svg" xmlns="http://www.w3.org/2000/svg" width="25.51" height="23.443" viewBox="0 0 512 512"><path d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 00-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 000-17.47C428.89 172.28 347.8 112 255.66 112z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" /><circle cx="256" cy="256" r="80" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32" /></svg>
-                                                    <span class="visually-hidden">Quick View</span>
+                                                    <span class="visually-hidden">Xem nhanh</span>
                                                 </a>
                                             </li>
 
@@ -1474,7 +1475,7 @@
                                             <img class="product__items--img product__secondary--img" src="~/assets/img/product/product2.png" alt="product-img">
                                         </a>
                                         <div class="product__badge">
-                                            <span class="product__badge--items sale">Sale</span>
+                                            <span class="product__badge--items sale">Giảm giá</span>
                                         </div>
                                     </div>
                                     <div class="product__items--content">
@@ -1535,19 +1536,19 @@
                                                             </g>
                                                         </g>
                                                     </svg>
-                                                    <span class="add__to--cart__text"> + Add to cart</span>
+                                                    <span class="add__to--cart__text"> + Thêm vào giỏ</span>
                                                 </a>
                                             </li>
                                             <li class="product__items--action__list">
                                                 <a class="product__items--action__btn" href="wishlist.html">
                                                     <svg class="product__items--action__btn--svg" xmlns="http://www.w3.org/2000/svg" width="25.51" height="23.443" viewBox="0 0 512 512"><path d="M352.92 80C288 80 256 144 256 144s-32-64-96.92-64c-52.76 0-94.54 44.14-95.08 96.81-1.1 109.33 86.73 187.08 183 252.42a16 16 0 0018 0c96.26-65.34 184.09-143.09 183-252.42-.54-52.67-42.32-96.81-95.08-96.81z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"></path></svg>
-                                                    <span class="visually-hidden">Wishlist</span>
+                                                    <span class="visually-hidden">Yêu thích</span>
                                                 </a>
                                             </li>
                                             <li class="product__items--action__list">
                                                 <a class="product__items--action__btn" data-open="modal1" href="javascript:void(0)">
                                                     <svg class="product__items--action__btn--svg" xmlns="http://www.w3.org/2000/svg" width="25.51" height="23.443" viewBox="0 0 512 512"><path d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 00-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 000-17.47C428.89 172.28 347.8 112 255.66 112z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" /><circle cx="256" cy="256" r="80" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32" /></svg>
-                                                    <span class="visually-hidden">Quick View</span>
+                                                    <span class="visually-hidden">Xem nhanh</span>
                                                 </a>
                                             </li>
 
@@ -1563,7 +1564,7 @@
                                             <img class="product__items--img product__secondary--img" src="~/assets/img/product/product4.png" alt="product-img">
                                         </a>
                                         <div class="product__badge">
-                                            <span class="product__badge--items sale">Sale</span>
+                                            <span class="product__badge--items sale">Giảm giá</span>
                                         </div>
                                     </div>
                                     <div class="product__items--content">
@@ -1624,19 +1625,19 @@
                                                             </g>
                                                         </g>
                                                     </svg>
-                                                    <span class="add__to--cart__text"> + Add to cart</span>
+                                                    <span class="add__to--cart__text"> + Thêm vào giỏ</span>
                                                 </a>
                                             </li>
                                             <li class="product__items--action__list">
                                                 <a class="product__items--action__btn" href="wishlist.html">
                                                     <svg class="product__items--action__btn--svg" xmlns="http://www.w3.org/2000/svg" width="25.51" height="23.443" viewBox="0 0 512 512"><path d="M352.92 80C288 80 256 144 256 144s-32-64-96.92-64c-52.76 0-94.54 44.14-95.08 96.81-1.1 109.33 86.73 187.08 183 252.42a16 16 0 0018 0c96.26-65.34 184.09-143.09 183-252.42-.54-52.67-42.32-96.81-95.08-96.81z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"></path></svg>
-                                                    <span class="visually-hidden">Wishlist</span>
+                                                    <span class="visually-hidden">Yêu thích</span>
                                                 </a>
                                             </li>
                                             <li class="product__items--action__list">
                                                 <a class="product__items--action__btn" data-open="modal1" href="javascript:void(0)">
                                                     <svg class="product__items--action__btn--svg" xmlns="http://www.w3.org/2000/svg" width="25.51" height="23.443" viewBox="0 0 512 512"><path d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 00-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 000-17.47C428.89 172.28 347.8 112 255.66 112z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" /><circle cx="256" cy="256" r="80" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32" /></svg>
-                                                    <span class="visually-hidden">Quick View</span>
+                                                    <span class="visually-hidden">Xem nhanh</span>
                                                 </a>
                                             </li>
 
@@ -1652,7 +1653,7 @@
                                             <img class="product__items--img product__secondary--img" src="~/assets/img/product/product11.png" alt="product-img">
                                         </a>
                                         <div class="product__badge">
-                                            <span class="product__badge--items sale">Sale</span>
+                                            <span class="product__badge--items sale">Giảm giá</span>
                                         </div>
                                     </div>
                                     <div class="product__items--content">
@@ -1713,19 +1714,19 @@
                                                             </g>
                                                         </g>
                                                     </svg>
-                                                    <span class="add__to--cart__text"> + Add to cart</span>
+                                                    <span class="add__to--cart__text"> + Thêm vào giỏ</span>
                                                 </a>
                                             </li>
                                             <li class="product__items--action__list">
                                                 <a class="product__items--action__btn" href="wishlist.html">
                                                     <svg class="product__items--action__btn--svg" xmlns="http://www.w3.org/2000/svg" width="25.51" height="23.443" viewBox="0 0 512 512"><path d="M352.92 80C288 80 256 144 256 144s-32-64-96.92-64c-52.76 0-94.54 44.14-95.08 96.81-1.1 109.33 86.73 187.08 183 252.42a16 16 0 0018 0c96.26-65.34 184.09-143.09 183-252.42-.54-52.67-42.32-96.81-95.08-96.81z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"></path></svg>
-                                                    <span class="visually-hidden">Wishlist</span>
+                                                    <span class="visually-hidden">Yêu thích</span>
                                                 </a>
                                             </li>
                                             <li class="product__items--action__list">
                                                 <a class="product__items--action__btn" data-open="modal1" href="javascript:void(0)">
                                                     <svg class="product__items--action__btn--svg" xmlns="http://www.w3.org/2000/svg" width="25.51" height="23.443" viewBox="0 0 512 512"><path d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 00-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 000-17.47C428.89 172.28 347.8 112 255.66 112z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" /><circle cx="256" cy="256" r="80" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32" /></svg>
-                                                    <span class="visually-hidden">Quick View</span>
+                                                    <span class="visually-hidden">Xem nhanh</span>
                                                 </a>
                                             </li>
 
@@ -1741,7 +1742,7 @@
                                             <img class="product__items--img product__secondary--img" src="~/assets/img/product/product8.png" alt="product-img">
                                         </a>
                                         <div class="product__badge">
-                                            <span class="product__badge--items sale">Sale</span>
+                                            <span class="product__badge--items sale">Giảm giá</span>
                                         </div>
                                     </div>
                                     <div class="product__items--content">
@@ -1802,19 +1803,19 @@
                                                             </g>
                                                         </g>
                                                     </svg>
-                                                    <span class="add__to--cart__text"> + Add to cart</span>
+                                                    <span class="add__to--cart__text"> + Thêm vào giỏ</span>
                                                 </a>
                                             </li>
                                             <li class="product__items--action__list">
                                                 <a class="product__items--action__btn" href="wishlist.html">
                                                     <svg class="product__items--action__btn--svg" xmlns="http://www.w3.org/2000/svg" width="25.51" height="23.443" viewBox="0 0 512 512"><path d="M352.92 80C288 80 256 144 256 144s-32-64-96.92-64c-52.76 0-94.54 44.14-95.08 96.81-1.1 109.33 86.73 187.08 183 252.42a16 16 0 0018 0c96.26-65.34 184.09-143.09 183-252.42-.54-52.67-42.32-96.81-95.08-96.81z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"></path></svg>
-                                                    <span class="visually-hidden">Wishlist</span>
+                                                    <span class="visually-hidden">Yêu thích</span>
                                                 </a>
                                             </li>
                                             <li class="product__items--action__list">
                                                 <a class="product__items--action__btn" data-open="modal1" href="javascript:void(0)">
                                                     <svg class="product__items--action__btn--svg" xmlns="http://www.w3.org/2000/svg" width="25.51" height="23.443" viewBox="0 0 512 512"><path d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 00-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 000-17.47C428.89 172.28 347.8 112 255.66 112z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" /><circle cx="256" cy="256" r="80" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32" /></svg>
-                                                    <span class="visually-hidden">Quick View</span>
+                                                    <span class="visually-hidden">Xem nhanh</span>
                                                 </a>
                                             </li>
 
@@ -1830,7 +1831,7 @@
                                             <img class="product__items--img product__secondary--img" src="~/assets/img/product/product15.png" alt="product-img">
                                         </a>
                                         <div class="product__badge">
-                                            <span class="product__badge--items sale">Sale</span>
+                                            <span class="product__badge--items sale">Giảm giá</span>
                                         </div>
                                     </div>
                                     <div class="product__items--content">
@@ -1891,19 +1892,19 @@
                                                             </g>
                                                         </g>
                                                     </svg>
-                                                    <span class="add__to--cart__text"> + Add to cart</span>
+                                                    <span class="add__to--cart__text"> + Thêm vào giỏ</span>
                                                 </a>
                                             </li>
                                             <li class="product__items--action__list">
                                                 <a class="product__items--action__btn" href="wishlist.html">
                                                     <svg class="product__items--action__btn--svg" xmlns="http://www.w3.org/2000/svg" width="25.51" height="23.443" viewBox="0 0 512 512"><path d="M352.92 80C288 80 256 144 256 144s-32-64-96.92-64c-52.76 0-94.54 44.14-95.08 96.81-1.1 109.33 86.73 187.08 183 252.42a16 16 0 0018 0c96.26-65.34 184.09-143.09 183-252.42-.54-52.67-42.32-96.81-95.08-96.81z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"></path></svg>
-                                                    <span class="visually-hidden">Wishlist</span>
+                                                    <span class="visually-hidden">Yêu thích</span>
                                                 </a>
                                             </li>
                                             <li class="product__items--action__list">
                                                 <a class="product__items--action__btn" data-open="modal1" href="javascript:void(0)">
                                                     <svg class="product__items--action__btn--svg" xmlns="http://www.w3.org/2000/svg" width="25.51" height="23.443" viewBox="0 0 512 512"><path d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 00-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 000-17.47C428.89 172.28 347.8 112 255.66 112z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" /><circle cx="256" cy="256" r="80" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32" /></svg>
-                                                    <span class="visually-hidden">Quick View</span>
+                                                    <span class="visually-hidden">Xem nhanh</span>
                                                 </a>
                                             </li>
 
@@ -1919,7 +1920,7 @@
                                             <img class="product__items--img product__secondary--img" src="~/assets/img/product/product1.png" alt="product-img">
                                         </a>
                                         <div class="product__badge">
-                                            <span class="product__badge--items sale">Sale</span>
+                                            <span class="product__badge--items sale">Giảm giá</span>
                                         </div>
                                     </div>
                                     <div class="product__items--content">
@@ -1980,19 +1981,19 @@
                                                             </g>
                                                         </g>
                                                     </svg>
-                                                    <span class="add__to--cart__text"> + Add to cart</span>
+                                                    <span class="add__to--cart__text"> + Thêm vào giỏ</span>
                                                 </a>
                                             </li>
                                             <li class="product__items--action__list">
                                                 <a class="product__items--action__btn" href="wishlist.html">
                                                     <svg class="product__items--action__btn--svg" xmlns="http://www.w3.org/2000/svg" width="25.51" height="23.443" viewBox="0 0 512 512"><path d="M352.92 80C288 80 256 144 256 144s-32-64-96.92-64c-52.76 0-94.54 44.14-95.08 96.81-1.1 109.33 86.73 187.08 183 252.42a16 16 0 0018 0c96.26-65.34 184.09-143.09 183-252.42-.54-52.67-42.32-96.81-95.08-96.81z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"></path></svg>
-                                                    <span class="visually-hidden">Wishlist</span>
+                                                    <span class="visually-hidden">Yêu thích</span>
                                                 </a>
                                             </li>
                                             <li class="product__items--action__list">
                                                 <a class="product__items--action__btn" data-open="modal1" href="javascript:void(0)">
                                                     <svg class="product__items--action__btn--svg" xmlns="http://www.w3.org/2000/svg" width="25.51" height="23.443" viewBox="0 0 512 512"><path d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 00-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 000-17.47C428.89 172.28 347.8 112 255.66 112z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" /><circle cx="256" cy="256" r="80" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32" /></svg>
-                                                    <span class="visually-hidden">Quick View</span>
+                                                    <span class="visually-hidden">Xem nhanh</span>
                                                 </a>
                                             </li>
 
@@ -2002,7 +2003,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>*@
             </div>
         </div>
     </section>
@@ -2109,210 +2110,56 @@
     <section class="testimonial__section section--padding pt-0">
         <div class="container-fluid">
             <div class="section__heading text-center mb-40">
-                <h2 class="section__heading--maintitle">Our Clients Say</h2>
+                <h2 class="section__heading--maintitle">Khách hàng nói gì về chúng tôi</h2>
             </div>
             <div class="testimonial__section--inner testimonial__swiper--activation swiper">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <div class="testimonial__items text-center">
-                            <div class="testimonial__items--thumbnail">
-                                <img class="testimonial__items--thumbnail__img border-radius-50" src="~/assets/img/other/testimonial-thumb1.png" alt="testimonial-img">
+                    @if (Reviews != null && Reviews.Any())
+                    {
+                        @foreach (var review in Reviews)
+                        {
+                            var customer = review.Customer;
+                            var customerName = customer?.Name ?? "Khách hàng";
+                            var reviewDetail = !string.IsNullOrWhiteSpace(review.Detail) 
+                                ? review.Detail 
+                                : "Sản phẩm rất tốt!";
+                            var starRating = review.Star ?? 5;
+                            
+                            <div class="swiper-slide">
+                                <div class="testimonial__items text-center">
+                                    <div class="testimonial__items--thumbnail">
+                                        <img class="testimonial__items--thumbnail__img border-radius-50 w-25 h-25" src="@(string.IsNullOrEmpty(customer.Avatar) ? "/assets/img/avatar/default.png" : customer.Avatar)" alt="avatar">
+                                    </div>
+                                    <div class="testimonial__items--content">
+                                        <h3 class="testimonial__items--title">@customerName</h3>
+                                        <p class="testimonial__items--desc">@reviewDetail</p>
+                                        <ul class="rating testimonial__rating d-flex justify-content-center">
+                                            @for (int i = 1; i <= 5; i++)
+                                            {
+                                                <li class="rating__list">
+                                                    <span class="rating__list--icon">
+                                                        <svg class="rating__list--icon__svg" xmlns="http://www.w3.org/2000/svg" width="14.105" height="14.732" viewBox="0 0 10.105 9.732">
+                                                            <path data-name="star - Copy" d="M9.837,3.5,6.73,3.039,5.338.179a.335.335,0,0,0-.571,0L3.375,3.039.268,3.5a.3.3,0,0,0-.178.514L2.347,6.242,1.813,9.4a.314.314,0,0,0,.464.316L5.052,8.232,7.827,9.712A.314.314,0,0,0,8.292,9.4L7.758,6.242l2.257-2.231A.3.3,0,0,0,9.837,3.5Z" transform="translate(0 -0.018)" fill="@(i <= starRating ? "currentColor" : "none")" stroke="currentColor" stroke-width="0.5"></path>
+                                                        </svg>
+                                                    </span>
+                                                </li>
+                                            }
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="testimonial__items--content">
-                                <h3 class="testimonial__items--title">Nike Mardson</h3>
-                                <span class="testimonial__items--subtitle">fashion</span>
-                                <p class="testimonial__items--desc">Lorem ipsum dolor sit amet, consectetur adipisicin elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim </p>
-                                <ul class="rating testimonial__rating d-flex justify-content-center">
-                                    <li class="rating__list">
-                                        <span class="rating__list--icon">
-                                            <svg class="rating__list--icon__svg" xmlns="http://www.w3.org/2000/svg" width="14.105" height="14.732" viewBox="0 0 10.105 9.732">
-                                                <path data-name="star - Copy" d="M9.837,3.5,6.73,3.039,5.338.179a.335.335,0,0,0-.571,0L3.375,3.039.268,3.5a.3.3,0,0,0-.178.514L2.347,6.242,1.813,9.4a.314.314,0,0,0,.464.316L5.052,8.232,7.827,9.712A.314.314,0,0,0,8.292,9.4L7.758,6.242l2.257-2.231A.3.3,0,0,0,9.837,3.5Z" transform="translate(0 -0.018)" fill="currentColor"></path>
-                                            </svg>
-                                        </span>
-                                    </li>
-                                    <li class="rating__list">
-                                        <span class="rating__list--icon">
-                                            <svg class="rating__list--icon__svg" xmlns="http://www.w3.org/2000/svg" width="14.105" height="14.732" viewBox="0 0 10.105 9.732">
-                                                <path data-name="star - Copy" d="M9.837,3.5,6.73,3.039,5.338.179a.335.335,0,0,0-.571,0L3.375,3.039.268,3.5a.3.3,0,0,0-.178.514L2.347,6.242,1.813,9.4a.314.314,0,0,0,.464.316L5.052,8.232,7.827,9.712A.314.314,0,0,0,8.292,9.4L7.758,6.242l2.257-2.231A.3.3,0,0,0,9.837,3.5Z" transform="translate(0 -0.018)" fill="currentColor"></path>
-                                            </svg>
-                                        </span>
-                                    </li>
-                                    <li class="rating__list">
-                                        <span class="rating__list--icon">
-                                            <svg class="rating__list--icon__svg" xmlns="http://www.w3.org/2000/svg" width="14.105" height="14.732" viewBox="0 0 10.105 9.732">
-                                                <path data-name="star - Copy" d="M9.837,3.5,6.73,3.039,5.338.179a.335.335,0,0,0-.571,0L3.375,3.039.268,3.5a.3.3,0,0,0-.178.514L2.347,6.242,1.813,9.4a.314.314,0,0,0,.464.316L5.052,8.232,7.827,9.712A.314.314,0,0,0,8.292,9.4L7.758,6.242l2.257-2.231A.3.3,0,0,0,9.837,3.5Z" transform="translate(0 -0.018)" fill="currentColor"></path>
-                                            </svg>
-                                        </span>
-                                    </li>
-                                    <li class="rating__list">
-                                        <span class="rating__list--icon">
-                                            <svg class="rating__list--icon__svg" xmlns="http://www.w3.org/2000/svg" width="14.105" height="14.732" viewBox="0 0 10.105 9.732">
-                                                <path data-name="star - Copy" d="M9.837,3.5,6.73,3.039,5.338.179a.335.335,0,0,0-.571,0L3.375,3.039.268,3.5a.3.3,0,0,0-.178.514L2.347,6.242,1.813,9.4a.314.314,0,0,0,.464.316L5.052,8.232,7.827,9.712A.314.314,0,0,0,8.292,9.4L7.758,6.242l2.257-2.231A.3.3,0,0,0,9.837,3.5Z" transform="translate(0 -0.018)" fill="currentColor"></path>
-                                            </svg>
-                                        </span>
-                                    </li>
-                                    <li class="rating__list">
-                                        <span class="rating__list--icon">
-                                            <svg class="rating__list--icon__svg" xmlns="http://www.w3.org/2000/svg" width="14.105" height="14.732" viewBox="0 0 10.105 9.732">
-                                                <path data-name="star - Copy" d="M9.837,3.5,6.73,3.039,5.338.179a.335.335,0,0,0-.571,0L3.375,3.039.268,3.5a.3.3,0,0,0-.178.514L2.347,6.242,1.813,9.4a.314.314,0,0,0,.464.316L5.052,8.232,7.827,9.712A.314.314,0,0,0,8.292,9.4L7.758,6.242l2.257-2.231A.3.3,0,0,0,9.837,3.5Z" transform="translate(0 -0.018)" fill="currentColor"></path>
-                                            </svg>
-                                        </span>
-                                    </li>
-
-                                </ul>
+                        }
+                    }
+                    else
+                    {
+                        <div class="swiper-slide">
+                            <div class="testimonial__items text-center">
+                                <div class="testimonial__items--content">
+                                    <p class="testimonial__items--desc">Chưa có đánh giá nào. Hãy là người đầu tiên đánh giá!</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="testimonial__items text-center">
-                            <div class="testimonial__items--thumbnail">
-                                <img class="testimonial__items--thumbnail__img border-radius-50" src="~/assets/img/other/testimonial-thumb2.png" alt="testimonial-img">
-                            </div>
-                            <div class="testimonial__items--content">
-                                <h3 class="testimonial__items--title">Laura Johnson</h3>
-                                <span class="testimonial__items--subtitle">fashion</span>
-                                <p class="testimonial__items--desc">Lorem ipsum dolor sit amet, consectetur adipisicin elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim </p>
-                                <ul class="rating testimonial__rating d-flex justify-content-center">
-                                    <li class="rating__list">
-                                        <span class="rating__list--icon">
-                                            <svg class="rating__list--icon__svg" xmlns="http://www.w3.org/2000/svg" width="14.105" height="14.732" viewBox="0 0 10.105 9.732">
-                                                <path data-name="star - Copy" d="M9.837,3.5,6.73,3.039,5.338.179a.335.335,0,0,0-.571,0L3.375,3.039.268,3.5a.3.3,0,0,0-.178.514L2.347,6.242,1.813,9.4a.314.314,0,0,0,.464.316L5.052,8.232,7.827,9.712A.314.314,0,0,0,8.292,9.4L7.758,6.242l2.257-2.231A.3.3,0,0,0,9.837,3.5Z" transform="translate(0 -0.018)" fill="currentColor"></path>
-                                            </svg>
-                                        </span>
-                                    </li>
-                                    <li class="rating__list">
-                                        <span class="rating__list--icon">
-                                            <svg class="rating__list--icon__svg" xmlns="http://www.w3.org/2000/svg" width="14.105" height="14.732" viewBox="0 0 10.105 9.732">
-                                                <path data-name="star - Copy" d="M9.837,3.5,6.73,3.039,5.338.179a.335.335,0,0,0-.571,0L3.375,3.039.268,3.5a.3.3,0,0,0-.178.514L2.347,6.242,1.813,9.4a.314.314,0,0,0,.464.316L5.052,8.232,7.827,9.712A.314.314,0,0,0,8.292,9.4L7.758,6.242l2.257-2.231A.3.3,0,0,0,9.837,3.5Z" transform="translate(0 -0.018)" fill="currentColor"></path>
-                                            </svg>
-                                        </span>
-                                    </li>
-                                    <li class="rating__list">
-                                        <span class="rating__list--icon">
-                                            <svg class="rating__list--icon__svg" xmlns="http://www.w3.org/2000/svg" width="14.105" height="14.732" viewBox="0 0 10.105 9.732">
-                                                <path data-name="star - Copy" d="M9.837,3.5,6.73,3.039,5.338.179a.335.335,0,0,0-.571,0L3.375,3.039.268,3.5a.3.3,0,0,0-.178.514L2.347,6.242,1.813,9.4a.314.314,0,0,0,.464.316L5.052,8.232,7.827,9.712A.314.314,0,0,0,8.292,9.4L7.758,6.242l2.257-2.231A.3.3,0,0,0,9.837,3.5Z" transform="translate(0 -0.018)" fill="currentColor"></path>
-                                            </svg>
-                                        </span>
-                                    </li>
-                                    <li class="rating__list">
-                                        <span class="rating__list--icon">
-                                            <svg class="rating__list--icon__svg" xmlns="http://www.w3.org/2000/svg" width="14.105" height="14.732" viewBox="0 0 10.105 9.732">
-                                                <path data-name="star - Copy" d="M9.837,3.5,6.73,3.039,5.338.179a.335.335,0,0,0-.571,0L3.375,3.039.268,3.5a.3.3,0,0,0-.178.514L2.347,6.242,1.813,9.4a.314.314,0,0,0,.464.316L5.052,8.232,7.827,9.712A.314.314,0,0,0,8.292,9.4L7.758,6.242l2.257-2.231A.3.3,0,0,0,9.837,3.5Z" transform="translate(0 -0.018)" fill="currentColor"></path>
-                                            </svg>
-                                        </span>
-                                    </li>
-                                    <li class="rating__list">
-                                        <span class="rating__list--icon">
-                                            <svg class="rating__list--icon__svg" xmlns="http://www.w3.org/2000/svg" width="14.105" height="14.732" viewBox="0 0 10.105 9.732">
-                                                <path data-name="star - Copy" d="M9.837,3.5,6.73,3.039,5.338.179a.335.335,0,0,0-.571,0L3.375,3.039.268,3.5a.3.3,0,0,0-.178.514L2.347,6.242,1.813,9.4a.314.314,0,0,0,.464.316L5.052,8.232,7.827,9.712A.314.314,0,0,0,8.292,9.4L7.758,6.242l2.257-2.231A.3.3,0,0,0,9.837,3.5Z" transform="translate(0 -0.018)" fill="currentColor"></path>
-                                            </svg>
-                                        </span>
-                                    </li>
-
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="testimonial__items text-center">
-                            <div class="testimonial__items--thumbnail">
-                                <img class="testimonial__items--thumbnail__img border-radius-50" src="~/assets/img/other/testimonial-thumb3.png" alt="testimonial-img">
-                            </div>
-                            <div class="testimonial__items--content">
-                                <h3 class="testimonial__items--title">Richard Smith</h3>
-                                <span class="testimonial__items--subtitle">fashion</span>
-                                <p class="testimonial__items--desc">Lorem ipsum dolor sit amet, consectetur adipisicin elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim </p>
-                                <ul class="rating testimonial__rating d-flex justify-content-center">
-                                    <li class="rating__list">
-                                        <span class="rating__list--icon">
-                                            <svg class="rating__list--icon__svg" xmlns="http://www.w3.org/2000/svg" width="14.105" height="14.732" viewBox="0 0 10.105 9.732">
-                                                <path data-name="star - Copy" d="M9.837,3.5,6.73,3.039,5.338.179a.335.335,0,0,0-.571,0L3.375,3.039.268,3.5a.3.3,0,0,0-.178.514L2.347,6.242,1.813,9.4a.314.314,0,0,0,.464.316L5.052,8.232,7.827,9.712A.314.314,0,0,0,8.292,9.4L7.758,6.242l2.257-2.231A.3.3,0,0,0,9.837,3.5Z" transform="translate(0 -0.018)" fill="currentColor"></path>
-                                            </svg>
-                                        </span>
-                                    </li>
-                                    <li class="rating__list">
-                                        <span class="rating__list--icon">
-                                            <svg class="rating__list--icon__svg" xmlns="http://www.w3.org/2000/svg" width="14.105" height="14.732" viewBox="0 0 10.105 9.732">
-                                                <path data-name="star - Copy" d="M9.837,3.5,6.73,3.039,5.338.179a.335.335,0,0,0-.571,0L3.375,3.039.268,3.5a.3.3,0,0,0-.178.514L2.347,6.242,1.813,9.4a.314.314,0,0,0,.464.316L5.052,8.232,7.827,9.712A.314.314,0,0,0,8.292,9.4L7.758,6.242l2.257-2.231A.3.3,0,0,0,9.837,3.5Z" transform="translate(0 -0.018)" fill="currentColor"></path>
-                                            </svg>
-                                        </span>
-                                    </li>
-                                    <li class="rating__list">
-                                        <span class="rating__list--icon">
-                                            <svg class="rating__list--icon__svg" xmlns="http://www.w3.org/2000/svg" width="14.105" height="14.732" viewBox="0 0 10.105 9.732">
-                                                <path data-name="star - Copy" d="M9.837,3.5,6.73,3.039,5.338.179a.335.335,0,0,0-.571,0L3.375,3.039.268,3.5a.3.3,0,0,0-.178.514L2.347,6.242,1.813,9.4a.314.314,0,0,0,.464.316L5.052,8.232,7.827,9.712A.314.314,0,0,0,8.292,9.4L7.758,6.242l2.257-2.231A.3.3,0,0,0,9.837,3.5Z" transform="translate(0 -0.018)" fill="currentColor"></path>
-                                            </svg>
-                                        </span>
-                                    </li>
-                                    <li class="rating__list">
-                                        <span class="rating__list--icon">
-                                            <svg class="rating__list--icon__svg" xmlns="http://www.w3.org/2000/svg" width="14.105" height="14.732" viewBox="0 0 10.105 9.732">
-                                                <path data-name="star - Copy" d="M9.837,3.5,6.73,3.039,5.338.179a.335.335,0,0,0-.571,0L3.375,3.039.268,3.5a.3.3,0,0,0-.178.514L2.347,6.242,1.813,9.4a.314.314,0,0,0,.464.316L5.052,8.232,7.827,9.712A.314.314,0,0,0,8.292,9.4L7.758,6.242l2.257-2.231A.3.3,0,0,0,9.837,3.5Z" transform="translate(0 -0.018)" fill="currentColor"></path>
-                                            </svg>
-                                        </span>
-                                    </li>
-                                    <li class="rating__list">
-                                        <span class="rating__list--icon">
-                                            <svg class="rating__list--icon__svg" xmlns="http://www.w3.org/2000/svg" width="14.105" height="14.732" viewBox="0 0 10.105 9.732">
-                                                <path data-name="star - Copy" d="M9.837,3.5,6.73,3.039,5.338.179a.335.335,0,0,0-.571,0L3.375,3.039.268,3.5a.3.3,0,0,0-.178.514L2.347,6.242,1.813,9.4a.314.314,0,0,0,.464.316L5.052,8.232,7.827,9.712A.314.314,0,0,0,8.292,9.4L7.758,6.242l2.257-2.231A.3.3,0,0,0,9.837,3.5Z" transform="translate(0 -0.018)" fill="currentColor"></path>
-                                            </svg>
-                                        </span>
-                                    </li>
-
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="testimonial__items text-center">
-                            <div class="testimonial__items--thumbnail">
-                                <img class="testimonial__items--thumbnail__img border-radius-50" src="~/assets/img/other/testimonial-thumb1.png" alt="testimonial-img">
-                            </div>
-                            <div class="testimonial__items--content">
-                                <h3 class="testimonial__items--title">Nike Mardson</h3>
-                                <span class="testimonial__items--subtitle">fashion</span>
-                                <p class="testimonial__items--desc">Lorem ipsum dolor sit amet, consectetur adipisicin elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim </p>
-                                <ul class="rating testimonial__rating d-flex justify-content-center">
-                                    <li class="rating__list">
-                                        <span class="rating__list--icon">
-                                            <svg class="rating__list--icon__svg" xmlns="http://www.w3.org/2000/svg" width="14.105" height="14.732" viewBox="0 0 10.105 9.732">
-                                                <path data-name="star - Copy" d="M9.837,3.5,6.73,3.039,5.338.179a.335.335,0,0,0-.571,0L3.375,3.039.268,3.5a.3.3,0,0,0-.178.514L2.347,6.242,1.813,9.4a.314.314,0,0,0,.464.316L5.052,8.232,7.827,9.712A.314.314,0,0,0,8.292,9.4L7.758,6.242l2.257-2.231A.3.3,0,0,0,9.837,3.5Z" transform="translate(0 -0.018)" fill="currentColor"></path>
-                                            </svg>
-                                        </span>
-                                    </li>
-                                    <li class="rating__list">
-                                        <span class="rating__list--icon">
-                                            <svg class="rating__list--icon__svg" xmlns="http://www.w3.org/2000/svg" width="14.105" height="14.732" viewBox="0 0 10.105 9.732">
-                                                <path data-name="star - Copy" d="M9.837,3.5,6.73,3.039,5.338.179a.335.335,0,0,0-.571,0L3.375,3.039.268,3.5a.3.3,0,0,0-.178.514L2.347,6.242,1.813,9.4a.314.314,0,0,0,.464.316L5.052,8.232,7.827,9.712A.314.314,0,0,0,8.292,9.4L7.758,6.242l2.257-2.231A.3.3,0,0,0,9.837,3.5Z" transform="translate(0 -0.018)" fill="currentColor"></path>
-                                            </svg>
-                                        </span>
-                                    </li>
-                                    <li class="rating__list">
-                                        <span class="rating__list--icon">
-                                            <svg class="rating__list--icon__svg" xmlns="http://www.w3.org/2000/svg" width="14.105" height="14.732" viewBox="0 0 10.105 9.732">
-                                                <path data-name="star - Copy" d="M9.837,3.5,6.73,3.039,5.338.179a.335.335,0,0,0-.571,0L3.375,3.039.268,3.5a.3.3,0,0,0-.178.514L2.347,6.242,1.813,9.4a.314.314,0,0,0,.464.316L5.052,8.232,7.827,9.712A.314.314,0,0,0,8.292,9.4L7.758,6.242l2.257-2.231A.3.3,0,0,0,9.837,3.5Z" transform="translate(0 -0.018)" fill="currentColor"></path>
-                                            </svg>
-                                        </span>
-                                    </li>
-                                    <li class="rating__list">
-                                        <span class="rating__list--icon">
-                                            <svg class="rating__list--icon__svg" xmlns="http://www.w3.org/2000/svg" width="14.105" height="14.732" viewBox="0 0 10.105 9.732">
-                                                <path data-name="star - Copy" d="M9.837,3.5,6.73,3.039,5.338.179a.335.335,0,0,0-.571,0L3.375,3.039.268,3.5a.3.3,0,0,0-.178.514L2.347,6.242,1.813,9.4a.314.314,0,0,0,.464.316L5.052,8.232,7.827,9.712A.314.314,0,0,0,8.292,9.4L7.758,6.242l2.257-2.231A.3.3,0,0,0,9.837,3.5Z" transform="translate(0 -0.018)" fill="currentColor"></path>
-                                            </svg>
-                                        </span>
-                                    </li>
-                                    <li class="rating__list">
-                                        <span class="rating__list--icon">
-                                            <svg class="rating__list--icon__svg" xmlns="http://www.w3.org/2000/svg" width="14.105" height="14.732" viewBox="0 0 10.105 9.732">
-                                                <path data-name="star - Copy" d="M9.837,3.5,6.73,3.039,5.338.179a.335.335,0,0,0-.571,0L3.375,3.039.268,3.5a.3.3,0,0,0-.178.514L2.347,6.242,1.813,9.4a.314.314,0,0,0,.464.316L5.052,8.232,7.827,9.712A.314.314,0,0,0,8.292,9.4L7.758,6.242l2.257-2.231A.3.3,0,0,0,9.837,3.5Z" transform="translate(0 -0.018)" fill="currentColor"></path>
-                                            </svg>
-                                        </span>
-                                    </li>
-
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                    }
                 </div>
                 <div class="testimonial__pagination swiper-pagination"></div>
             </div>
@@ -2328,10 +2175,10 @@
                         <a class="banner__items--thumbnail display-block" href="shop.html">
                             <img class="banner__items--thumbnail__img banner__img--height__md display-block" src="~/assets/img/banner/banner-bg2.png" alt="banner-img">
                             <div class="banner__content--style2">
-                                <h2 class="banner__content--style2__title text-white">Need Winter Boots? </h2>
-                                <p class="banner__content--style2__desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua enim ad minim veniam, quis nostrud exercitation </p>
+                                <h2 class="banner__content--style2__title text-white">Cần giày mùa đông? </h2>
+                                <p class="banner__content--style2__desc">Khám phá bộ sưu tập giày mùa đông mới nhất với nhiều mẫu mã đa dạng và chất lượng cao. Đặt hàng ngay để nhận ưu đãi đặc biệt! </p>
                                 <span class="primary__btn">
-                                    Shop Now
+                                    Mua ngay
                                     <svg class="primary__btn--arrow__icon" xmlns="http://www.w3.org/2000/svg" width="20.2" height="12.2" viewBox="0 0 6.2 6.2">
                                         <path d="M7.1,4l-.546.546L8.716,6.713H4v.775H8.716L6.554,9.654,7.1,10.2,9.233,8.067,10.2,7.1Z" transform="translate(-4 -4)" fill="currentColor"></path>
                                     </svg>

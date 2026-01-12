@@ -19,8 +19,16 @@ public class HomeController : Controller
     public IActionResult Index()
     {
         ViewBag.Blog = _context.TbBlogs
-.Where(m => (bool)m.IsActive)
-    .OrderByDescending(m => m.CreatedDate).ToList();
+            .Where(m => (bool)m.IsActive)
+            .OrderByDescending(m => m.CreatedDate).ToList();
+
+        ViewBag.Reviews = _context.TbProductReviews
+            .Include(r => r.Customer)
+            .Where(r => r.IsActive == true && r.Customer != null)
+            .OrderByDescending(r => r.CreatedDate)
+            .Take(6)
+            .ToList();
+
         return View();
     }
 
