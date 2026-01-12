@@ -104,6 +104,7 @@ namespace Do_an_1.Areas.Admin.Controllers
                             ProductId = product.ProductId,
                             ColorId = v.ColorId,
                             SizeId = v.SizeId,
+                            Image = v.Image,
                             Sku = v.Sku,
                             Price = v.Price,
                             PriceSale = v.PriceSale,

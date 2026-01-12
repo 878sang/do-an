@@ -7,6 +7,7 @@ namespace Do_an_1.Models.ViewModels
     {
         public int? ColorId { get; set; }
         public int? SizeId { get; set; }
+        public string? Image { get; set; }
         public string? Sku { get; set; }
         public decimal? Price { get; set; }
         public decimal? PriceSale { get; set; }
