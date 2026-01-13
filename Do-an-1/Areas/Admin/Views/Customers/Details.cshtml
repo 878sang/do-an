@@ -48,56 +48,141 @@
 
                         <div class="mb-4">
                             <h5>Đơn hàng (@Model.TbOrders.Count)</h5>
-                            <div class="table-responsive">
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>Mã đơn</th>
-                                            <th>Ngày tạo</th>
-                                            <th>Tổng tiền</th>
-                                            <th>Trạng thái</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach (var order in Model.TbOrders)
-                                        {
-                                            <tr>
-                                                <td>@order.Code</td>
-                                                <td>@(order.CreatedDate?.ToString("dd/MM/yyyy") ?? "")</td>
-                                                <td>@string.Format("{0:n0}", order.TotalAmount) đ</td>
-                                                <td>@(order.OrderStatus?.Name ?? "N/A")</td>
-                                            </tr>
-                                        }
-                                    </tbody>
-                                </table>
-                            </div>
+                            @if (Model.TbOrders != null && Model.TbOrders.Any())
+                            {
+                                @foreach (var order in Model.TbOrders.OrderByDescending(o => o.CreatedDate))
+                                {
+                                    <div class="card mb-3">
+                                        <div class="card-header">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <strong>Mã đơn: @order.Code</strong>
+                                                </div>
+                                                <div class="col-md-6 text-end">
+                                                    <span class="badge badge-@(order.OrderStatus?.OrderStatusId == 5 ? "success" : order.OrderStatus?.OrderStatusId == 6 ? "danger" : "warning")">
+                                                        @(order.OrderStatus?.Description ?? order.OrderStatus?.Name ?? "N/A")
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row mb-2">
+                                                <div class="col-md-6">
+                                                    <strong>Ngày tạo:</strong> @(order.CreatedDate?.ToString("dd/MM/yyyy HH:mm") ?? "")
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <strong>Phương thức thanh toán:</strong> @(order.PaymentMethod == "VNPAY" ? "Đã thanh toán" : "Chưa thanh toán")
+                                                </div>
+                                            </div>
+                                            @if (!string.IsNullOrEmpty(order.ShippingAddress))
+                                            {
+                                                <div class="mb-2">
+                                                    <strong>Địa chỉ giao hàng:</strong> @order.ShippingAddress
+                                                </div>
+                                            }
+                                            <div class="table-responsive">
+                                                <table class="table table-sm table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Sản phẩm</th>
+                                                            <th>Số lượng</th>
+                                                            <th>Giá</th>
+                                                            <th>Thành tiền</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @if (order.TbOrderDetails != null && order.TbOrderDetails.Any())
+                                                        {
+                                                            @foreach (var detail in order.TbOrderDetails)
+                                                            {
+                                                                <tr>
+                                                                    <td>@(detail.Product?.Title ?? "N/A")</td>
+                                                                    <td>@detail.Quantity</td>
+                                                                    <td>@string.Format("{0:n0}", detail.Price) đ</td>
+                                                                    <td>@string.Format("{0:n0}", detail.Price * detail.Quantity) đ</td>
+                                                                </tr>
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                                            <tr>
+                                                                <td colspan="4" class="text-center">Không có chi tiết</td>
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <th colspan="3" class="text-end">Tổng cộng:</th>
+                                                            <th class="text-danger">@string.Format("{0:n0}", order.TotalAmount ?? 0) đ</th>
+                                                        </tr>
+                                                    </tfoot>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <p class="text-muted">Khách hàng chưa có đơn hàng nào.</p>
+                            }
                         </div>
 
                         <div class="mb-4">
-                            <h5>Đánh giá sản phẩm (@Model.TbProductReviews.Count)</h5>
-                            <div class="table-responsive">
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>Sản phẩm</th>
-                                            <th>Sao</th>
-                                            <th>Nội dung</th>
-                                            <th>Ngày đánh giá</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach (var review in Model.TbProductReviews)
-                                        {
+                            <h5>Đánh giá sản phẩm (@(Model.TbProductReviews?.Count ?? 0))</h5>
+                            @if (Model.TbProductReviews != null && Model.TbProductReviews.Any())
+                            {
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
                                             <tr>
-                                                <td>@(review.Product?.Title ?? "N/A")</td>
-                                                <td>@review.Star</td>
-                                                <td>@review.Detail</td>
-                                                <td>@(review.CreatedDate?.ToString("dd/MM/yyyy") ?? "")</td>
+                                                <th>Sản phẩm</th>
+                                                <th>Sao</th>
+                                                <th>Nội dung</th>
+                                                <th>Ngày đánh giá</th>
+                                                <th>Trạng thái</th>
                                             </tr>
-                                        }
-                                    </tbody>
-                                </table>
-                            </div>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var review in Model.TbProductReviews.OrderByDescending(r => r.CreatedDate))
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @if (review.Product != null)
+                                                        {
+                                                            <a href="/Admin/Products/Details/@review.Product.ProductId" target="_blank">
+                                                                @review.Product.Title
+                                                            </a>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span>N/A</span>
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @for (int i = 1; i <= 5; i++)
+                                                        {
+                                                            <span class="text-warning">@(i <= review.Star ? "★" : "☆")</span>
+                                                        }
+                                                        (@review.Star)
+                                                    </td>
+                                                    <td>@(string.IsNullOrEmpty(review.Detail) ? "Không có nội dung" : review.Detail)</td>
+                                                    <td>@(review.CreatedDate?.ToString("dd/MM/yyyy HH:mm") ?? "")</td>
+                                                    <td>
+                                                        <span class="badge badge-@(review.IsActive == true ? "success" : "secondary")">
+                                                            @(review.IsActive == true ? "Hiển thị" : "Ẩn")
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            }
+                            else
+                            {
+                                <p class="text-muted">Khách hàng chưa có đánh giá nào.</p>
+                            }
                         </div>
 
                         <div class="mt-3">

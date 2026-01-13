@@ -1064,33 +1064,32 @@
 							<li><a href="/Admin/Contact">Danh sách liên hệ</a></li>
 						</ul>
 					</li>
+					@if (Context.Session.GetSessionString("RoleId") == "1")
+					{
+						<!-- Quản lý Tài khoản -->
+						<li>
+							<a class="has-arrow" href="javascript:void(0)" aria-expanded="false">
+								<i class="fas fa-users"></i>
+								<span class="nav-text">Tài khoản</span>
+							</a>
+							<ul aria-expanded="false">
+								<li><a href="/Admin/Accounts">Danh sách tài khoản</a></li>
+								<li><a href="/Admin/Accounts/Create">Thêm tài khoản</a></li>
+							</ul>
+						</li>
 
-					<!-- Quản lý Tài khoản -->
-					<li>
-						<a class="has-arrow" href="javascript:void(0)" aria-expanded="false">
-							<i class="fas fa-users"></i>
-							<span class="nav-text">Tài khoản</span>
-						</a>
-						<ul aria-expanded="false">
-							<li><a href="/Admin/Accounts">Danh sách tài khoản</a></li>
-							<li><a href="/Admin/Accounts/Create">Thêm tài khoản</a></li>
-						</ul>
-					</li>
-					<!-- Báo cáo -->
-					<li>
-						<a class="has-arrow" href="javascript:void(0)" aria-expanded="false">
-							<i class="fas fa-chart-bar"></i>
-							<span class="nav-text">Báo cáo</span>
-						</a>
-						<ul aria-expanded="false">
-							<li><a href="/Admin/Reports/Revenue">Báo cáo doanh thu</a></li>
-							<li><a href="/Admin/Reports/Products">Báo cáo sản phẩm</a></li>
-							<li><a href="/Admin/Reports/Customers">Báo cáo khách hàng</a></li>
-							<li><a href="/Admin/Reports/Inventory">Báo cáo tồn kho</a></li>
-							<li><a href="/Admin/Reports/Profit">Báo cáo lợi nhuận</a></li>
-						</ul>
-					</li>
-
+						<!-- Báo cáo -->
+						<li>
+							<a class="has-arrow" href="javascript:void(0)" aria-expanded="false">
+								<i class="fas fa-chart-bar"></i>
+								<span class="nav-text">Báo cáo</span>
+							</a>
+							<ul aria-expanded="false">
+								<li><a href="/Admin/Reports/Revenue">Báo cáo doanh thu</a></li>
+								<li><a href="/Admin/Reports/Inventory">Báo cáo tồn kho</a></li>
+							</ul>
+						</li>
+					}
 					<!-- Quản lý Menu -->
 					<li>
 						<a class="has-arrow" href="javascript:void(0)" aria-expanded="false">
@@ -1102,6 +1101,7 @@
 							<li><a href="/Admin/Menus/Create">Thêm menu mới</a></li>
 						</ul>
 					</li>
+
 					<!-- Hỗ trợ -->
 					<li>
 						<a href="/Admin/Support">

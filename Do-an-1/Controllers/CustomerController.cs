@@ -112,7 +112,7 @@ namespace Do_an_1.Controllers
                 user.Password = ToMD5(password); // Mã hóa pass
                 user.IsActive = true;
                 user.LastLogin = DateTime.Now;
-           
+
 
                 _context.Add(user);
                 _context.SaveChanges();
@@ -187,6 +187,58 @@ namespace Do_an_1.Controllers
             _context.Update(customer);
             _context.SaveChanges();
             TempData["SuccessMessage"] = "Cập nhật thông tin thành công!";
+            return RedirectToAction("Dashboard");
+        }
+
+        [HttpPost]
+        public IActionResult UpdatePassword(string CurrentPassword, string NewPassword, string ConfirmPassword)
+        {
+            var customerId = HttpContext.Session.GetString("CustomerId");
+            if (string.IsNullOrEmpty(customerId))
+                return RedirectToAction("Index");
+
+            var customer = _context.TbCustomers.Find(int.Parse(customerId));
+            if (customer == null)
+            {
+                TempData["PasswordErrorMessage"] = "Không tìm thấy thông tin khách hàng.";
+                return RedirectToAction("Dashboard");
+            }
+
+            // Kiểm tra mật khẩu hiện tại
+            string currentPasswordHash = ToMD5(CurrentPassword);
+            if (customer.Password != currentPasswordHash)
+            {
+                TempData["PasswordErrorMessage"] = "Mật khẩu hiện tại không đúng.";
+                return RedirectToAction("Dashboard");
+            }
+
+            // Kiểm tra mật khẩu mới và xác nhận
+            if (string.IsNullOrEmpty(NewPassword) || NewPassword.Length < 6)
+            {
+                TempData["PasswordErrorMessage"] = "Mật khẩu mới phải có ít nhất 6 ký tự.";
+                return RedirectToAction("Dashboard");
+            }
+
+            if (NewPassword != ConfirmPassword)
+            {
+                TempData["PasswordErrorMessage"] = "Mật khẩu mới và xác nhận mật khẩu không khớp.";
+                return RedirectToAction("Dashboard");
+            }
+
+            // Kiểm tra mật khẩu mới không được trùng với mật khẩu cũ
+            string newPasswordHash = ToMD5(NewPassword);
+            if (customer.Password == newPasswordHash)
+            {
+                TempData["PasswordErrorMessage"] = "Mật khẩu mới phải khác với mật khẩu hiện tại.";
+                return RedirectToAction("Dashboard");
+            }
+
+            // Cập nhật mật khẩu mới
+            customer.Password = newPasswordHash;
+            _context.Update(customer);
+            _context.SaveChanges();
+
+            TempData["PasswordSuccessMessage"] = "Đổi mật khẩu thành công!";
             return RedirectToAction("Dashboard");
         }
 

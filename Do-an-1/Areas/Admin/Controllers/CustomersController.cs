@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Do_an_1.Models;
 
@@ -21,6 +22,11 @@ namespace Do_an_1.Areas.Admin.Controllers
         // GET: Admin/Customers
         public async Task<IActionResult> Index()
         {
+            if (HttpContext.Session.GetString("AdminId") == null)
+            {
+                return RedirectToAction("Login", "Accounts", new { area = "Admin" });
+            }
+
             return View(await _context.TbCustomers
                 .OrderByDescending(c => c.CustomerId)
                 .ToListAsync());
@@ -29,6 +35,11 @@ namespace Do_an_1.Areas.Admin.Controllers
         // GET: Admin/Customers/Create
         public IActionResult Create()
         {
+            if (HttpContext.Session.GetString("AdminId") == null)
+            {
+                return RedirectToAction("Login", "Accounts", new { area = "Admin" });
+            }
+
             return View();
         }
 
@@ -49,6 +60,11 @@ namespace Do_an_1.Areas.Admin.Controllers
         // GET: Admin/Customers/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            if (HttpContext.Session.GetString("AdminId") == null)
+            {
+                return RedirectToAction("Login", "Accounts", new { area = "Admin" });
+            }
+
             if (id == null)
             {
                 return NotFound();
@@ -56,7 +72,12 @@ namespace Do_an_1.Areas.Admin.Controllers
 
             var customer = await _context.TbCustomers
                 .Include(c => c.TbOrders)
+                    .ThenInclude(o => o.OrderStatus)
+                .Include(c => c.TbOrders)
+                    .ThenInclude(o => o.TbOrderDetails)
+                        .ThenInclude(od => od.Product)
                 .Include(c => c.TbProductReviews)
+                    .ThenInclude(r => r.Product)
                 .FirstOrDefaultAsync(m => m.CustomerId == id);
 
             if (customer == null)
@@ -70,6 +91,11 @@ namespace Do_an_1.Areas.Admin.Controllers
         // GET: Admin/Customers/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            if (HttpContext.Session.GetString("AdminId") == null)
+            {
+                return RedirectToAction("Login", "Accounts", new { area = "Admin" });
+            }
+
             if (id == null)
             {
                 return NotFound();
@@ -116,16 +142,14 @@ namespace Do_an_1.Areas.Admin.Controllers
             return View(customer);
         }
 
-        // GET: Admin/Customers/Groups
-        public IActionResult Groups()
-        {
-            // Placeholder for customer groups functionality
-            return View();
-        }
-
         // GET: Admin/Customers/Reviews
         public async Task<IActionResult> Reviews()
         {
+            if (HttpContext.Session.GetString("AdminId") == null)
+            {
+                return RedirectToAction("Login", "Accounts", new { area = "Admin" });
+            }
+
             var reviews = await _context.TbProductReviews
                 .Include(r => r.Customer)
                 .Include(r => r.Product)

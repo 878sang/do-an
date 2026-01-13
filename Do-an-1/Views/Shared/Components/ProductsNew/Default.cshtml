@@ -1,13 +1,12 @@
 ﻿@model IEnumerable<Do_an_1.Models.TbProduct>
-@foreach (var item in Model)
+@foreach (var item in Model.Take(5))
 {
     string sUrl = $"/product/{item.Alias}-{item.ProductId}.html";
     <div class="col mb-30">
         <div class="product__items ">
             <div class="product__items--thumbnail">
                 <a class="product__items--link" href="@sUrl">
-                    <img class="product__items--img product__primary--img" src="@item.Image"
-                        alt="product-img">
+                    <img class="product__items--img product__primary--img" src="@item.Image" alt="product-img">
                 </a>
                 <div class="product__badge">
                     <span class="product__badge--items sale">Giảm giá</span>
@@ -38,8 +37,8 @@
                 </ul>
                 <ul class="product__items--action d-flex">
                     <li class="product__items--action__list">
-                        <a href="javascript:void(0)" class="product__items--action__btn add__to--cart"
-                           data-open="modal1" data-id="@item.ProductId">
+                        <a href="javascript:void(0)" class="product__items--action__btn add__to--cart" data-open="modal1"
+                            data-id="@item.ProductId">
                             <svg class="product__items--action__btn--svg" xmlns="http://www.w3.org/2000/svg" width="22.51"
                                 height="20.443" viewBox="0 0 14.706 13.534">
                                 <g transform="translate(0 0)">
